@@ -1,0 +1,30 @@
+@import "react-modern-calendar-datepicker/lib/DatePicker.css";
+
+.responsive-calendar {
+  font-size: 9px;
+  --cl-color-error: theme("colors.primary.DEFAULT");
+}
+
+@screen sm {
+  .responsive-calendar {
+    font-size: 10px;
+  }
+}
+
+@screen md {
+  .responsive-calendar {
+    font-size: 9px;
+  }
+}
+
+@screen lg {
+  .responsive-calendar {
+    font-size: 10px;
+  }
+}
+
+@screen xl {
+  .responsive-calendar {
+    font-size: 11px;
+  }
+}

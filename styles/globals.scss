@@ -1,0 +1,9 @@
+@import "tailwindcss/base";
+@import "./custom/base.scss";
+
+@import "tailwindcss/components";
+@import "./swiper";
+@import "./modern-calendar";
+
+@import "tailwindcss/utilities";
+@import "./custom/utilities.scss";
