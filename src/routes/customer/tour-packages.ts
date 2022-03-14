@@ -5,12 +5,11 @@ import { ITourPackage } from "../../types/ITourPackage";
 import { ITourPayment } from "../../types/ITourPayment";
 import { myTemplateDmoSms } from "../../template/TemplateDemoSms";
 import { wrapedSendMail } from "../../helpers/wrapedSendMail";
-import { format } from "date-fns";
+import { format, addDays } from "date-fns";
 import axios from "axios";
 import mercadopago from "mercadopago";
 mercadopago.configure({
-  access_token:
-    "TEST-5112251307249981-122715-2a77b84d2620381ddba2a042fe3888c3-650233529"
+  access_token: `${process.env.ACCES_TOKEN_MERCADOLIBRE}`
 });
 import { normalizeId } from "../../utils/normalize-id";
 
@@ -32,7 +31,6 @@ export const tourPackagesRoute: FastifyPluginCallback = async app => {
   app.post("/payment", async (request: any, res) => {
     const TourPayment = app.mongo.db!.collection<ITourPayment>(PAYMENTS);
     const body = request.body;
-    console.log("req.body", body);
     const {
       fullName,
       fullNameInvoice,
@@ -63,18 +61,17 @@ export const tourPackagesRoute: FastifyPluginCallback = async app => {
         phone: { area_code: "51", number: Number(phoneNumber) as any },
         identification: { type: tipoDocumento, number: String(documentInvoice) }
       },
-      notification_url: "https://hookb.in/6Jn0mnV6kmtoRnwwYxEL"
+      notification_url: "https://hookb.in/VGMrZq0VKqcDrgoopqoL"
     };
-    console.log("preference", preference);
     mercadopago.preferences
       .create(preference)
       .then(async function (response) {
-        console.log("response.body", response.body);
+        console.log(response.body);
         await TourPayment.insertOne({
           fullName,
           fullNameInvoice,
           addressInvoice,
-          collector_id: response.body.collector_id,
+          collector_id: String(response.body.id),
           price,
           title,
           mail,
@@ -120,8 +117,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async app => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization:
-          "Bearer TEST-5112251307249981-122715-2a77b84d2620381ddba2a042fe3888c3-650233529"
+        Authorization: `Bearer ${process.env.ACCES_TOKEN_MERCADOLIBRE}`
       }
     });
     console.log("detailsPayment.data.status", detailsPayment.data.status);
@@ -135,7 +131,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async app => {
       detailsPayment.data.status_detail === "accredited"
     ) {
       const searchClient = await TourPayment.findOne({
-        collector_id: 650233529
+        collector_id: "650233529"
       });
       const normalize = normalizeId(searchClient);
       console.log("normalize", normalize);
@@ -143,8 +139,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async app => {
       process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
       const today = format(new Date(), "yyyy-MM-dd");
       const todayTime = format(new Date(), "HH:mm:ss");
-      const todayTimeExp = format(addDaysToDate(new Date(), 7), "yyyy-MM-dd");
-      console.log("todayTimeExp", todayTimeExp);
+      const todayTimeExp = format(addDays(new Date(), 7), "yyyy-MM-dd");
       const body = {
         serie_documento:
           normalize.documentInvoice.length === 11 ? "F001" : "B001",
@@ -166,7 +161,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async app => {
           ubigeo: "150101",
           direccion: normalize.addressInvoice,
           correo_electronico: normalize.mail,
-          telefono: normalize.telephone
+          telefono: normalize.phoneNumber
         },
         totales: {
           total_exportacion: 0.0,
@@ -183,7 +178,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async app => {
           {
             codigo_interno: null,
             descripcion: normalize.title,
-            codigo_producto_sunat: "51121703",
+            codigo_producto_sunat: "90121502",
             unidad_de_medida: "NIU",
             cantidad: normalize.numberAttendees,
             valor_unitario: numberPrice,
@@ -203,16 +198,14 @@ export const tourPackagesRoute: FastifyPluginCallback = async app => {
 
       console.log("data ", data);
       const reloadProductos = await axios({
-        url: `https://test.innout.cloud/api/documents`,
+        url: `${process.env.TEST_INNOUT}/api/documents`,
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization:
-            "Bearer qooOmSNXNvTv6NVDMo6aaB5jh1u0lCgwrdJKbFdDyghe5Yezks"
+          Authorization: `Bearer ${process.env.TOKEN_DOC_INNOUT}`
         },
         data: body
       });
-      console.log("reloadProductos", reloadProductos.data.links.pdf);
       const settingMail = {
         host: "correo.innout.pe", // Office 365 server
         port: "465", // secure SMTP
@@ -230,19 +223,19 @@ export const tourPackagesRoute: FastifyPluginCallback = async app => {
       };
       const mailOptions = {
         from: `Samiria <hola@innout.pe>`, // sender address
-        to: `samir@innout.pe`, // list of receivers
+        to: `${normalize.mail}`, // list of receivers
         subject: `confirmación de reserva | SAMIRIA`, // Subject line
         html: myTemplateDmoSms(params),
         attachments: [
           {
-            filename: "factura.pdf",
+            filename:
+              normalize.documentInvoice.length === 11 ? "Factura" : "Boleta",
             path: `${reloadProductos.data.links.pdf}`,
             contentType: "application/pdf"
           }
         ]
       };
       await wrapedSendMail(settingMail, mailOptions);
-
       res.send("correo enviado");
     }
   });
