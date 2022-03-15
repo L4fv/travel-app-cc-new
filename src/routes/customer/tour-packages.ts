@@ -53,12 +53,18 @@ export const tourPackagesRoute: FastifyPluginCallback = async app => {
           quantity: numberAttendees
         }
       ],
-/*       payer: {
+      payer: {
         name: fullNameInvoice,
         email: mail,
         phone: { area_code: "51", number: Number(phoneNumber) as any },
         identification: { type: tipoDocumento, number: String(documentInvoice) }
-      }, */
+      },
+      back_urls: {
+        "success": "http://localhost:8080/feedback",
+        "failure": "http://localhost:8080/feedback",
+        "pending": "http://localhost:8080/feedback"
+      },
+      auto_return: "approved",
       notification_url:
         "https:///ms.test.innout.cloud/ms/travelapp/customer/tour-packages/payment/webhook"
     };
@@ -69,7 +75,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async app => {
     mercadopago.configure({
       access_token: `${process.env.MP_ACCESS_TOKEN}`
     });
-    const result = await mercadopago.preferences.create(preference);
+    const result = await mercadopago.preferences.create(preference as any);
     console.log("rezsponse", result);
     console.log("rezsponse", result.body);
     await TourPayment.insertOne({
@@ -250,4 +256,12 @@ export const tourPackagesRoute: FastifyPluginCallback = async app => {
     if (!tourPackage) throw new NotFound();
     return normalizeId(tourPackage);
   });
+  app.get("/feedback",  (req: any, res) => {
+    res.send({
+      Payment: req.query.payment_id,
+      Status: req.query.status,
+      MerchantOrder: req.query.merchant_order_id
+    });
+  });
 };
+
