@@ -67,7 +67,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
         "failure": "https:///ms.test.innout.cloud/ms/travelapp/feedback",
         "pending": "https:///ms.test.innout.cloud/ms/travelapp/feedback"
       }, */
-      auto_return: "approved",
+      //auto_return: "approved",
       notification_url:
         "https://ms.test.innout.cloud/ms/travelapp/customer/tour-packages/payment/webhook",
     };
