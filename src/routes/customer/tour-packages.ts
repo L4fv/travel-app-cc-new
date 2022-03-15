@@ -53,7 +53,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async app => {
           quantity: numberAttendees
         }
       ],
-      payer: {
+/*       payer: {
         name: fullNameInvoice,
         email: mail,
         phone: { area_code: "51", number: Number(phoneNumber) as any },
@@ -63,8 +63,8 @@ export const tourPackagesRoute: FastifyPluginCallback = async app => {
         "success": "https:///ms.test.innout.cloud/ms/travelapp/feedback",
         "failure": "https:///ms.test.innout.cloud/ms/travelapp/feedback",
         "pending": "https:///ms.test.innout.cloud/ms/travelapp/feedback"
-      },
-      auto_return: "approved",
+      }, */
+      //auto_return: "approved",
       notification_url:
         "https:///ms.test.innout.cloud/ms/travelapp/customer/tour-packages/payment/webhook"
     };
