@@ -79,13 +79,13 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
       access_token: `${process.env.MP_ACCESS_TOKEN}`,
     });
     const result = await mercadopago.preferences.create(preference as any);
-    console.log("rezsponse", result);
+  
     console.log("rezsponse", result.body);
     await TourPayment.insertOne({
       fullName,
       fullNameInvoice,
       addressInvoice,
-      collector_id: result.body.id, //aqup[i el eroor]
+      user_id: result.body.collector_id, //aqup[i el eroor]
       price,
       title,
       mail,
@@ -122,6 +122,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
           Authorization: `Bearer ${process.env.MP_ACCESS_TOKEN}`,
         },
       });
+      console.log("detailsPayment ",detailsPayment)
       console.log("detailsPayment.data.status", detailsPayment.data.status);
       console.log(
         "detailsPayment.data.status_detail",
@@ -133,7 +134,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
         detailsPayment.data.status_detail === "accredited"
       ) {
         const searchClient = await TourPayment.findOne({
-          collector_id: body.user_id,
+          user_id: body.user_id,
         });
         const normalize = normalizeId(searchClient);
         console.log("normalize", normalize);
@@ -238,6 +239,8 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
           ],
         };
         await wrapedSendMail(settingMail, mailOptions);
+        res.send({ status: true, message: "ok" });
+      }else{
         res.send({ status: true, message: "ok" });
       }
     } else {
