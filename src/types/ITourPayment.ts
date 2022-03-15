@@ -3,7 +3,7 @@ export interface ITourPayment {
   fullName: string;
   fullNameInvoice: string;
   addressInvoice: string;
-  preferenceId: string;
+  myPreferenceId: string;
   price: string;
   title: string;
   mail: string;

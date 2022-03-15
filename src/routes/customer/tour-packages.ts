@@ -70,7 +70,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
         "pending": "https:///ms.test.innout.cloud/ms/travelapp/feedback"
       }, */
       //auto_return: "approved",
-      notification_url: `https://ms.test.innout.cloud/ms/travelapp/customer/tour-packages/payment/webhook?preferenceId=${_id}`,
+      notification_url: `https://ms.test.innout.cloud/ms/travelapp/customer/tour-packages/payment/webhook?myPreferenceId=${_id}`,
     };
 
     console.log("preference", preference);
@@ -91,7 +91,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
       fullName,
       fullNameInvoice,
       addressInvoice,
-      preferenceId: result.body.id, //aqup[i el eroor]
+      myPreferenceId: result.body.id, //aqup[i el eroor]
       price,
       title,
       mail,
@@ -136,7 +136,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
         detailsPayment.data.status_detail === "accredited"
       ) {
         const searchClient = await TourPayment.findOne({
-          preferenceId: request.query.preferenceId,
+          myPreferenceId: request.query.myPreferenceId,
         });
         const normalize = normalizeId(searchClient);
         console.log("normalize", normalize);
