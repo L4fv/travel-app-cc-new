@@ -72,7 +72,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
     };
 
     preference.notification_url = `https://ms.test.innout.cloud/ms/travelapp/customer/tour-packages/payment/webhook?jsonData=${JSON.stringify(
-      preference
+      encodeURI(preference as any)
     )}`;
     console.log("preference", preference);
 
