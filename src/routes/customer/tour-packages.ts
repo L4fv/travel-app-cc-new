@@ -95,10 +95,10 @@ export const tourPackagesRoute: FastifyPluginCallback = async app => {
     //    console.log(error);
     //  });
   });
-  app.get("/payment/webhook", async (request: any, res) => {
+  app.post("/payment/webhook", async (request: any, res) => {
     const TourPayment = app.mongo.db!.collection<ITourPayment>(PAYMENTS);
     const body = request.body;
-    console.log("good");
+    console.log("body", body);
     const data = {
       action: "payment.created",
       api_version: "v1",
