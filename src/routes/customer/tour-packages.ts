@@ -53,12 +53,12 @@ export const tourPackagesRoute: FastifyPluginCallback = async app => {
           quantity: numberAttendees
         }
       ],
-      payer: {
+/*       payer: {
         name: fullNameInvoice,
         email: mail,
         phone: { area_code: "51", number: Number(phoneNumber) as any },
         identification: { type: tipoDocumento, number: String(documentInvoice) }
-      },
+      }, */
       notification_url:
         "https:///ms.test.innout.cloud/ms/travelapp/customer/tour-packages/payment/webhook"
     };
