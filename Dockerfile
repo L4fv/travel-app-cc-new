@@ -1,4 +1,4 @@
-FROM  node:14-alpine  as BUILD_IMAGE
+FROM  node:16-alpine  as BUILD_IMAGE
 
 WORKDIR /app
 
@@ -13,7 +13,7 @@ COPY . .
 #------------------------------------------------------------------------------------
 
 # Create new namespace for final Docker Image
-FROM  node:14-alpine 
+FROM  node:16-alpine 
 
 # Only copy your source code without system file
 COPY --from=BUILD_IMAGE /app /app
