@@ -60,9 +60,9 @@ export const tourPackagesRoute: FastifyPluginCallback = async app => {
         identification: { type: tipoDocumento, number: String(documentInvoice) }
       },
       back_urls: {
-        "success": "http://localhost:8080/feedback",
-        "failure": "http://localhost:8080/feedback",
-        "pending": "http://localhost:8080/feedback"
+        "success": "https:///ms.test.innout.cloud/ms/travelapp/feedback",
+        "failure": "https:///ms.test.innout.cloud/ms/travelapp/feedback",
+        "pending": "https:///ms.test.innout.cloud/ms/travelapp/feedback"
       },
       auto_return: "approved",
       notification_url:
