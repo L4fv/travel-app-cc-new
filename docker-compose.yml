@@ -5,18 +5,17 @@ services:
         image: 'travel_app:PROD_1.015'
         env_file: .env.production
         ports:
-            - '30009:3009'
-        networks:
-            - app_postgreSQL_innout_networks
+            - '30019:3001'
+
     app_2:
         restart: always
         image: 'travel_app:PROD_1.015'
         env_file: .env.production
         ports:
-            - '40009:3009'
+            - '40019:3001'
         networks:
-            - app_postgreSQL_innout_networks
+            - app_mysql_innout_networks
 
 networks:
-    app_postgreSQL_innout_networks:
+    app_mysql_innout_networks:
         external: true

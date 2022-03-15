@@ -9,7 +9,7 @@ import { format, addDays } from "date-fns";
 import axios from "axios";
 import mercadopago from "mercadopago";
 mercadopago.configure({
-  access_token: `${process.env.ACCES_TOKEN_MERCADOLIBRE}`
+  access_token: `${process.env.MP_TOKEN}`
 });
 import { normalizeId } from "../../utils/normalize-id";
 
@@ -117,7 +117,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async app => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.ACCES_TOKEN_MERCADOLIBRE}`
+        Authorization: `Bearer ${process.env.MP_TOKEN}`
       }
     });
     console.log("detailsPayment.data.status", detailsPayment.data.status);
@@ -198,11 +198,11 @@ export const tourPackagesRoute: FastifyPluginCallback = async app => {
 
       console.log("data ", data);
       const reloadProductos = await axios({
-        url: `${process.env.TEST_INNOUT}/api/documents`,
+        url: `${process.env.INNOUT_HOST}/api/documents`,
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.TOKEN_DOC_INNOUT}`
+          Authorization: `Bearer ${process.env.INNOUT_TOKEN}`
         },
         data: body
       });
