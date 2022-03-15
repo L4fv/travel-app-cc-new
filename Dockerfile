@@ -9,7 +9,7 @@ RUN yarn install --production=true --frozen-lockfile
 
 # Copy all for build and release cache if package.json update
 COPY . .
-
+RUN yarn build
 #------------------------------------------------------------------------------------
 
 # Create new namespace for final Docker Image
@@ -22,4 +22,4 @@ WORKDIR /app
 
 #ENV STRAPI_LOG_LEVEL=debug
 
-CMD [ "node", "./src/app.js" ]
+CMD [ "yarn", "start" ]
