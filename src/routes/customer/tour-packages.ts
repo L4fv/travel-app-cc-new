@@ -64,10 +64,10 @@ export const tourPackagesRoute: FastifyPluginCallback = async app => {
     };
     console.log("preference", preference);
 
-    const { MP_TOKEN } = process.env;
-    console.log("MP_TOKEN", MP_TOKEN);
+    const { MP_ACCESS_TOKEN } = process.env;
+    console.log("MP_ACCESS_TOKEN", MP_ACCESS_TOKEN);
     mercadopago.configure({
-      access_token: `${process.env.MP_TOKEN}`
+      access_token: `${process.env.MP_ACCESS_TOKEN}`
     });
     const result = await mercadopago.preferences.create(preference);
     console.log("rezsponse", result);
@@ -121,7 +121,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async app => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.MP_ACTOKEN}`
+        Authorization: `Bearer ${process.env.MP_ACCESS_TOKEN}`
       }
     });
     console.log("detailsPayment.data.status", detailsPayment.data.status);
