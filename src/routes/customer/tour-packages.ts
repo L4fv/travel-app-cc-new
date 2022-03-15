@@ -61,7 +61,8 @@ export const tourPackagesRoute: FastifyPluginCallback = async app => {
         phone: { area_code: "51", number: Number(phoneNumber) as any },
         identification: { type: tipoDocumento, number: String(documentInvoice) }
       },
-      notification_url: "https://hookb.in/VGMrZq0VKqcDrgoopqoL"
+      notification_url:
+        "https:///ms.test.innout.cloud/ms/travelapp/customer/tour-packages/payment/webhook"
     };
     mercadopago.preferences
       .create(preference)

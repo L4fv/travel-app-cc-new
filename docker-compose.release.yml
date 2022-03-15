@@ -2,7 +2,7 @@ version: '2'
 services:
     app_1:
         restart: always
-        image: 'travel_app:TEST_2.5'
+        image: 'travel_app:TEST_2.6'
         env_file: .env.release
         ports:
             - '30019:3001'
