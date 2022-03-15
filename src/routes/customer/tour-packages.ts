@@ -100,13 +100,13 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
       documentReservation,
       documentInvoice,
       observation,
+      createdAt: new Date(),
     } as any);
     console.log("resultDb", resultDb);
     res.send({
       code: "00",
       data: { id: result.body.id, init_point: result.body.init_point },
     });
-
   });
   app.post("/payment/webhook", async (request: any, res) => {
     const TourPayment = app.mongo.db!.collection<ITourPayment>(PAYMENTS);
