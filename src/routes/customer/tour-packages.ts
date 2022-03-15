@@ -68,9 +68,12 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
         "pending": "https:///ms.test.innout.cloud/ms/travelapp/feedback"
       }, */
       //auto_return: "approved",
-      notification_url:
-        "https://ms.test.innout.cloud/ms/travelapp/customer/tour-packages/payment/webhook",
+      notification_url: "",
     };
+
+    preference.notification_url = `https://ms.test.innout.cloud/ms/travelapp/customer/tour-packages/payment/webhook?jsonData=${JSON.stringify(
+      preference
+    )}`;
     console.log("preference", preference);
 
     const { MP_ACCESS_TOKEN } = process.env;
@@ -79,7 +82,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
       access_token: `${process.env.MP_ACCESS_TOKEN}`,
     });
     const result = await mercadopago.preferences.create(preference as any);
-  
+
     console.log("rezsponse", result.body);
     await TourPayment.insertOne({
       fullName,
@@ -111,6 +114,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
     const TourPayment = app.mongo.db!.collection<ITourPayment>(PAYMENTS);
     const body = request.body;
     console.log("request.body", body);
+    console.log("req.query", request.query);
 
     // console.log("data", data);
     if (body["type"] == "payment") {
@@ -122,7 +126,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
           Authorization: `Bearer ${process.env.MP_ACCESS_TOKEN}`,
         },
       });
-      console.log("detailsPayment ",detailsPayment)
+      console.log("detailsPayment ", detailsPayment.data);
       console.log("detailsPayment.data.status", detailsPayment.data.status);
       console.log(
         "detailsPayment.data.status_detail",
@@ -240,7 +244,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
         };
         await wrapedSendMail(settingMail, mailOptions);
         res.send({ status: true, message: "ok" });
-      }else{
+      } else {
         res.send({ status: true, message: "ok" });
       }
     } else {
