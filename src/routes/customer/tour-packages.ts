@@ -8,9 +8,7 @@ import { wrapedSendMail } from "../../helpers/wrapedSendMail";
 import { format, addDays } from "date-fns";
 import axios from "axios";
 import mercadopago from "mercadopago";
-mercadopago.configure({
-  access_token: `${process.env.MP_TOKEN}`
-});
+
 import { normalizeId } from "../../utils/normalize-id";
 
 interface IRequestPayment {
@@ -64,29 +62,34 @@ export const tourPackagesRoute: FastifyPluginCallback = async app => {
       notification_url:
         "https:///ms.test.innout.cloud/ms/travelapp/customer/tour-packages/payment/webhook"
     };
-    mercadopago.preferences
-      .create(preference)
-      .then(async function (response) {
-        console.log(response.body);
-        await TourPayment.insertOne({
-          fullName,
-          fullNameInvoice,
-          addressInvoice,
-          collector_id: String(response.body.id),
-          price,
-          title,
-          mail,
-          phoneNumber,
-          numberAttendees,
-          documentReservation,
-          documentInvoice,
-          observation
-        } as any);
-        res.send({ code: "00", data: response.body.id });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    console.log("preference", preference);
+
+    const { MP_TOKEN } = process.env;
+    console.log("MP_TOKEN", MP_TOKEN);
+    mercadopago.configure({
+      access_token: `${process.env.MP_TOKEN}`
+    });
+    const result = await mercadopago.preferences.create(preference);
+    console.log("rezsponse", result);
+    console.log("rezsponse", result.body);
+    await TourPayment.insertOne({
+      fullName,
+      fullNameInvoice,
+      addressInvoice,
+      collector_id: result.body.id, //aqup[i el eroor]
+      price,
+      title,
+      mail,
+      phoneNumber,
+      numberAttendees,
+      documentReservation,
+      documentInvoice,
+      observation
+    } as any);
+    res.send({
+      code: "00",
+      data: { id: result.body.id, init_point: result.body.init_point }
+    });
 
     //  .then(function (response) {
     //    // En esta instancia deberás asignar el valor dentro de response.body.id por el ID de preferencia solicitado en el siguiente paso
@@ -132,7 +135,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async app => {
       detailsPayment.data.status_detail === "accredited"
     ) {
       const searchClient = await TourPayment.findOne({
-        collector_id: "650233529"
+        collector_id: data.user_id
       });
       const normalize = normalizeId(searchClient);
       console.log("normalize", normalize);
