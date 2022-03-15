@@ -28,6 +28,8 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
   });
   app.post("/payment", async (request: any, res) => {
     const TourPayment = app.mongo.db!.collection<ITourPayment>(PAYMENTS);
+    const _id = new app.mongo.ObjectId();
+
     const body = request.body;
     const {
       fullName,
@@ -68,12 +70,9 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
         "pending": "https:///ms.test.innout.cloud/ms/travelapp/feedback"
       }, */
       //auto_return: "approved",
-      notification_url: "",
+      notification_url: `https://ms.test.innout.cloud/ms/travelapp/customer/tour-packages/payment/webhook?preferenceId=${_id}`,
     };
 
-    preference.notification_url = `https://ms.test.innout.cloud/ms/travelapp/customer/tour-packages/payment/webhook?jsonData=${JSON.stringify(
-      encodeURI(preference as any)
-    )}`;
     console.log("preference", preference);
 
     const { MP_ACCESS_TOKEN } = process.env;
@@ -84,11 +83,15 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
     const result = await mercadopago.preferences.create(preference as any);
 
     console.log("rezsponse", result.body);
-    await TourPayment.insertOne({
+    /*  const _id = new ObjectId()
+    console.log("_id", _id); */
+
+    const resultDb = await TourPayment.insertOne({
+      _id,
       fullName,
       fullNameInvoice,
       addressInvoice,
-      user_id: result.body.collector_id, //aqup[i el eroor]
+      preferenceId: result.body.id, //aqup[i el eroor]
       price,
       title,
       mail,
@@ -98,17 +101,12 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
       documentInvoice,
       observation,
     } as any);
+    console.log("resultDb", resultDb);
     res.send({
       code: "00",
       data: { id: result.body.id, init_point: result.body.init_point },
     });
 
-    //  .then(function (response) {
-    //    // En esta instancia deberás asignar el valor dentro de response.body.id por el ID de preferencia solicitado en el siguiente paso
-    //  })
-    //  .catch(function (error) {
-    //    console.log(error);
-    //  });
   });
   app.post("/payment/webhook", async (request: any, res) => {
     const TourPayment = app.mongo.db!.collection<ITourPayment>(PAYMENTS);
@@ -138,7 +136,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
         detailsPayment.data.status_detail === "accredited"
       ) {
         const searchClient = await TourPayment.findOne({
-          user_id: body.user_id,
+          preferenceId: request.query.preferenceId,
         });
         const normalize = normalizeId(searchClient);
         console.log("normalize", normalize);

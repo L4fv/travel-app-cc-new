@@ -1,8 +1,9 @@
 export interface ITourPayment {
+  _id: string;
   fullName: string;
   fullNameInvoice: string;
   addressInvoice: string;
-  user_id: string;
+  preferenceId: string;
   price: string;
   title: string;
   mail: string;
