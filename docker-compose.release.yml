@@ -1,0 +1,14 @@
+version: '2'
+services:
+    app_1:
+        restart: always
+        image: 'travel_app:TEST_1.015'
+        env_file: .env.release
+        ports:
+            - '30009:3009'
+        networks:
+            - app_postgreSQL_innout_networks
+
+networks:
+    app_postgreSQL_innout_networks:
+        external: true
