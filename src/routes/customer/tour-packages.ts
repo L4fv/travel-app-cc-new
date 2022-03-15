@@ -121,7 +121,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async app => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.MP_TOKEN}`
+        Authorization: `Bearer ${process.env.MP_ACTOKEN}`
       }
     });
     console.log("detailsPayment.data.status", detailsPayment.data.status);
