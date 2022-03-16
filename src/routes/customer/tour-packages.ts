@@ -45,7 +45,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
       observation,
     } = body;
 
-    const tipoDocumento = documentInvoice.length === 8 ? "DNI" : "RUC";
+    const tipoDocumento = JSON.stringify(documentInvoice).length === 8 ? "DNI" : "RUC";
     console.log("tipoDocumento", tipoDocumento);
     let preference = {
       items: [
