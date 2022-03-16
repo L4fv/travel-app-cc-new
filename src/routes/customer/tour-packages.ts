@@ -83,10 +83,8 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
     const result = await mercadopago.preferences.create(preference as any);
 
     console.log("rezsponse", result.body);
-    /*  const _id = new ObjectId()
-    console.log("_id", _id); */
 
-    const resultDb = await TourPayment.insertOne({
+    await TourPayment.insertOne({
       _id,
       fullName,
       fullNameInvoice,
@@ -102,7 +100,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
       observation,
       createdAt: new Date(),
     } as any);
-    console.log("resultDb", resultDb);
+
     res.send({
       code: "00",
       data: { id: result.body.id, init_point: result.body.init_point },
@@ -124,20 +122,25 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
           Authorization: `Bearer ${process.env.MP_ACCESS_TOKEN}`,
         },
       });
-      console.log("detailsPayment ", detailsPayment.data);
+
       console.log("detailsPayment.data.status", detailsPayment.data.status);
-      console.log(
-        "detailsPayment.data.status_detail",
-        detailsPayment.data.status_detail
-      );
 
       if (
         detailsPayment.data.status === "approved" &&
         detailsPayment.data.status_detail === "accredited"
       ) {
+        console.log(
+          " request.query.myPreferenceId, ",
+          request.query.myPreferenceId
+        );
+        const myPreferenceId = new app.mongo.ObjectId(
+          request.query.myPreferenceId
+        );
+
         const searchClient = await TourPayment.findOne({
-          myPreferenceId: request.query.myPreferenceId,
+          _id: myPreferenceId as any,
         });
+        console.log("searchClient ", searchClient);
         const normalize = normalizeId(searchClient);
         console.log("normalize", normalize);
         const numberPrice = Number(normalize.price);
@@ -145,21 +148,20 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
         const today = format(new Date(), "yyyy-MM-dd");
         const todayTime = format(new Date(), "HH:mm:ss");
         const todayTimeExp = format(addDays(new Date(), 7), "yyyy-MM-dd");
+        const _lengthDocument = normalize.documentInvoice.length;
+        const totalIgv = numberPrice * 0.18;
         const data = {
-          serie_documento:
-            normalize.documentInvoice.length === 11 ? "F001" : "B001",
+          serie_documento: _lengthDocument === 11 ? "F001" : "B001",
           numero_documento: "#", //*
           fecha_de_emision: today,
           hora_de_emision: todayTime,
           codigo_tipo_operacion: "0101",
-          codigo_tipo_documento:
-            normalize.documentInvoice.length === 11 ? "01" : "03",
+          codigo_tipo_documento: _lengthDocument === 11 ? "01" : "03",
           codigo_tipo_moneda: "PEN",
           fecha_de_vencimiento: todayTimeExp,
           numero_orden_de_compra: null, //*
           datos_del_cliente_o_receptor: {
-            codigo_tipo_documento_identidad:
-              normalize.documentInvoice.length === 11 ? "6" : "1",
+            codigo_tipo_documento_identidad: _lengthDocument === 11 ? "6" : "1",
             numero_documento: normalize.documentInvoice,
             apellidos_y_nombres_o_razon_social: normalize.fullNameInvoice,
             codigo_pais: "PE",
@@ -170,13 +172,13 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
           },
           totales: {
             total_exportacion: 0.0,
-            total_operaciones_gravadas: numberPrice / (1 + 0.18),
+            total_operaciones_gravadas: numberPrice - numberPrice * totalIgv,
             total_operaciones_inafectas: 0.0,
             total_operaciones_exoneradas: 0.0,
             total_operaciones_gratuitas: 0.0,
-            total_igv: numberPrice - numberPrice / (1 + 0.18),
-            total_impuestos: numberPrice - numberPrice / (1 + 0.18),
-            total_valor: numberPrice / (1 + 0.18),
+            total_igv: numberPrice * totalIgv,
+            total_impuestos: numberPrice * totalIgv,
+            total_valor: numberPrice - numberPrice * totalIgv,
             total_venta: numberPrice,
           },
           items: [
@@ -184,17 +186,17 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
               codigo_interno: null,
               descripcion: normalize.title,
               codigo_producto_sunat: "90121502",
-              unidad_de_medida: "NIU",
+              unidad_de_medida: "ZZ",
               cantidad: normalize.numberAttendees,
               valor_unitario: numberPrice,
               codigo_tipo_precio: "01",
               precio_unitario: numberPrice / normalize.numberAttendees,
-              codigo_tipo_afectacion_igv: "10",
-              total_base_igv: numberPrice / (1 + 0.18),
-              porcentaje_igv: numberPrice - numberPrice / (1 + 0.18),
-              total_igv: numberPrice - numberPrice / (1 + 0.18),
-              total_impuestos: numberPrice - numberPrice / (1 + 0.18),
-              total_valor_item: numberPrice / (1 + 0.18),
+              codigo_tipo_afectacion_igv: "30", // inafecta
+              total_base_igv: numberPrice,
+              porcentaje_igv: 0,
+              total_igv: 0,
+              total_impuestos: 0,
+              total_valor_item: numberPrice,
               total_item: numberPrice,
             },
           ],
