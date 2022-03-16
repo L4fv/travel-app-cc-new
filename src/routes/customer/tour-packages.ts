@@ -171,13 +171,13 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
           },
           totales: {
             total_exportacion: 0.0,
-            total_operaciones_gravadas: numberPrice - numberPrice * totalIgv,
+            total_operaciones_gravadas: numberPrice,
             total_operaciones_inafectas: 0.0,
             total_operaciones_exoneradas: 0.0,
             total_operaciones_gratuitas: 0.0,
-            total_igv: numberPrice * totalIgv,
-            total_impuestos: numberPrice * totalIgv,
-            total_valor: numberPrice - numberPrice * totalIgv,
+            total_igv: 0.0,
+            total_impuestos: 0.0,
+            total_valor: numberPrice,
             total_venta: numberPrice,
           },
           items: [
