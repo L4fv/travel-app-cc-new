@@ -45,7 +45,8 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
       observation,
     } = body;
 
-    const tipoDocumento = JSON.stringify(documentInvoice).length === 8 ? "DNI" : "RUC";
+    const tipoDocumento =
+      JSON.stringify(documentInvoice).length === 8 ? "DNI" : "RUC";
     console.log("tipoDocumento", tipoDocumento);
     let preference = {
       items: [
@@ -64,12 +65,10 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
           number: String(documentInvoice),
         },
       },
-      /*       back_urls: {
-        "success": "https:///ms.test.innout.cloud/ms/travelapp/feedback",
-        "failure": "https:///ms.test.innout.cloud/ms/travelapp/feedback",
-        "pending": "https:///ms.test.innout.cloud/ms/travelapp/feedback"
-      }, */
-      //auto_return: "approved",
+      back_urls: {
+        success: "/thankyou",
+      },
+      auto_return: "approved",
       notification_url: `https://ms.test.innout.cloud/ms/travelapp/customer/tour-packages/payment/webhook?myPreferenceId=${_id}`,
     };
 
