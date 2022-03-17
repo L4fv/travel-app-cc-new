@@ -213,12 +213,12 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
           data,
         });
         const settingMail = {
-          host: "correo.innout.pe", // Office 365 server
+          host: "correo.innout.pe", //
           port: "465", // secure SMTP
           secure: true, // false for TLS - as a boolean not string - but the default is false so just remove this completely
           auth: {
-            user: "hola@innout.pe",
-            pass: "@Lafv1992",
+            user: "notify@innout.pe",
+            pass: "fP34Lw2KH24Bpj9L",
           },
           tls: {
             rejectUnauthorized: false,
@@ -228,14 +228,13 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
           fullName: normalize.fullName,
         };
         const mailOptions = {
-          from: `Samiria <hola@innout.pe>`, // sender address
+          from: `SAMIRIA <notify@innout.pe>`, // sender address
           to: `${normalize.mail}`, // list of receivers
-          subject: `confirmación de reserva | SAMIRIA`, // Subject line
+          subject: `Confirmación de reserva | SAMIRIA`, // Subject line
           html: myTemplateDmoSms(params),
           attachments: [
             {
-              filename:
-                normalize.documentInvoice.length === 11 ? "Factura" : "Boleta",
+              filename: _lengthDocument === 11 ? "Factura" : "Boleta",
               path: `${reloadProductos.data.links.pdf}`,
               contentType: "application/pdf",
             },
