@@ -2,20 +2,7 @@ version: '2'
 services:
     app_1:
         restart: always
-        image: 'travel_app:PROD_1.2'
+        image: 'travel_app:PROD_1.3'
         env_file: .env.production
         ports:
             - '30019:3001'
-
-    app_2:
-        restart: always
-        image: 'travel_app:PROD_1.2'
-        env_file: .env.production
-        ports:
-            - '40019:3001'
-        networks:
-            - app_mysql_innout_networks
-
-networks:
-    app_mysql_innout_networks:
-        external: true
