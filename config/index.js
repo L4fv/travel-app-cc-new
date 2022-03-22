@@ -1,8 +1,9 @@
 const ht = require("./hotelytourstarapoto");
 const lm = require("./lamansion");
 const sht = require("./samiria");
+const cc = require("./samiria");
 
-const BRANDS = ["ht", "lm", "sht"];
+const BRANDS = ["ht", "lm", "sht","cc"];
 
 let brand = process.env.NEXT_PUBLIC_BRAND;
 brand = BRANDS.includes(brand) ? brand : "ht";
