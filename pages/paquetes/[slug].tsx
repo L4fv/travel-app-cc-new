@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import Error from "next/error";
+import Script from "next/script";
+
 import { useRouter } from "next/router";
 import SwiperCore, {
   Navigation,
@@ -27,7 +29,11 @@ import {
   getRemainingOfferDays,
   hasActiveOffer,
 } from "../../utils/product";
-
+declare global {
+  interface Window {
+    MercadoPago: any;
+  }
+}
 SwiperCore.use([Navigation, Pagination, A11y, EffectCube, Thumbs]);
 
 export default function TourPackagePage(props) {
@@ -38,6 +44,7 @@ export default function TourPackagePage(props) {
     from: null,
     to: null,
   });
+  const [mp, setMercadoPago] = useState({});
 
   const [peopleQuantity, setPeopleQuantity] = useState(tourPackage || 1);
 
@@ -59,7 +66,18 @@ export default function TourPackagePage(props) {
           {tourPackage.name} | {config.name}
         </title>
       </Head>
-
+      <Script
+        id="mercadopago-js"
+        src="https://sdk.mercadopago.com/js/v2"
+        onLoad={() => {
+          setMercadoPago(
+            new window.MercadoPago(
+              "TEST-408b3c56-a1f5-4dd0-9039-e222d131830b",
+              { locale: "es-PE" }
+            )
+          );
+        }}
+      />
       <div className="w-full max-w-6xl mx-auto px-4 sm:px-8 py-8 md:py-12">
         <div className="grid grid-cols-1 md:grid-cols-[1fr,320px] lg:grid-cols-[1fr,380px] gap-6 md:gap-8 lg:gap-x-16 mb-6">
           <div className="min-w-0">
@@ -125,10 +143,12 @@ export default function TourPackagePage(props) {
                 </p>
               )}
             </div>
+
             <TourPackageContact
               tourPackage={tourPackage}
               range={selectedDayRange}
               quantity={peopleQuantity}
+              mp={mp}
             />
           </div>
         </div>
@@ -158,6 +178,7 @@ export async function getStaticProps({ params }) {
   try {
     tourPackage = await fetchTourPackage(params.slug);
   } catch (error) {
+    console.log("eerror ", error);
     return {
       notFound: true,
     };
