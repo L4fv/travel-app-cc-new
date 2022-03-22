@@ -1,0 +1,104 @@
+{
+  "title": "ITourPackage",
+  "bsonType": "object",
+  "additionalProperties": false,
+  "required": [
+    "_id",
+    "slug",
+    "name",
+    "price",
+    "capacity",
+    "duration",
+    "details",
+    "images",
+    "videos",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "_id": {},
+    "slug": {
+      "bsonType": "string"
+    },
+    "name": {
+      "bsonType": "string"
+    },
+    "price": {
+      "bsonType": "int"
+    },
+    "offer": {
+      "bsonType": "object",
+      "additionalProperties": false,
+      "required": ["enabled", "price", "from", "to"],
+      "properties": {
+        "enabled": {
+          "bsonType": "bool"
+        },
+        "price": {
+          "bsonType": "int"
+        },
+        "from": {
+          "bsonType": "date"
+        },
+        "to": {
+          "bsonType": "date"
+        }
+      }
+    },
+    "capacity": {
+      "bsonType": "object",
+      "additionalProperties": false,
+      "required": ["min", "max"],
+      "properties": {
+        "min": {
+          "bsonType": "int"
+        },
+        "max": {
+          "bsonType": "int"
+        }
+      }
+    },
+    "duration": {
+      "bsonType": "int"
+    },
+    "details": {
+      "bsonType": "array",
+      "items": {
+        "bsonType": "object",
+        "additionalProperties": false,
+        "required": ["title", "description"],
+        "properties": {
+          "title": {
+            "bsonType": "string"
+          },
+          "description": {
+            "bsonType": "string"
+          }
+        }
+      },
+      "minItems": 1
+    },
+    "images": {
+      "bsonType": "array",
+      "items": {
+        "bsonType": "string"
+      },
+      "minItems": 1
+    },
+    "videos": {
+      "bsonType": "array",
+      "items": {
+        "bsonType": "string"
+      }
+    },
+    "relevance": {
+      "bsonType": "int"
+    },
+    "createdAt": {
+      "bsonType": "date"
+    },
+    "updatedAt": {
+      "bsonType": "date"
+    }
+  }
+}

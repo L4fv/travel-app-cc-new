@@ -1,0 +1,8 @@
+version: '2'
+services:
+    app_1:
+        restart: always
+        image: 'travel_app:PROD_1.5'
+        env_file: .env.production
+        ports:
+            - '30019:3001'
