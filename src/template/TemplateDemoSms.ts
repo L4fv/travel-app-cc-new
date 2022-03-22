@@ -48,103 +48,46 @@ export const myTemplateDmoSms = (params: any) => {
         font-family: "Cereal";
         font-style: normal;
         font-weight: 200;
-        src: url("https://a1.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Lt-61d38480cfdf1dfc73d6bd0f459b3e10.eot");
-        src: url("https://a1.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Lt-61d38480cfdf1dfc73d6bd0f459b3e10.eot?#")
-            format("eot"),
-          url("https://a1.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Lt-4f51497e2f6db6e72599a1f2f484eb7e.woff")
-            format("woff"),
-          url("https://a1.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Lt-919ae0b65de2f8c6204ec57daeceb9e9.woff2")
-            format("woff2"),
-          url("https://a0.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Lt-ef243dd05072c5987d3abcbe00581224.ttf")
-            format("truetype");
+        
       }
       /*Regular*/
       @font-face {
         font-family: "Cereal";
         font-style: normal;
         font-weight: 300;
-        src: url("https://a1.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Rg-909a75677f1cbf6e66c8811e6d39441a.eot");
-        src: url("https://a1.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Rg-909a75677f1cbf6e66c8811e6d39441a.eot?#")
-            format("eot"),
-          url("https://a1.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Rg-391ee76d399e20117aade2ce1f7e196e.woff")
-            format("woff"),
-          url("https://a1.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Rg-3ff4006ded0500d605d6eff88ccc59f8.woff2")
-            format("woff2"),
-          url("https://a0.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Rg-190a6e02b3b3d6cfaf3bbe887349adad.ttf")
-            format("truetype");
+       
       }
       /*Medium*/
       @font-face {
         font-family: "Cereal";
         font-style: normal;
         font-weight: 500;
-        src: url("https://a0.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Md-ff8747694c95295917ef4c60c2bb6bce.eot");
-        src: url("https://a0.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Md-ff8747694c95295917ef4c60c2bb6bce.eot?#")
-            format("eot"),
-          url("https://a1.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Md-b9bb7e6d20007be4b0caa86ea7fbd906.woff")
-            format("woff"),
-          url("https://a0.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Md-dec1db4a099dd1761f19bbe3088de0c8.woff2")
-            format("woff2"),
-          url("https://a0.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Md-2f25e87279c9c202ebf384fae79ac376.ttf")
-            format("truetype");
+        
       }
       /*Bold*/
       @font-face {
         font-family: "Cereal";
         font-style: normal;
         font-weight: 700;
-        src: url("https://a0.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Bd-7b4c5f071be2fb695c04a1af3a1e0616.eot");
-        src: url("https://a0.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Bd-7b4c5f071be2fb695c04a1af3a1e0616.eot?#")
-            format("eot"),
-          url("https://a1.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Bd-20d7bff68cfbfa449bd9601275d29996.woff")
-            format("woff"),
-          url("https://a1.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Bd-32afa6b67d060b665623bbc48ce00187.woff2")
-            format("woff2"),
-          url("https://a1.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Bd-943ebbaff21543f9115cf46427213a47.ttf")
-            format("truetype");
+        
+        
       }
       /*XBold*/
       @font-face {
         font-family: "Cereal";
         font-style: normal;
         font-weight: 800;
-        src: url("https://a1.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_XBd-170530db17719eb719c2f03f8ac2a94d.eot");
-        src: url("https://a1.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_XBd-170530db17719eb719c2f03f8ac2a94d.eot?#")
-            format("eot"),
-          url("https://a0.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_XBd-3aea49864b40db534f43dc271460baba.woff")
-            format("woff"),
-          url("https://a0.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_XBd-66f244ea0cd79026250a9ba89a47a7aa.woff2")
-            format("woff2"),
-          url("https://a0.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_XBd-5d879965b6ea4ac2a31b41647c283433.ttf")
-            format("truetype");
+       
+        
       }
       /*Black*/
       @font-face {
         font-family: "Cereal";
         font-style: normal;
         font-weight: 900;
-        src: url("https://a0.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Bk-5e8fbee9505fc68a77d714aa35aee405.eot");
-        src: url("https://a0.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Bk-5e8fbee9505fc68a77d714aa35aee405.eot?#")
-            format("eot"),
-          url("https://a1.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Bk-36f3fbaecfd0e0f82e83f28a466ce425.woff")
-            format("woff"),
-          url("https://a1.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Bk-eed38b780704d1a3acbdb4ed930f6cdf.woff2")
-            format("woff2"),
-          url("https://a0.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Bk-a7f958b92f5a7555e9a6d5755e026c6b.ttf")
-            format("truetype");
+        
       }
-      @font-face {
-        font-family: "Cereal Black";
-        src: url("https://a0.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Bk-5e8fbee9505fc68a77d714aa35aee405.eot");
-        src: url("https://a0.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Bk-5e8fbee9505fc68a77d714aa35aee405.eot?#")
-            format("eot"),
-          url("https://a1.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Bk-36f3fbaecfd0e0f82e83f28a466ce425.woff")
-            format("woff"),
-          url("https://a1.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Bk-eed38b780704d1a3acbdb4ed930f6cdf.woff2")
-            format("woff2"),
-          url("https://a0.muscache.com/airbnb/rookery/fonts/Cereal/Cereal_W_Bk-a7f958b92f5a7555e9a6d5755e026c6b.ttf")
-            format("truetype");
-      }
+
     </style>
     <style data-roadie-ignore data-immutable="true">
       @media only screen and (max-width: 596px) {
@@ -543,7 +486,7 @@ export const myTemplateDmoSms = (params: any) => {
     <meta name="filler" content="                                  " />
     <img
       class="tracking"
-      src="https://www.airbnb.com/tracking/pixel/email_opened/1564933238?rookery_uuid=4b6ce406-a914-2efd-211f-09aa17dfd941"
+      
       style="
         outline: none;
         text-decoration: none;
@@ -715,7 +658,7 @@ export const myTemplateDmoSms = (params: any) => {
                           >
                             <img
                               align="center"
-                              alt="Airbnb"
+                              alt="samiria"
                               class="center standard-header"
                               height="80"
                               src="https://www.samiriahotelytours.com/sht/images/logo.png"
@@ -970,7 +913,7 @@ export const myTemplateDmoSms = (params: any) => {
                                 line-height: 1.4;
                               "
                             >
-                              powered by <a href="https://innout.pe">INNOUT</a>
+                              powered by <a href="https://innout.pe">innout.pe</a>
                             </p>
                             <p
                               class="standard-footer-text"
@@ -1014,7 +957,7 @@ export const myTemplateDmoSms = (params: any) => {
       "
     ></div>
     <img
-      src="https://email.airbnb.com/wf/open?upn=CmwAv3oRa0AH4Hd1bWC6X6p1xqrVRedZKih16VD-2B0xoHMugg5iXg-2FpsT6EhOGzj8QPgX8omd1F8f42574sUO-2B28xJW1pDJtFzhiSB1O6fsCzLELaaTg-2FAoIpuWcSykPGgFr4xAE6XvGu73lzn-2Bc2Sg4OXlsVRFymeHHDPlM2tLNKsg8TGgLGcmM1yuGqz6lGMdV-2F7sknTmrNcSiWRnIVa0khrGWgJ-2Fn-2Bl0V-2Fjc3JsRPwrWziv7ES1YvgDWTMBLRFaAOX-2FWviOGHjiSveF7fCwDHdHMqR8LR7Kpc1mji2K30XcRREkPA2k1zFh844i0cQ5zCI9mSVf1ok6kElY1e2aP5krXTPWw2fGm1Tzd8j927zuHEB3z9wvv8rpqRSKgCSYk3y2wfga5itWFwlTcDUhbwypthrQl4YyxLjtxsA5rwVU4kkfylkxQJW7EVw8-2BDslhWu93gRHRCiAcMl9oa3IUAQbV8hAmpukIBviov03VnIAU9IV-2BCXpu-2BbTL92jlNeJqyWfU6TOJQm5KhwgFlva1CpVPJjWny7adKd2Zg8vmx6M7pXqhG4ZjVuXRBMdv-2BWjjfghYqWTJEQicqrDHFhjHSzOr0Rme8xhq2y3BzL9htE-2F7f6hhppwxd1w3UwlLdm6trxtfsyJSbKwbKaDolxpBSN7-2B-2BZ-2FcRgGK5SLLdbAjiGJqJ66TicLghK8XO8Vnwy"
+      
       alt=""
       width="1"
       height="1"
