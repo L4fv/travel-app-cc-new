@@ -2,13 +2,9 @@ version: '2'
 services:
     app_1:
         restart: always
-        image: 'travel_app:TEST_4.10'
-        env_file: .env.release
+        image: 'travel_app:TEST_4.4'
+        env_file: .env
         ports:
             - '50009:5000'
-        networks:
-            - app_mysql_innout_networks
 
-networks:
-    app_mysql_innout_networks:
-        external: true
+
