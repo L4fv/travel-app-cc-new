@@ -2,17 +2,14 @@ export default class DefaultForm {
   static formReservation() {
     //console.log('store: ', store)
     return {
-      fullName: null,
-      fullNameInvoice: null,
-      addressInvoice: null,
-      price: null,
-      title: null,
-      mail: null,
-      phoneNumber: null,
-      numberAttendees: null,
-      documentReservation: null,
-      documentInvoice: null,
-      observation: null,
+      fullName: '',
+      fullNameInvoice: '',
+      addressInvoice: '',
+      mail: '',
+      phoneNumber: '',      
+      documentReservation: '',
+      documentInvoice: '',
+      observation: '',
       checked: false,
     };
   }
