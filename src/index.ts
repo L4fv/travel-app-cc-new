@@ -17,7 +17,7 @@ const app = fastify({
 app.register(fastifyCors, {
   exposedHeaders: ["Content-Range"],
 });
-
+console.log("process.env.MONGO_URL ", process.env.MONGO_URL);
 app
   .register(fastifyMongoDB, {
     forceClose: true,
