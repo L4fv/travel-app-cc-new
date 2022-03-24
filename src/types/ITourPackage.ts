@@ -8,7 +8,7 @@
  * and run bson2ts to regenerate this file.
  */
 
-export interface ITourPackage {
+ export interface ITourPackage {
   _id: unknown;
   slug: string;
   name: string;
