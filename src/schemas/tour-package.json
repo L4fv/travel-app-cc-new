@@ -26,25 +26,6 @@
     "price": {
       "bsonType": "int"
     },
-    "offer": {
-      "bsonType": "object",
-      "additionalProperties": false,
-      "required": ["enabled", "price", "from", "to"],
-      "properties": {
-        "enabled": {
-          "bsonType": "bool"
-        },
-        "price": {
-          "bsonType": "int"
-        },
-        "from": {
-          "bsonType": "date"
-        },
-        "to": {
-          "bsonType": "date"
-        }
-      }
-    },
     "capacity": {
       "bsonType": "object",
       "additionalProperties": false,
@@ -90,9 +71,6 @@
       "items": {
         "bsonType": "string"
       }
-    },
-    "relevance": {
-      "bsonType": "int"
     },
     "createdAt": {
       "bsonType": "date"
