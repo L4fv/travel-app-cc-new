@@ -23,12 +23,12 @@ export const registerSchemas = async (app: FastifyInstance) => {
       await app.mongo.db?.createCollection(namespace);
     } catch (e) {
     } finally {
-/*       await app.mongo.db?.command({
+      await app.mongo.db?.command({
         collMod: namespace,
         validator: {
           $jsonSchema: schema,
         },
-      }); */
+      });
     }
 
     if (!indexes) continue;
