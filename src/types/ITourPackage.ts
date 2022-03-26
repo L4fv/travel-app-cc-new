@@ -13,6 +13,12 @@
   slug: string;
   name: string;
   price: number;
+  offer?: {
+    enabled: boolean;
+    price: number;
+    from: Date;
+    to: Date;
+  };
   capacity: {
     min: number;
     max: number;
@@ -30,6 +36,7 @@
   ];
   images: [string, ...string[]];
   videos: string[];
+  relevance?: number;
   createdAt: Date;
   updatedAt: Date;
 }
