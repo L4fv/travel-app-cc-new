@@ -148,7 +148,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
         const todayTime = format(new Date(), "HH:mm:ss");
         const todayTimeExp = format(addDays(new Date(), 7), "yyyy-MM-dd");
         const _lengthDocument = normalize.documentInvoice.length;
-        const total = (numberPrice*normalize.numberAttendees).toFixed(2)
+        const total = Number(numberPrice*normalize.numberAttendees).toFixed(2)
 
         const data = {
           serie_documento: _lengthDocument === 11 ? "F001" : "B001",
