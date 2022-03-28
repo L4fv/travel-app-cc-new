@@ -145,7 +145,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
         const total =  parseFloat(Number(numberPrice*normalize.numberAttendees).toFixed(2)) 
 
         const data = {
-          serie_documento: _lengthDocument === 11 ? "F001" : "B001",
+          serie_documento: _lengthDocument === 11 ? "FA01" : "B001",
           numero_documento: "#", //*
           fecha_de_emision: today,
           hora_de_emision: todayTime,
@@ -198,7 +198,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
         };
 
         console.log("data ", data);
-        const reloadProductos = await axios({
+        const respuesta = await axios({
           url: `${process.env.INNOUT_HOST}/api/documents`,
           method: "POST",
           headers: {
@@ -232,7 +232,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
           attachments: [
             {
               filename: _lengthDocument === 11 ? "Factura" : "Boleta",
-              path: `${reloadProductos.data.links.pdf}`,
+              path: `${respuesta.data.links.pdf}`,
               contentType: "application/pdf",
             },
           ],
