@@ -2,6 +2,7 @@ module.exports = {
   name: "Samiria - Hotel & Tours - Tarapoto",
   fbUsername: "SamiriaHotelTours",
   contactPhone: "51923993105",
+  domain:"https://samiriahotelytours.com",
   heroVideo: {
     url: "https://travel-app-space.nyc3.digitaloceanspaces.com/common/ahuashiyacu.mp4",
     start: 0,

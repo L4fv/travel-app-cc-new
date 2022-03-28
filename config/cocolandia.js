@@ -2,6 +2,7 @@ module.exports = {
   name: "Cocolandia Tours",
   fbUsername: "CocolandiaTours",
   contactPhone: "51995624942",
+  domain:"https://cocolandiatours.com",
   heroVideo: {
     url: "https://travel-app-space.nyc3.digitaloceanspaces.com/common/Cocolandia%20Tours.mp4",
     start: 0,

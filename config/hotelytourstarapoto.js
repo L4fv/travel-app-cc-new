@@ -2,6 +2,7 @@ module.exports = {
   name: "Hotel & Tours Tarapoto",
   fbUsername: "hotelytourstarapoto",
   contactPhone: "51924274581",
+  domain:"https://hotelytourstarapoto.com",
   heroVideo: {
     url: "https://travel-app-space.nyc3.digitaloceanspaces.com/common/lagunaazul.mp4",
     start: 0,

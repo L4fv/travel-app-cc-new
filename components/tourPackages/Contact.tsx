@@ -86,6 +86,8 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
         documentReservation: v.documentReservation,
         fullName: v.fullName,
         observation: v.observation,
+        origen: config.domain,
+        titleMail: config.name,
       },
     });
     console.log("data ", data);
