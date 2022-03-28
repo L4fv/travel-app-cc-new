@@ -43,6 +43,8 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
       documentReservation,
       documentInvoice,
       observation,
+      origen,
+      titleMail
     } = body;
 
     const tipoDocumento =
@@ -66,10 +68,11 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
         },
       },
       back_urls: {
-        success: "/thankyou",
+        success: `${origen}/thankyou`,
       },
       auto_return: "approved",
-      notification_url: `${process.env.API_TOUR_HOST}/customer/tour-packages/payment/webhook?myPreferenceId=${_id}`,
+      notification_url: `${process.env.API_TOUR_HOST}/customer/tour-packages/payment/webhook?myPreferenceId=${_id}`,      
+      
     };
 
     console.log("preference", preference);
@@ -98,6 +101,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
       documentInvoice,
       observation,
       createdAt: new Date(),
+      titleMail
     } as any);
 
     res.send({
@@ -213,24 +217,24 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
           data,
         });
         const settingMail = {
-          host: "correo.innout.pe", //
-          port: "465", // secure SMTP
-          secure: true, // false for TLS - as a boolean not string - but the default is false so just remove this completely
+          host: 'smtp.gmail.com', // Office 365 server
+          port: '587', // secure SMTP
+          secure: false, // false for TLS - as a boolean not string - but the default is false so just remove this completely
           auth: {
-            user: "notify@innout.pe",
-            pass: "fP34Lw2KH24Bpj9L",
+              user: 'jian@genbby.com',
+              pass: 'Genbbymirko4ever2020',
           },
           tls: {
-            rejectUnauthorized: false,
+              ciphers: 'SSLv3',
           },
-        };
+      }
         const params = {
           fullName: normalize.fullName,
         };
         const mailOptions = {
-          from: `SAMIRIA <notify@innout.pe>`, // sender address
+          from: `${normalize.titleMail} <jian@genbby.com>`, // sender address
           to: `${normalize.mail}`, // list of receivers
-          subject: `Confirmación de reserva | SAMIRIA`, // Subject line
+          subject: `Confirmación de reserva`, // Subject line
           html: myTemplateDmoSms(params),
           attachments: [
             {

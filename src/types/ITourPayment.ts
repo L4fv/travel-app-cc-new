@@ -14,4 +14,5 @@ export interface ITourPayment {
   observation: string;
   createdAt: Date;
   updatedAt: Date;
+  titleMail: string
 }
