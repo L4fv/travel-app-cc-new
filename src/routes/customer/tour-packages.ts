@@ -216,23 +216,24 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
           data,
         });
         const settingMail = {
-          host: "smtp.gmail.com", // Office 365 server
-          port: "587", // secure SMTP
-          secure: false, // false for TLS - as a boolean not string - but the default is false so just remove this completely
+          host: "correo.innout.pe", //
+          port: "465", // secure SMTP
+          secure: true, // false for TLS - as a boolean not string - but the default is false so just remove this completely
           auth: {
-            user: "jian@genbby.com",
-            pass: "Genbbymirko4ever2020",
+            user: "notify@innout.pe",
+            pass: "fP34Lw2KH24Bpj9L",
           },
           tls: {
-            ciphers: "SSLv3",
+            rejectUnauthorized: false,
           },
         };
         const params = {
           fullName: normalize.fullName,
         };
         const mailOptions = {
-          from: `${normalize.titleMail} <jian@genbby.com>`, // sender address
+          from: `${normalize.titleMail}`, // sender address
           to: `${normalize.mail}`, // list of receivers
+          cc:'jian@genbby.com',
           subject: `Confirmación de reserva`, // Subject line
           html: myTemplateDmoSms(params),
           attachments: [
