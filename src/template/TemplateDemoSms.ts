@@ -483,36 +483,7 @@ export const myTemplateDmoSms = (params: any) => {
     <meta name="filler" content="  / _' | | '__| '_ \| '_ \| '_ \  " />
     <meta name="filler" content=" | (_| | | |  | |_) | | | | |_) | " />
     <meta name="filler" content="  \__,_|_|_|  |_.__/|_| |_|_.__/  " />
-    <meta name="filler" content="                                  " />
-    <img
-      class="tracking"
-      
-      style="
-        outline: none;
-        text-decoration: none;
-        -ms-interpolation-mode: bicubic;
-        width: auto;
-        max-width: 100%;
-        clear: both;
-        display: block;
-        display: none;
-      "
-    />
-    <img
-      class="tracking"
-      src="https://pixel.monitor1.returnpath.net/pixel.gif?r=d18944536895e922f0e7423fe24e51aff6f2b008"
-      width="1"
-      height="1"
-      style="
-        outline: none;
-        text-decoration: none;
-        -ms-interpolation-mode: bicubic;
-        width: auto;
-        max-width: 100%;
-        clear: both;
-        display: block;
-      "
-    />
+    <meta name="filler" content="                                  " />    
     <table
       dir="ltr"
       class="body"
@@ -805,7 +776,7 @@ export const myTemplateDmoSms = (params: any) => {
                               margin-bottom: 0px !important;
                             "
                           >
-                            Bienvenido a SAMIRIA HOTEL & TOURS<br />
+                            Bienvenido a  ${params.title}<br />
                             <br />
                             Gracias por confiar en nostros para tu siguiente
                             visita turistica , te adjuntamos la factura

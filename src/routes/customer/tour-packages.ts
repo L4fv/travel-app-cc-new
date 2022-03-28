@@ -227,6 +227,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
         };
         const params = {
           fullName: normalize.fullName,
+          title:normalize.titleMail
         };
         const mailOptions = {
           from: `${normalize.titleMail}`, // sender address
