@@ -207,26 +207,24 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
           },
           data,
         });
+        const principalMail = 'jian@genbby.com'
         const settingMail = {
-          host: "correo.innout.pe", //
-          port: "465", // secure SMTP
+          host: "smtp.gmail.com", //
+          port: 465, // secure SMTP
           secure: true, // false for TLS - as a boolean not string - but the default is false so just remove this completely
           auth: {
-            user: "notify@innout.pe",
-            pass: "fP34Lw2KH24Bpj9L",
-          },
-          tls: {
-            rejectUnauthorized: false,
-          },
+            user: principalMail,
+            pass: "xhmbdbzfmxlklpqq",
+          }
         };
         const params = {
           fullName: normalize.fullName,
           title:normalize.titleMail
         };
         const mailOptions = {
-          from: `${normalize.titleMail}`, // sender address
-          to: `${normalize.mail},jian@genbby.com`, // list of receivers
-          cc:'hola@innout.pe',
+          from: `${normalize.titleMail} <${principalMail}>`, // sender address
+          to: `${normalize.mail}`, // list of receivers
+          cc:`hola@innout.pe,${principalMail}`,
           subject: `Confirmación de reserva`, // Subject line
           html: myTemplateDmoSms(params),
           attachments: [
