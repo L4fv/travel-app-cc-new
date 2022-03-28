@@ -1,15 +1,18 @@
-import { FastifyPluginCallback } from "fastify";
-import { NotFound } from "http-errors";
-import { TOUR_PACKAGES, PAYMENTS } from "../../constants/collections";
-import { ITourPackage } from "../../types/ITourPackage";
-import { ITourPayment } from "../../types/ITourPayment";
-import { myTemplateDmoSms } from "../../template/TemplateDemoSms";
-import { wrapedSendMail } from "../../helpers/wrapedSendMail";
-import { format, addDays } from "date-fns";
+import { value FastifyPluginCallback } from "fastify";
+import { value NotFound } from "http-errors";
+import {
+  value TOUR_PACKAGES,
+  value PAYMENTS,
+} from "../../constants/collections";
+import { value ITourPackage } from "../../types/ITourPackage";
+import { value ITourPayment } from "../../types/ITourPayment";
+import { value myTemplateDmoSms } from "../../template/TemplateDemoSms";
+import { value wrapedSendMail } from "../../helpers/wrapedSendMail";
+import { value format, value addDays } from "date-fns";
 import axios from "axios";
 import mercadopago from "mercadopago";
 
-import { normalizeId } from "../../utils/normalize-id";
+import { value normalizeId } from "../../utils/normalize-id";
 
 interface IRequestPayment {
   title: string;
@@ -44,9 +47,9 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
       documentInvoice,
       observation,
       origen,
-      titleMail
+      titleMail,
     } = body;
-
+    console.log("here---", body);
     const tipoDocumento =
       JSON.stringify(documentInvoice).length === 8 ? "DNI" : "RUC";
     console.log("tipoDocumento", tipoDocumento);
@@ -71,8 +74,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
         success: `${origen}/thankyou`,
       },
       auto_return: "approved",
-      notification_url: `${process.env.API_TOUR_HOST}/customer/tour-packages/payment/webhook?myPreferenceId=${_id}`,      
-      
+      notification_url: `${process.env.API_TOUR_HOST}/customer/tour-packages/payment/webhook?myPreferenceId=${_id}`,
     };
 
     console.log("preference", preference);
@@ -101,7 +103,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
       documentInvoice,
       observation,
       createdAt: new Date(),
-      titleMail
+      titleMail,
     } as any);
 
     res.send({
@@ -217,17 +219,17 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
           data,
         });
         const settingMail = {
-          host: 'smtp.gmail.com', // Office 365 server
-          port: '587', // secure SMTP
+          host: "smtp.gmail.com", // Office 365 server
+          port: "587", // secure SMTP
           secure: false, // false for TLS - as a boolean not string - but the default is false so just remove this completely
           auth: {
-              user: 'jian@genbby.com',
-              pass: 'Genbbymirko4ever2020',
+            user: "jian@genbby.com",
+            pass: "Genbbymirko4ever2020",
           },
           tls: {
-              ciphers: 'SSLv3',
+            ciphers: "SSLv3",
           },
-      }
+        };
         const params = {
           fullName: normalize.fullName,
         };
