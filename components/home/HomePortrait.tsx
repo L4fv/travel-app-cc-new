@@ -32,6 +32,7 @@ export const HomePortrait = () => {
   const content = {
     ht: <HTHeroContent />,
     lm: <LMHeroContent />,
+    cc: <LMHeroContent />,
     sht: <LMHeroContent />,
   };
 

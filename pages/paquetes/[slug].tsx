@@ -72,7 +72,7 @@ export default function TourPackagePage(props) {
         onLoad={() => {
           setMercadoPago(
             new window.MercadoPago(
-              "TEST-408b3c56-a1f5-4dd0-9039-e222d131830b",
+              "APP_USR-ab56aa38-f7e9-4d10-9093-d89ea3a8efcd",
               { locale: "es-PE" }
             )
           );
