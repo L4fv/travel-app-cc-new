@@ -3,7 +3,6 @@ import nodemailer from "nodemailer";
 export async function wrapedSendMail(settings: any, mailOptions: any) {
   return new Promise((resolve, reject) => {
     let transporter = nodemailer.createTransport(settings);
-    console.log("settings", settings);
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
         console.log("error is " + error);

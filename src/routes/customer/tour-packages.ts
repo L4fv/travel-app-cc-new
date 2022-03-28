@@ -20,7 +20,7 @@ interface IRequestPayment {
 export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
   const TourPackages = app.mongo.db!.collection<ITourPackage>(TOUR_PACKAGES);
   app.get("/", async () => {
-    console.log("hola");
+    
     const tourPackages = await TourPackages.find()
       .sort({ relevance: -1, _id: 1 })
       .toArray();
@@ -49,7 +49,6 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
     console.log("here---", body);
     const tipoDocumento =
       JSON.stringify(documentInvoice).length === 8 ? "DNI" : "RUC";
-    console.log("tipoDocumento", tipoDocumento);
     let preference = {
       items: [
         {
@@ -74,16 +73,11 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
       notification_url: `${process.env.API_TOUR_HOST}/customer/tour-packages/payment/webhook?myPreferenceId=${_id}`,
     };
 
-    console.log("preference", preference);
-
     const { MP_ACCESS_TOKEN } = process.env;
-    console.log("MP_ACCESS_TOKEN", MP_ACCESS_TOKEN);
     mercadopago.configure({
       access_token: `${process.env.MP_ACCESS_TOKEN}`,
     });
     const result = await mercadopago.preferences.create(preference as any);
-
-    console.log("rezsponse", result.body);
 
     await TourPayment.insertOne({
       _id,
@@ -148,7 +142,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
         const todayTime = format(new Date(), "HH:mm:ss");
         const todayTimeExp = format(addDays(new Date(), 7), "yyyy-MM-dd");
         const _lengthDocument = normalize.documentInvoice.length;
-        const total = Number(numberPrice*normalize.numberAttendees).toFixed(2)
+        const total =  parseFloat(Number(numberPrice*normalize.numberAttendees).toFixed(2)) 
 
         const data = {
           serie_documento: _lengthDocument === 11 ? "F001" : "B001",
