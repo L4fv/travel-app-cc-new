@@ -10,3 +10,4 @@
 # DEPLOY LOCAL
     npm run dev
 
+dokku config:set cc-front NEXT_PUBLIC_API_URL_EXT=https://api.cocolandiatours.com
