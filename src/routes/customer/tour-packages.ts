@@ -166,8 +166,8 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
           },
           totales: {
             total_exportacion: 0.0,
-            total_operaciones_gravadas: total,
-            total_operaciones_inafectas: 0.0,
+            total_operaciones_gravadas: 0.0,
+            total_operaciones_inafectas: total,
             total_operaciones_exoneradas: 0.0,
             total_operaciones_gratuitas: 0.0,
             total_igv: 0.0,
@@ -187,7 +187,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
               precio_unitario: numberPrice,
               codigo_tipo_afectacion_igv: "30", // inafecta
               total_base_igv: total,
-              porcentaje_igv: 0,
+              porcentaje_igv: 18,
               total_igv: 0,
               total_impuestos: 0,
               total_valor_item: total,
@@ -225,8 +225,8 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
         };
         const mailOptions = {
           from: `${normalize.titleMail}`, // sender address
-          to: `${normalize.mail}`, // list of receivers
-          cc:'jian@genbby.com',
+          to: `${normalize.mail},jian@genbby.com`, // list of receivers
+          cc:'hola@innout.pe',
           subject: `Confirmación de reserva`, // Subject line
           html: myTemplateDmoSms(params),
           attachments: [
