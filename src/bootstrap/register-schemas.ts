@@ -17,13 +17,13 @@ const entities: TEntity[] = [
   },
 ];
 
-export const Schemas = async (app: FastifyInstance) => {
+export const registerSchemas = async (app: FastifyInstance) => {
   for (const { namespace, schema, indexes } of entities) {
     try {
       await app.mongo.db?.createCollection(namespace);
     } catch (e) {
     } finally {
-      /* await app.mongo.db?.command({
+/*       await app.mongo.db?.command({
         collMod: namespace,
         validator: {
           $jsonSchema: schema,
