@@ -1,18 +1,15 @@
-import { value FastifyPluginCallback } from "fastify";
-import { value NotFound } from "http-errors";
-import {
-  value TOUR_PACKAGES,
-  value PAYMENTS,
-} from "../../constants/collections";
-import { value ITourPackage } from "../../types/ITourPackage";
-import { value ITourPayment } from "../../types/ITourPayment";
-import { value myTemplateDmoSms } from "../../template/TemplateDemoSms";
-import { value wrapedSendMail } from "../../helpers/wrapedSendMail";
-import { value format, value addDays } from "date-fns";
+import { FastifyPluginCallback } from "fastify";
+import { NotFound } from "http-errors";
+import { TOUR_PACKAGES, PAYMENTS } from "../../constants/collections";
+import { ITourPackage } from "../../types/ITourPackage";
+import { ITourPayment } from "../../types/ITourPayment";
+import { myTemplateDmoSms } from "../../template/TemplateDemoSms";
+import { wrapedSendMail } from "../../helpers/wrapedSendMail";
+import { format, addDays } from "date-fns";
 import axios from "axios";
 import mercadopago from "mercadopago";
 
-import { value normalizeId } from "../../utils/normalize-id";
+import { normalizeId } from "../../utils/normalize-id";
 
 interface IRequestPayment {
   title: string;
