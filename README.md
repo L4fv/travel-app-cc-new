@@ -1,5 +1,5 @@
 # travel_app
-git push cc-fron2t main:prod
+git push cc-front2 main:prod
 # DEPLOY PROD
     COMAND=
      git pull && docker-compose down && docker build . -t travel_app=PROD_1.5  && docker-compose up -d --remove-orphans
