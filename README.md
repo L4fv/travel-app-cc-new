@@ -1,13 +1,10 @@
 # travel_app
-
+git push cc-fron2t main:prod
 # DEPLOY PROD
-    COMAND:
-     git pull && docker-compose down && docker build . -t travel_app:PROD_1.5  && docker-compose up -d --remove-orphans
-
-# DEPLOY RELEASE
-    git pull && docker-compose down && docker build . -t travel_app:TEST_4.9 && docker-compose -f docker-compose.release.yml  up -d --remove-orphans
+    COMAND=
+     git pull && docker-compose down && docker build . -t travel_app=PROD_1.5  && docker-compose up -d --remove-orphans
 
 # DEPLOY LOCAL
     npm run dev
 
-dokku config:set cc-front NEXT_PUBLIC_API_URL_EXT=https://api.cocolandiatours.com
+dokku config:set lm-api API_TOUR_HOST=https=//api.mansionhoteltours.com INNOUT_HOST=https=//genbby.innout.cloud INNOUT_TOKEN=XP5SMuzGE7JnVBG4bz6KAix9wmfBFBJ006vruRXfSuDcgKYRjZdRd6bcRkPt MP_ACCESS_TOKEN=APP_USR-3734648925832046-032216-1c18bf925cd3658d417288fa02748f52-835224208

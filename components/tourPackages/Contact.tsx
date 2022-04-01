@@ -88,10 +88,11 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
         observation: v.observation,
         origen: config.domain,
         titleMail: config.name,
+        brand: config.brand,
       },
     });
     console.log("data ", data);
-    console.log("mp", mp);
+    
     // Inicializa el checkout
     mp.checkout({
       preference: {
