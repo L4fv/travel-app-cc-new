@@ -26,16 +26,18 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
   const [open, setOpen] = useState(false);
   const [isLoadingMp, setLoading] = useState(false);
 
-  const [bodyForm, setBodyForm] = useState(DefaultForm.formReservation());
-
   const validationSchema = yup.object({
     fullName: yup.string().required("Nombres es requerido"),
     fullNameInvoice: yup.string(),
-    documentInvoice: yup.number(),
+    documentInvoice: yup.string().min(11).max(11),
     addressInvoice: yup.string(),
     observation: yup.string(),
     checked: yup.boolean(),
-    documentReservation: yup.number().required("Documento es requerido"),
+    documentReservation: yup
+      .string()
+      .min(8)
+      .max(8)
+      .required("Documento es requerido"),
     mail: yup
       .string()
       .email("Invalid email format")
@@ -92,7 +94,7 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
       },
     });
     console.log("data ", data);
-    
+
     // Inicializa el checkout
     mp.checkout({
       preference: {
@@ -323,7 +325,7 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
               style={{ backgroundColor: "blue" }}
               disabled={isLoadingMp}
             >
-              Lo quiero S/.{tourPackage.price}
+              Lo quiero S/.{tourPackage.price * quantity}
             </Button>
           </DialogActions>
         </form>

@@ -35,7 +35,7 @@ export default function CustomThankyou() {
             <Icon path={mdiEmailOutline} size={3} color="blue" />
           </Grid>
           <Grid item xs={9} md={11}>
-            <h2 className="text-center text-md ">
+            <h2 className="text-center text-md px-2">
               Estamos agradecidos por confiar en nosotros. Estamos preparando
               todo para darte mayor información y estaremos enviando
               Boleta/Factura a tu correo electrónico.
