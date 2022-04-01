@@ -3,7 +3,7 @@ import { NotFound } from "http-errors";
 import { TOUR_PACKAGES, PAYMENTS } from "../../constants/collections";
 import { ITourPackage } from "../../types/ITourPackage";
 import { ITourPayment } from "../../types/ITourPayment";
-import { myTemplateDmoSms } from "../../template/TemplateDemoSms";
+import { myTemplate } from "../../template/TemplateMailPayment";
 import { wrapedSendMail } from "../../helpers/wrapedSendMail";
 import { format, addDays } from "date-fns";
 import axios from "axios";
@@ -44,6 +44,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
       documentInvoice,
       observation,
       origen,
+      brand,
       titleMail,
     } = body;
     console.log("here---", body);
@@ -95,6 +96,8 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
       observation,
       createdAt: new Date(),
       titleMail,
+      origen,
+      brand
     } as any);
 
     res.send({
@@ -194,7 +197,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
               total_item: total,
             },
           ],
-          informacion_adicional: "Forma de pago:Transferencia|Caja: 1",
+          informacion_adicional: "",
         };
 
         console.log("data ", data);
@@ -217,16 +220,13 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
             pass: "xhmbdbzfmxlklpqq",
           }
         };
-        const params = {
-          fullName: normalize.fullName,
-          title:normalize.titleMail
-        };
+
         const mailOptions = {
           from: `${normalize.titleMail} <${principalMail}>`, // sender address
           to: `${normalize.mail}`, // list of receivers
           cc:`hola@innout.pe,${principalMail}`,
           subject: `Confirmación de reserva`, // Subject line
-          html: myTemplateDmoSms(params),
+          html: myTemplate(normalize),
           attachments: [
             {
               filename: _lengthDocument === 11 ? "Factura" : "Boleta",
