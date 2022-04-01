@@ -7,4 +7,4 @@ git push cc-front2 main:prod
 # DEPLOY LOCAL
     npm run dev
 
-dokku config:set lm-api API_TOUR_HOST=https=//api.mansionhoteltours.com INNOUT_HOST=https=//genbby.innout.cloud INNOUT_TOKEN=XP5SMuzGE7JnVBG4bz6KAix9wmfBFBJ006vruRXfSuDcgKYRjZdRd6bcRkPt MP_ACCESS_TOKEN=APP_USR-3734648925832046-032216-1c18bf925cd3658d417288fa02748f52-835224208
+dokku config:set sht-api API_TOUR_HOST=https=//api.samiriahotelytours.com INNOUT_HOST=https=//genbby.innout.cloud INNOUT_TOKEN=XP5SMuzGE7JnVBG4bz6KAix9wmfBFBJ006vruRXfSuDcgKYRjZdRd6bcRkPt MP_ACCESS_TOKEN=APP_USR-3734648925832046-032216-1c18bf925cd3658d417288fa02748f52-835224208 NEXT_PUBLIC_BRAND=sht NEXT_PUBLIC_API_URL_EXT=https://api.samiriahotelytours.com NEXT_PUBLIC_API_URL=https://api.samiriahotelytours.com 
