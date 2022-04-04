@@ -785,10 +785,7 @@ export const myTemplate = (params: any) => {
                                                       visita turistica ${params.title}
                                                       <br />
                                                       te adjuntamos la Boleta/factura
-                                                      correspondiente<br /><br />
-                                                      <!-- Integra envios SMS en las comunicaciones con tus clientes, informa sobre pedidos, citas, advertencias, recordatorios, autorizaciones, etc.                                                                                                                                 Tus clientes agradecerán una información útil y rápida. <br/><br/>
-                                                              Te brindamos 5 SMS gratuitos, para que pruebes nuestro sistema, no dudes en contactarte con nosotros
-                                                              para tu siguiente proyecto. -->
+                                                      correspondiente<br /><br />                                                      
                                                       <br /><br />
                                                   </p>
                                               </th>
@@ -899,7 +896,6 @@ export const myTemplate = (params: any) => {
   
       <!-- Gmail on iOS will automatically increase font-size for readability -->
   
-      <!-- http://freshinbox.com/blog/gmail-supports-displaynone-and-gmail-ios-font-fix-update/ -->
       <div class="gmailfix" style="
           white-space: nowrap;
           font: 15px courier;

@@ -20,7 +20,6 @@ interface IRequestPayment {
 export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
   const TourPackages = app.mongo.db!.collection<ITourPackage>(TOUR_PACKAGES);
   app.get("/", async () => {
-    
     const tourPackages = await TourPackages.find()
       .sort({ relevance: -1, _id: 1 })
       .toArray();
@@ -48,6 +47,8 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
       titleMail,
     } = body;
     console.log("here---", body);
+    const { MP_ACCESS_TOKEN, API_TOUR_HOST } = process.env;
+
     const tipoDocumento =
       JSON.stringify(documentInvoice).length === 8 ? "DNI" : "RUC";
     let preference = {
@@ -71,12 +72,11 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
         success: `${origen}/thankyou`,
       },
       auto_return: "approved",
-      notification_url: `${process.env.API_TOUR_HOST}/customer/tour-packages/payment/webhook?myPreferenceId=${_id}`,
+      notification_url: `${API_TOUR_HOST}/customer/tour-packages/payment/webhook?idMDBRef=${_id}`,
     };
 
-    const { MP_ACCESS_TOKEN } = process.env;
     mercadopago.configure({
-      access_token: `${process.env.MP_ACCESS_TOKEN}`,
+      access_token: `${MP_ACCESS_TOKEN}`,
     });
     const result = await mercadopago.preferences.create(preference as any);
 
@@ -85,7 +85,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
       fullName,
       fullNameInvoice,
       addressInvoice,
-      myPreferenceId: result.body.id, //aqup[i el eroor]
+      mpReference: result.body.id, //aqup[i el eroor]
       price,
       title,
       mail,
@@ -97,15 +97,19 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
       createdAt: new Date(),
       titleMail,
       origen,
-      brand
+      brand,
     } as any);
 
     res.send({
       code: "00",
-      data: { id: result.body.id, init_point: result.body.init_point },
+      data: {
+        idMDBRef: _id,
+        mpReference: result.body.id,
+        init_point: result.body.init_point,
+      },
     });
   });
-  
+
   app.post("/payment/webhook", async (request: any, res) => {
     const TourPayment = app.mongo.db!.collection<ITourPayment>(PAYMENTS);
     const body = request.body;
@@ -123,21 +127,18 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
         },
       });
 
-      console.log("detailsPayment.data.status", detailsPayment.data.status);
+      console.log("detailsPayment.data.status", detailsPayment.data);
 
       if (
         detailsPayment.data.status === "approved" &&
         detailsPayment.data.status_detail === "accredited"
       ) {
-
-        const myPreferenceId = new app.mongo.ObjectId(
-          request.query.myPreferenceId
-        );
+        const idMDBRef = new app.mongo.ObjectId(request.query.myPreferenceId);
 
         const searchClient = await TourPayment.findOne({
-          _id: myPreferenceId as any,
+          _id: idMDBRef as any,
         });
-        
+
         const normalize = normalizeId(searchClient);
         const numberPrice = Number(normalize.price);
         process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
@@ -145,7 +146,9 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
         const todayTime = format(new Date(), "HH:mm:ss");
         const todayTimeExp = format(addDays(new Date(), 7), "yyyy-MM-dd");
         const _lengthDocument = normalize.documentInvoice.length;
-        const total =  parseFloat(Number(numberPrice*normalize.numberAttendees).toFixed(2)) 
+        const total = parseFloat(
+          Number(numberPrice * normalize.numberAttendees).toFixed(2)
+        );
 
         const data = {
           serie_documento: _lengthDocument === 11 ? "FA01" : "B001",
@@ -210,7 +213,7 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
           },
           data,
         });
-        const principalMail = 'jian@genbby.com'
+        const principalMail = "jian@genbby.com";
         const settingMail = {
           host: "smtp.gmail.com", //
           port: 465, // secure SMTP
@@ -218,13 +221,13 @@ export const tourPackagesRoute: FastifyPluginCallback = async (app) => {
           auth: {
             user: principalMail,
             pass: "xhmbdbzfmxlklpqq",
-          }
+          },
         };
 
         const mailOptions = {
           from: `${normalize.titleMail} <${principalMail}>`, // sender address
           to: `${normalize.mail}`, // list of receivers
-          cc:`hola@innout.pe,${principalMail}`,
+          cc: `hola@innout.pe,${principalMail}`,
           subject: `Confirmación de reserva`, // Subject line
           html: myTemplate(normalize),
           attachments: [
