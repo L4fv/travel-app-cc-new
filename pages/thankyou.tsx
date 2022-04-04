@@ -7,38 +7,34 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 
 export default function CustomThankyou() {
-    
   return (
     <Layout>
       <Head>
         <title>Gracias por tu compra</title>
       </Head>
       <div className="px-8 py-12  max-w-6xl mx-auto">
-        <h1 className="text-center text-xl font-bold">Gracias por tu compra</h1>
+        <h1 className="text-center text-xl font-bold">GRACIAS POR TU COMPRA</h1>
+        <br />        
         <h2 className="text-center text-md ">
           Hemos recibido su pago satisfactoriamente
         </h2>
-        <br />
-
-        <br />
         <Grid
           container
-          spacing={1}
+          spacing={2}
           textAlign="center"
           alignItems="center"
           justifyContent="center"
           style={{
-            maxWidth: "750px",
+            maxWidth: "500px",
           }}
         >
-          <Grid item xs={3} md={1}>
-            <Icon path={mdiEmailOutline} size={3} color="blue" />
-          </Grid>
-          <Grid item xs={9} md={11}>
+          <Grid item >
             <h2 className="text-center text-md px-2">
-              Estamos agradecidos por confiar en nosotros. Estamos preparando
-              todo para darte mayor información y estaremos enviando
-              Boleta/Factura a tu correo electrónico.
+              Por favor comunícate con uno de nuestros asesores para poder
+              detallar el tipo de habitaciones, itinerario, actividades y
+              cualquier duda que tengas. 
+              <br></br> *Estaremos enviando su boleta/factura
+              electrónica
             </h2>
           </Grid>
           <Grid item xs={12}>
@@ -46,7 +42,11 @@ export default function CustomThankyou() {
               variant="outlined"
               href={`https://wa.me/${config.contactPhone}?text="Hola"`}
               className="inline-flex items-center  text-md px-8 py-3 font-bold text-white rounded-full shadow-lg hover:shadow-xl"
-              style={{ backgroundColor: "#4fce5d", margin: 8 }}
+              style={{
+                backgroundColor: "#4fce5d",
+                margin: 8,
+                borderColor: "#4fce5d",
+              }}
               startIcon={<Icon path={mdiWhatsapp} size={1.5} />}
             >
               <span>WHATSAPP</span>
@@ -57,7 +57,11 @@ export default function CustomThankyou() {
               variant="outlined"
               href="/"
               className="inline-flex items-center  text-md px-8 py-3 font-bold text-white rounded-full shadow-lg hover:shadow-xl"
-              style={{ backgroundColor: "blue", margin: 8 }}
+              style={{
+                backgroundColor: config.colors.primary.DEFAULT,
+                margin: 8,
+                borderColor: config.colors.primary.DEFAULT,
+              }}
               startIcon={<Icon path={mdiArrowLeft} size={1.5} />}
             >
               <span>HOME</span>

@@ -7,4 +7,4 @@ git push cc-front2 main:prod
 # DEPLOY LOCAL
     npm run dev
 
-dokku config:set cc-front NEXT_PUBLIC_BRAND=cc NEXT_PUBLIC_API_URL_EXT=https://api.cocolandiatours.com NEXT_PUBLIC_API_URL=https://api.cocolandiatours.com 
+dokku config:set lm-front NEXT_PUBLIC_BRAND=lm NEXT_PUBLIC_API_URL_EXT=https://api.mansionhoteltours.com NEXT_PUBLIC_API_URL=https://api.mansionhoteltours.com 

@@ -24,6 +24,7 @@ var LMExperienceContent = function () {
 };
 var HomeExperience = function () {
     var content = {
+      cc: <LMExperienceContent />,
         ht: <HTExperienceContent />,
         lm: <LMExperienceContent />,
         sht: <LMExperienceContent />,
