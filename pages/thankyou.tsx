@@ -14,7 +14,7 @@ export default function CustomThankyou() {
       </Head>
       <div className="px-8 py-12  max-w-6xl mx-auto">
         <h1 className="text-center text-xl font-bold">GRACIAS POR TU COMPRA</h1>
-        <br />        
+        <br />
         <h2 className="text-center text-md ">
           Hemos recibido su pago satisfactoriamente
         </h2>
@@ -28,13 +28,12 @@ export default function CustomThankyou() {
             maxWidth: "500px",
           }}
         >
-          <Grid item >
+          <Grid item>
             <h2 className="text-center text-md px-2">
               Por favor comunícate con uno de nuestros asesores para poder
               detallar el tipo de habitaciones, itinerario, actividades y
-              cualquier duda que tengas. 
-              <br></br> *Estaremos enviando su boleta/factura
-              electrónica
+              cualquier duda que tengas.
+              <br></br> *Estaremos enviando su boleta/factura electrónica
             </h2>
           </Grid>
           <Grid item xs={12}>

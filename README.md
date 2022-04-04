@@ -8,3 +8,7 @@ git push cc-front2 main:prod
     npm run dev
 
 dokku config:set lm-front NEXT_PUBLIC_BRAND=lm NEXT_PUBLIC_API_URL_EXT=https://api.mansionhoteltours.com NEXT_PUBLIC_API_URL=https://api.mansionhoteltours.com 
+
+# DEPLOY
+git push cc-front main:prod && git push lm-front main:prod && git push sht-front main:prod && git push ht-front main:prod
+
