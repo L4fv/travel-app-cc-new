@@ -2,7 +2,7 @@ module.exports = {
   name: "Cocolandia Tours",
   fbUsername: "CocolandiaTours",
   contactPhone: "51995624942",
-  domain:"https://cocolandiatours.com",
+  domain: "https://cocolandiatours.com",
   heroVideo: {
     url: "https://travel-app-space.nyc3.digitaloceanspaces.com/common/Cocolandia%20Tours.mp4",
     start: 0,
@@ -13,10 +13,10 @@ module.exports = {
       DEFAULT: "#3FA7A0",
     },
     secondary: {
-      DEFAULT: "#64aa00",
+      DEFAULT: "#254341",
     },
     tertiary: {
-      DEFAULT: "#a35821",
+      DEFAULT: "#b2b09b",
     },
   },
   font: {
