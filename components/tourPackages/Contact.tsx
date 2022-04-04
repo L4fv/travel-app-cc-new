@@ -98,13 +98,9 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
     // Inicializa el checkout
     mp.checkout({
       preference: {
-        id: data.data.id,
+        id: data.data.mpReference,
       },
       autoOpen: true,
-      theme: {
-        elementsColor: "#4fce5d",
-        headerColor: "#4fce5d",
-      },
     });
 
     setLoading(false);
@@ -132,7 +128,11 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
         variant="contained"
         onClick={handleOpenModal}
         className="inline-flex items-center  text-md px-8 py-3 font-bold text-white rounded-full shadow-lg hover:shadow-xl"
-        style={{ backgroundColor: "blue", margin: 8 }}
+        style={{
+          backgroundColor: config.colors.primary.DEFAULT,
+          margin: 8,
+          borderColor: config.colors.primary.DEFAULT,
+        }}
         startIcon={<Icon path={mdiCreditCardOutline} size={1.5} />}
       >
         Reserva Online
@@ -316,13 +316,17 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
             </Grid>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} style={{ color: "blue" }}>
+            <Button onClick={handleClose} style={{ color: config.colors.primary.DEFAULT }}>
               Atras
             </Button>
             <Button
               variant="contained"
               type="submit"
-              style={{ backgroundColor: "blue" }}
+              style={{
+                backgroundColor: config.colors.primary.DEFAULT,
+                margin: 8,
+                borderColor: config.colors.primary.DEFAULT,
+              }}
               disabled={isLoadingMp}
             >
               Lo quiero S/.{tourPackage.price * quantity}
