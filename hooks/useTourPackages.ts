@@ -3,7 +3,7 @@ import { fetcher } from "../utils/api";
 
 const TOUR_PACKAGES_PATH = "/customer/tour-packages/";
 
-export const fetchTourPackage = (slug) => fetcher(TOUR_PACKAGES_PATH + slug);
+export const fetchTourPackage = slug => fetcher(TOUR_PACKAGES_PATH + slug);
 
 export const fetchTourPackages = () => fetcher(TOUR_PACKAGES_PATH);
 
