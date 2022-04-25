@@ -25,7 +25,6 @@ import DialogContent from "@mui/material/DialogContent";
 
 import DialogTitle from "@mui/material/DialogTitle";
 import DefaultForm from "../../utils/model";
-const miNombre = 'Samir'
 export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
    let [cuota, setCuota] = React.useState("");
 
@@ -90,7 +89,7 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
         documentInvoice: v.checked ? v.documentInvoice : v.documentReservation,
         fullNameInvoice: v.checked ? v.fullNameInvoice : v.fullName,
         addressInvoice: v.checked ? v.addressInvoice : "",
-        price: cuota? (cuota/quantity):tourPackage.price ,
+        price: cuota? (cuota as any/quantity):tourPackage.price ,
         title: tourPackage.name,
         mail: v.mail,
         phoneNumber: v.phoneNumber,
@@ -114,7 +113,6 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
       },
       autoOpen: true,
     });
-    console.log('_checkout')
     setLoading(false);
   };
 
