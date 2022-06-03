@@ -23,7 +23,6 @@ console.log('product',tourPackages)
           description={product.name}
           price={product.price}
           stars={5.0}
-
         />
         ))}
       </div>
