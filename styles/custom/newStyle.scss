@@ -275,6 +275,10 @@
 	flex-direction: column;
 	margin: 0px;
 }
+.classWhite{
+	display: flex;
+	background-color: #eeeeee;
+}
 #exp-city {
 	text-align: left;
 	color: #9a9a9a;
@@ -302,6 +306,52 @@
 	margin: 0px;
 	padding-right: 5px;
 }
+.headerDescription{
+	display: flex;
+	align-items: center;
+}
+.iconItems{
+	@media only screen and (max-width: 500px) {
+display: none;
+	}
+
+	display: flex;
+	justify-content: start;
+	font-size: 12px;
+	text-align: center;
+	line-height: normal;
+	letter-spacing: normal;
+	color: #888888	;
+	width: auto;
+	min-width: 350px;
+    height: 86px;
+
+
+}
+.spaceLeftRigth{
+	margin-left: 25px;
+}
+.spaceIcon{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	
+	margin-right: 25px;
+}
+.reservation{
+	display: flex;
+	align-items: center;
+	font-family: Rubik, Arial, sans-serif	;
+	font-size: 13px;
+	line-height: 14px;
+	text-align: start;
+	letter-spacing: normal;
+	margin-left: 12px;
+	background-color:#270570 ;
+	color: white;
+	padding: 3px 8px;
+	border-radius: 4px;
+}
 .exp-content-wrap {
 	display: flex;
 	flex-direction: column;
@@ -314,6 +364,82 @@
 	align-items: flex-end;
 	margin: 0 10px;
 	height: auto;
+}
+.space-icons {
+	display: flex;
+}
+.pocketTime{
+	margin-right: 10px;
+}
+.subHeader{
+	@media only screen and (max-width: 500px) {
+		text-align: center;
+	}
+	font-family: Rubik, Arial, sans-serif;
+	font-size: 28px;
+	text-align: start;
+	line-height: 32px;
+	letter-spacing: normal;
+	color: #444444;
+}
+
+.titleBody{
+	
+	font-family:Rubik, Arial, sans-serif;
+	font-size: 24px;
+	line-height: 31.92px;
+	text-align: start;
+	letter-spacing: normal;
+}
+
+.subResumeBody{
+	@media only screen and (max-width: 500px) {
+		display: flex;		
+	flex-direction: column;
+	align-items: center;
+	}
+	display: flex;
+	align-items: center;
+	text-align: center;
+	padding-top: 10px;
+}
+.leftRigth{
+	font-family: Rubik, Arial, sans-serif;
+	font-size: 14px;
+	line-height: 14px;
+	text-align: start;
+	letter-spacing: normal;
+
+	padding-left: 10px;
+}
+.indexComentario{
+	font-family:'Rubik', Arial, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	text-align: start;
+	letter-spacing: -0.1px;
+	line-height: 18.06px;
+	padding-left: 10px;
+	color:#4300d2 ;
+
+}
+.space-rigth{
+	
+	text-align: center;
+
+}
+.points{
+	font-family: Rubik, Arial, sans-serif;
+	font-size: 13px;
+	line-height: 13px;
+	text-align: start;
+	letter-spacing: normal;
+	padding: 3px;
+	box-shadow: none;
+	color: #ffffff;
+	background: #03a691
+	;
+	border-radius: 2px;
 }
 .discount {
 	color: #49d1fd;

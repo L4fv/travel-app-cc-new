@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import styled from "styled-components";
+
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
 
 const SwiperStyled = styled(Swiper)`
   --swiper-theme-color: black;
@@ -10,43 +14,278 @@ const SwiperStyled = styled(Swiper)`
 export const TourPackageDetails = ({ tourPackage }) => {
   const [index, setIndex] = useState(0);
   const [swiper, setSwiper] = useState(null);
-
-  const description = tourPackage.details[index].description;
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+    ...theme.typography.body2,
+    padding: theme.spacing(4),
+    textAlign: "start",
+    color: theme.palette.text.secondary,
+  }));
+  console.log("tourPackageDetails", tourPackage);
+  const description = tourPackage.details[0].description;
+  const initPoint = tourPackage.details[1].description;
+  const itinerario = tourPackage.details[2].description;
+  const actividades = tourPackage.details[3].description;
+  const noIncluye = tourPackage.details[4].description;
+  const notas = tourPackage.details[5].description;
+  console.log("description", description);
 
   return (
-    <div className="mt-12">
-      <h2 className="text-gray-600 text-xl lg:text-3xl font-bold mb-4">
-        Detalles
-      </h2>
-      <SwiperStyled
-        slidesPerView="auto"
-        centeredSlides={true}
-        navigation
-        grabCursor
-        spaceBetween={24}
-        onSwiper={setSwiper}
-      >
-        {tourPackage.details.map((detail, i) => (
-          <SwiperSlide key={i} className="w-auto my-4">
-            <h3
-              className={`cursor-pointer ${i === index && "font-bold"}`}
-              onClick={() => {
-                setIndex(i);
-                swiper.slideTo(i);
+    <Box>
+      <Item>
+        <div>
+          <h1 className="titleBody">
+            Incluye
+          </h1>
+        </div>
+
+        <div className=" mb-2"></div>
+
+        <Grid container spacing={1}>
+          <Grid
+            sx={{
+              display: "flex",
+              justifyContent: "start",
+              textAlign: "start",
+            }}
+            item
+            xs={12}
+            md={12}
+          >
+            <div
+              className="prose overflow-hidden"
+              dangerouslySetInnerHTML={{
+                __html: description,
               }}
-            >
-              {detail.title}
-            </h3>
-          </SwiperSlide>
-        ))}
-      </SwiperStyled>
-      <hr className="mt-2 mb-8 mx-8" />
-      <div
-        className="prose overflow-hidden"
-        dangerouslySetInnerHTML={{
-          __html: description,
-        }}
-      />
-    </div>
+            />
+          </Grid>
+        </Grid>
+      </Item>
+      <h1 className=" mb-8 " />
+
+      <Item>
+        <div>
+          <h1 className="titleBody">
+            Punto de Partida
+          </h1>
+        </div>
+        <div className=" mb-2"></div>
+
+        <Grid container spacing={1}>
+          <Grid
+            sx={{
+              display: "flex",
+              justifyContent: "start",
+              textAlign: "start",
+            }}
+            item
+            xs={12}
+            md={12}
+          >
+            <div
+              className="prose overflow-hidden"
+              dangerouslySetInnerHTML={{
+                __html: initPoint,
+              }}
+            />
+          </Grid>
+        </Grid>
+      </Item>
+      <h1 className=" mb-8 " />
+
+      <Item>
+        <div>
+          <h1 className="titleBody">
+            Itinerario
+          </h1>
+        </div>
+        <div className=" mb-2"></div>
+
+        <Grid container spacing={1}>
+          <Grid
+            sx={{
+              display: "flex",
+              justifyContent: "start",
+              textAlign: "start",
+            }}
+            item
+            xs={12}
+            md={12}
+          >
+            <div
+              className="prose overflow-hidden"
+              dangerouslySetInnerHTML={{
+                __html: itinerario,
+              }}
+            />
+          </Grid>
+        </Grid>
+      </Item>
+      <h1 className=" mb-8 " />
+
+      <Item>
+        <div>
+          <h1 className="titleBody">
+            Actividades
+          </h1>
+        </div>
+        <div className=" mb-2"></div>
+
+        <Grid container spacing={1}>
+          <Grid
+            sx={{
+              display: "flex",
+              justifyContent: "start",
+              textAlign: "start",
+            }}
+            item
+            xs={12}
+            md={12}
+          >
+            <div
+              className="prose overflow-hidden"
+              dangerouslySetInnerHTML={{
+                __html: actividades,
+              }}
+            />
+          </Grid>
+        </Grid>
+      </Item>
+      <h1 className=" mb-8 " />
+
+      <Item>
+        <div>
+          <h1 className="titleBody">
+            No Incluye
+          </h1>
+        </div>
+        <div className=" mb-2"></div>
+
+        <Grid container spacing={1}>
+          <Grid
+            sx={{
+              display: "flex",
+              justifyContent: "start",
+              textAlign: "start",
+            }}
+            item
+            xs={12}
+            md={12}
+          >
+            <div
+              className="prose overflow-hidden"
+              dangerouslySetInnerHTML={{
+                __html: noIncluye,
+              }}
+            />
+          </Grid>
+        </Grid>
+      </Item>
+      <h1 className=" mb-8 " />
+      <Item>
+        <div>
+          <h1 className="titleBody">
+            No Incluye
+          </h1>
+        </div>
+        <div className=" mb-2"></div>
+        <Grid container spacing={1}>
+          <Grid
+            sx={{
+              display: "flex",
+              justifyContent: "start",
+              textAlign: "start",
+            }}
+            item
+            xs={12}
+            md={12}
+          >
+            <div
+              className="prose overflow-hidden"
+              dangerouslySetInnerHTML={{
+                __html: noIncluye,
+              }}
+            />
+          </Grid>
+        </Grid>
+      </Item>
+      <h1 className=" mb-8 " />
+
+      <Item>
+        <div>
+          <h1 className="titleBody">
+            Notas
+          </h1>
+        </div>
+        <div className=" mb-2"></div>
+        <Grid container spacing={1}>
+          <Grid
+            sx={{
+              display: "flex",
+              justifyContent: "start",
+              textAlign: "start",
+            }}
+            item
+            xs={12}
+            md={12}
+          >
+            <div
+              className="prose overflow-hidden"
+              dangerouslySetInnerHTML={{
+                __html: notas,
+              }}
+            />
+          </Grid>
+        </Grid>
+      </Item>
+      <h1 className=" mb-8 " />
+    </Box>
+
+    // <div className="mt-12" >
+    //  <h1>hola</h1>
+    //   <Box sx={{ flexGrow: 1 ,
+    //       }} >
+    //     <Grid  container spacing={2}>
+    //       <Grid sx={{display: "flex" ,justifyContent:"center"}} item xs={12} md={12} >
+    //         {tourPackage.details.map((detail, i) => (
+    //           <Item >
+    //             <h3
+    //               className={`cursor-pointer ${i === index && "font-bold"}`}
+    //               onClick={() => {
+    //                 setIndex(i);
+    //               }}
+    //             >
+    //               {detail.title}
+    //             </h3>
+    //           </Item>
+    //         ))}
+    //       </Grid>
+    //     </Grid>
+    //     <hr className="mt-2 mb-8 mx-8" />
+    //     <Grid  container spacing={1}>
+    //     <Grid sx={{display: "flex" ,justifyContent:"start",textAlign:"start"}} item xs={12} md={12} >
+    //   <div
+    //     className="prose overflow-hidden"
+    //     dangerouslySetInnerHTML={{
+    //       __html: description,
+    //     }}
+    //   />
+    //     </Grid>
+    //     </Grid>
+    //   </Box>
+
+    //   {/* {tourPackage.details.map((detail, i) => (
+    //     <h3
+    //       className={`cursor-pointer ${i === index && "font-bold"}`}
+    //       onClick={() => {
+    //         setIndex(i);
+    //         swiper.slideTo(i);
+    //       }}
+    //     >
+    //       {detail.title}
+    //     </h3>
+    //   ))} */}
+
+    // </div>
   );
 };
