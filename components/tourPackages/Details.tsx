@@ -45,6 +45,7 @@ export const TourPackageDetails = ({ tourPackage }) => {
           <Grid
             sx={{
               display: "flex",
+              flexDirection:"column",
               justifyContent: "start",
               textAlign: "start",
             }}
@@ -182,34 +183,7 @@ export const TourPackageDetails = ({ tourPackage }) => {
         </Grid>
       </Item>
       <h1 className=" mb-8 " />
-      <Item>
-        <div>
-          <h1 className="titleBody">
-            No Incluye
-          </h1>
-        </div>
-        <div className=" mb-2"></div>
-        <Grid container spacing={1}>
-          <Grid
-            sx={{
-              display: "flex",
-              justifyContent: "start",
-              textAlign: "start",
-            }}
-            item
-            xs={12}
-            md={12}
-          >
-            <div
-              className="prose overflow-hidden"
-              dangerouslySetInnerHTML={{
-                __html: noIncluye,
-              }}
-            />
-          </Grid>
-        </Grid>
-      </Item>
-      <h1 className=" mb-8 " />
+   
 
       <Item>
         <div>

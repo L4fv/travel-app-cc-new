@@ -276,8 +276,11 @@
 	margin: 0px;
 }
 .classWhite{
-	display: flex;
-	background-color: #eeeeee;
+	@media only screen and (max-width: 500px) {
+		margin: 0px;
+
+	}
+	margin: 0px 30px;
 }
 #exp-city {
 	text-align: left;
@@ -371,9 +374,15 @@ display: none;
 .pocketTime{
 	margin-right: 10px;
 }
+.description{
+	@media only screen and (max-width: 500px) {
+		padding:"20px"
+	}
+	padding:"1rem 3rem"
+}
+
 .subHeader{
 	@media only screen and (max-width: 500px) {
-		text-align: center;
 	}
 	font-family: Rubik, Arial, sans-serif;
 	font-size: 28px;
@@ -393,11 +402,7 @@ display: none;
 }
 
 .subResumeBody{
-	@media only screen and (max-width: 500px) {
-		display: flex;		
-	flex-direction: column;
-	align-items: center;
-	}
+	
 	display: flex;
 	align-items: center;
 	text-align: center;
@@ -422,6 +427,59 @@ display: none;
 	padding-left: 10px;
 	color:#4300d2 ;
 
+}
+.footerSticky{
+	@media only screen and (min-width: 500px) {
+		display: none;
+	}
+	display: flex;
+	justify-content: center;
+	margin-top: 1rem;
+	padding: 1rem;
+	background-color: #eeeeee;
+	border-radius: 2px;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+  }
+.headerCalendar{
+	font-size: 15px;
+}
+#alert-dialog-description{
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+#alert-dialog-title{
+	display: flex;
+	justify-content: center;
+}
+.Calendar{
+	background: #eeeeee;
+	min-width: 220px;
+	width: auto;
+	height: auto;
+max-width: 300px;
+max-height: 320px;
+}
+
+.dateReserva{
+	@media only screen and (max-width: 500px) {
+		display: none;
+	}
+	background-color: deepskyblue;
+
+	max-width: 500px;
+	
+	}
+
+.footer{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
 }
 .space-rigth{
 	

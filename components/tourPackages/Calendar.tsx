@@ -25,7 +25,7 @@ export const TourPackageCalendar = ({ tourPackage, range, handleChange }) => {
   };
 
   return (
-    <div>
+    <div >
       <Calendar
         value={range}
         onChange={onChange}
