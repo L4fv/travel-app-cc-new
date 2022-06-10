@@ -1,4 +1,4 @@
-import { useState, useEffect, React } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import Error from "next/error";
 import Script from "next/script";
@@ -19,9 +19,12 @@ import {
   useTourPackage,
 } from "../../hooks/useTourPackages";
 import { TourPackageSlider } from "../../components/tourPackages/Slider";
+import { TourPackageFooter } from "../../components/tourPackages/Footer";
+import { TourCardReserva } from "../../components/tourPackages/CardReserva";
 import { TourPackageCalendar } from "../../components/tourPackages/Calendar";
 import { TourPackageDetails } from "../../components/tourPackages/Details";
 import { TourPackageCapacity } from "../../components/tourPackages/Capacity";
+import * as React from "react";
 
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -34,6 +37,21 @@ import DirectionsCarSharpIcon from "@mui/icons-material/DirectionsCarSharp";
 import LocalBarSharpIcon from "@mui/icons-material/LocalBarSharp";
 import InfoIcon from "@mui/icons-material/Info";
 import { render } from "react-dom";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import addDays from "date-fns/addDays";
+
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 import { TourPackageContact } from "../../components/tourPackages/Contact";
 import { NoSSR } from "../../components/shared/NoSSR";
@@ -42,7 +60,7 @@ import {
   getRemainingOfferDays,
   hasActiveOffer,
 } from "../../utils/product";
-import { padding } from "@mui/system";
+import { maxWidth, padding } from "@mui/system";
 declare global {
   interface Window {
     MercadoPago: any;
@@ -50,12 +68,17 @@ declare global {
 }
 SwiperCore.use([Navigation, Pagination, A11y, EffectCube, Thumbs]);
 
-
-
 export default function TourPackagePage(props) {
   const router = useRouter();
   const { slug } = router.query;
+  const [llegada, setValueLlegada] = React.useState<Date | null>(null);
+  const [age, setAge] = React.useState("");
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setAge(event.target.value as string);
+  };
   const { data: tourPackage, error } = useTourPackage(slug, props.tourPackage);
+
   const [selectedDayRange, setSelectedDayRange] = useState({
     from: null,
     to: null,
@@ -79,24 +102,30 @@ export default function TourPackagePage(props) {
     return parseInt(Math.random() * (max - min) + min);
   }
   console.log("slug tourPackage", tourPackage);
+  const listPersons = [];
+  for (
+    let index = tourPackage.capacity.min;
+    index <= tourPackage.capacity.max;
+    index++
+  ) {
+    listPersons.push(index);
+  }
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
-    padding: theme.spacing(4),
+    padding: theme.spacing(2),
     textAlign: "start",
+    borderRadius: "0px",
     color: theme.palette.text.secondary,
   }));
   tourPackage.images.map((x) => {
-    images.push({ src: x, width: 4, height: 3 });
+    images.push({ imgPath: x });
   });
-
   return (
-    <Layout 
-    tourPackage={tourPackage}>
+    <Layout>
       <Head>
         <title>
           {tourPackage.name} | {config.name}
-          
         </title>
       </Head>
       <Script
@@ -112,36 +141,21 @@ export default function TourPackagePage(props) {
         }}
       />
       {/* <div className="w-full max-w-6xl mx-auto px-4 sm:px-8 py-8 md:py-12"> */}
-      <div className="classWhite">
-        <Box
-          sx={{
-            overflowX: "hidden",
-         
-            background: "#eeeeee",
-          }}
-        >
-          <TourPackageSlider tourPackage={images} />
-          <Box sx={{ flexGrow: 1, background: "green",display:"flex",justifyContent:"start" }}>
-            <Grid
-              sx={{
-                margin: "0px",
-                display: "flex",
-                justifyContent: "center",
-              }}
-              xs={12}
-              container
-              spacing={1}
-            >
-
-              <Grid
-                sx={{ background: "#eeeeee", padding: "0px"}}
-                xs={12}
-                md={12}
-              >
-                <Item
-                  className="description"
-                  sx={{ background: "white", borderRadius: "0px" }}
-                >
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container className="bond">
+          {/* header */}
+          <Grid xs={12}>
+           
+                  <TourPackageSlider tourPackage={images} />
+              
+          </Grid>
+          {/* header */}
+          {/* Body */}
+          <Grid xs={12} >
+            <Box sx={{ flexGrow: 1 }}>
+              <Grid container >
+                {/* 1columna */}
+                <Grid sx={{padding:"0 0 0 20px"}} xs={12} md={8}>
                   <div>
                     <h1 className="subHeader">{tourPackage.name}</h1>
                     <div className="subResumeBody mb-6">
@@ -207,103 +221,42 @@ export default function TourPackagePage(props) {
                       <div>Bebidas</div>
                     </div>
                   </div>
-                </Item>
-                <h1 className=" mb-8 " />
-               
-              </Grid >
-              <Grid  sx={{ backgroundColor: "red",display:"flex" }}>
-              <Grid>
-                <Item>
-                <NoSSR>
-                  <TourPackageDetails tourPackage={tourPackage} />
-                </NoSSR>
-                </Item>
-              </Grid>
-              <Grid className="dateReserva" xs={12}>
-                <Item>
-                  {" "}
-                  <div className="footer">
-                    <div className=" inline-flex justify-center py-6">
-                      <div className="inline-flex px-8 py-2 bg-secondary text-white rounded-full shadow-lg">
-                        {tourPackage.duration + 1} días / {tourPackage.duration}{" "}
-                        noches
-                      </div>
-                    </div>
-                    <TourPackageCalendar
-                      tourPackage={tourPackage}
-                      range={selectedDayRange}
-                      handleChange={setSelectedDayRange}
-                    />
-                    <div className="text-center mt-8 md:mt-12 mb-6">
-                      <div className="inline-flex px-8 py-2 bg-tertiary text-white rounded-full shadow-lg">
-                        <div>
-                          {hasOffer && (
-                            <span className="line-through">
-                              S/.{tourPackage.price}
-                            </span>
-                          )}{" "}
-                          S/.
-                          {hasOffer
-                            ? tourPackage.offer.price
-                            : tourPackage.price}{" "}
-                          por persona
-                          {hasOffer && (
-                            <span className="text-white mt-1 font-bold">
-                              {" "}
-                              (-{getOfferRate(tourPackage)}%)
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                    <TourPackageCapacity
-                      defaultCapacity={tourPackage.capacity.min}
-                      min={tourPackage.capacity.min}
-                      max={tourPackage.capacity.max}
-                      onChange={setPeopleQuantity}
-                    />
-                    <div className="text-center my-4">
-                      <div>TOTAL</div>
-                      {hasOffer && (
-                        <div className="text-gray-400 line-through">
-                          S/.{tourPackage.price * peopleQuantity}
-                        </div>
-                      )}
-                      <div className="text-primary font-bold text-xl">
-                        {hasOffer && "Oferta: "}
-                        S/.
-                        {(hasOffer
-                          ? tourPackage.offer.price
-                          : tourPackage.price) * peopleQuantity}
-                      </div>
-                      {hasOffer && (
-                        <p className="text-red-500">
-                          La oferta termina en{" "}
-                          {getRemainingOfferDays(tourPackage)}.
-                        </p>
-                      )}
-                    </div>
 
-                    <TourPackageContact
-                      tourPackage={tourPackage}
-                      range={selectedDayRange}
-                      quantity={peopleQuantity}
-                      mp={mp}
-                    />
+                  <div>
+                    <NoSSR>
+                      <TourPackageDetails tourPackage={tourPackage} />
+                    </NoSSR>
                   </div>
-                </Item>
+                </Grid>
+                {/* 1columna */}
+                {/* 2columna */}
+                <Grid    xs={0} md={4}>
+                  <Grid className="stickyDate">
+                    <TourCardReserva tourPackage={tourPackage} mp={mp} />
+                  </Grid>{" "}
+                </Grid>
+                {/* 2columna */}
               </Grid>
+            </Box>
+          </Grid>
+          {/* Body */}
+          {/* Footer */}
+
+          <Grid className="classFooter" xs={12}>
+            <Box sx={{ flexGrow: 1 }}>
+              <Grid>
+                <Grid>
+                  <TourPackageFooter tourPackage={tourPackage} />
+                </Grid>
               </Grid>
-            </Grid>
-    
-          </Box>
-        </Box>
-      </div>
-     
-    </Layout >
+            </Box>
+          </Grid>
+          {/* Footer */}
+        </Grid>
+      </Box>
+    </Layout>
   );
 }
-
 
 export async function getStaticPaths() {
   let tourPackages;

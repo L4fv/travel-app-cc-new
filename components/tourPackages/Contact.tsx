@@ -133,7 +133,7 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
 
   const encoded = encodeURIComponent(message);
   return (
-    <div className="text-center mb-8">
+    <div className="text-center ">
       <Button
         variant="contained"
         onClick={handleOpenModal}
@@ -141,13 +141,14 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
         style={{
           backgroundColor: config.colors.primary.DEFAULT,
           margin: 8,
+          padding:"0.8rem 3rem",
           borderColor: config.colors.primary.DEFAULT,
         }}
         startIcon={<Icon path={mdiCreditCardOutline} size={1.5} />}
       >
         Reserva Online
       </Button>
-      <Button
+      {/* <Button
         variant="contained"
         href={`https://wa.me/${config.contactPhone}?text=${encoded}`}
         className="inline-flex items-center  text-md px-8 py-3 font-bold text-white rounded-full shadow-lg hover:shadow-xl"
@@ -155,7 +156,7 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
         startIcon={<Icon path={mdiWhatsapp} size={1.5} />}
       >
         <span>Reserva WHATSAPP</span>
-      </Button>
+      </Button> */}
 
       <Dialog
         open={open}

@@ -19,6 +19,7 @@ export const TourPackageDetails = ({ tourPackage }) => {
     ...theme.typography.body2,
     padding: theme.spacing(4),
     textAlign: "start",
+    borderRadius: "0px",
     color: theme.palette.text.secondary,
   }));
   console.log("tourPackageDetails", tourPackage);
@@ -31,12 +32,9 @@ export const TourPackageDetails = ({ tourPackage }) => {
   console.log("description", description);
 
   return (
-    <Box>
-      <Item>
+    <div>
         <div>
-          <h1 className="titleBody">
-            Incluye
-          </h1>
+          <h1 className="titleBody">Incluye</h1>
         </div>
 
         <div className=" mb-2"></div>
@@ -45,7 +43,7 @@ export const TourPackageDetails = ({ tourPackage }) => {
           <Grid
             sx={{
               display: "flex",
-              flexDirection:"column",
+              flexDirection: "column",
               justifyContent: "start",
               textAlign: "start",
             }}
@@ -61,14 +59,9 @@ export const TourPackageDetails = ({ tourPackage }) => {
             />
           </Grid>
         </Grid>
-      </Item>
-      <h1 className=" mb-8 " />
 
-      <Item>
         <div>
-          <h1 className="titleBody">
-            Punto de Partida
-          </h1>
+          <h1 className="titleBody">Punto de Partida</h1>
         </div>
         <div className=" mb-2"></div>
 
@@ -91,14 +84,9 @@ export const TourPackageDetails = ({ tourPackage }) => {
             />
           </Grid>
         </Grid>
-      </Item>
-      <h1 className=" mb-8 " />
 
-      <Item>
         <div>
-          <h1 className="titleBody">
-            Itinerario
-          </h1>
+          <h1 className="titleBody">Itinerario</h1>
         </div>
         <div className=" mb-2"></div>
 
@@ -121,14 +109,9 @@ export const TourPackageDetails = ({ tourPackage }) => {
             />
           </Grid>
         </Grid>
-      </Item>
-      <h1 className=" mb-8 " />
 
-      <Item>
         <div>
-          <h1 className="titleBody">
-            Actividades
-          </h1>
+          <h1 className="titleBody">Actividades</h1>
         </div>
         <div className=" mb-2"></div>
 
@@ -151,14 +134,9 @@ export const TourPackageDetails = ({ tourPackage }) => {
             />
           </Grid>
         </Grid>
-      </Item>
-      <h1 className=" mb-8 " />
 
-      <Item>
         <div>
-          <h1 className="titleBody">
-            No Incluye
-          </h1>
+          <h1 className="titleBody">No Incluye</h1>
         </div>
         <div className=" mb-2"></div>
 
@@ -181,15 +159,9 @@ export const TourPackageDetails = ({ tourPackage }) => {
             />
           </Grid>
         </Grid>
-      </Item>
-      <h1 className=" mb-8 " />
-   
 
-      <Item>
         <div>
-          <h1 className="titleBody">
-            Notas
-          </h1>
+          <h1 className="titleBody">Notas</h1>
         </div>
         <div className=" mb-2"></div>
         <Grid container spacing={1}>
@@ -211,55 +183,7 @@ export const TourPackageDetails = ({ tourPackage }) => {
             />
           </Grid>
         </Grid>
-      </Item>
-      <h1 className=" mb-8 " />
-    </Box>
-
-    // <div className="mt-12" >
-    //  <h1>hola</h1>
-    //   <Box sx={{ flexGrow: 1 ,
-    //       }} >
-    //     <Grid  container spacing={2}>
-    //       <Grid sx={{display: "flex" ,justifyContent:"center"}} item xs={12} md={12} >
-    //         {tourPackage.details.map((detail, i) => (
-    //           <Item >
-    //             <h3
-    //               className={`cursor-pointer ${i === index && "font-bold"}`}
-    //               onClick={() => {
-    //                 setIndex(i);
-    //               }}
-    //             >
-    //               {detail.title}
-    //             </h3>
-    //           </Item>
-    //         ))}
-    //       </Grid>
-    //     </Grid>
-    //     <hr className="mt-2 mb-8 mx-8" />
-    //     <Grid  container spacing={1}>
-    //     <Grid sx={{display: "flex" ,justifyContent:"start",textAlign:"start"}} item xs={12} md={12} >
-    //   <div
-    //     className="prose overflow-hidden"
-    //     dangerouslySetInnerHTML={{
-    //       __html: description,
-    //     }}
-    //   />
-    //     </Grid>
-    //     </Grid>
-    //   </Box>
-
-    //   {/* {tourPackage.details.map((detail, i) => (
-    //     <h3
-    //       className={`cursor-pointer ${i === index && "font-bold"}`}
-    //       onClick={() => {
-    //         setIndex(i);
-    //         swiper.slideTo(i);
-    //       }}
-    //     >
-    //       {detail.title}
-    //     </h3>
-    //   ))} */}
-
-    // </div>
+        </div>
+  
   );
 };

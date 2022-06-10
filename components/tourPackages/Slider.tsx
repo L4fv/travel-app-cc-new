@@ -3,12 +3,21 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import styled from "styled-components";
 import { config } from "../../config";
 
-import React from "react";
-
 import LightGallery from "lightgallery/react";
-import Gallery from "react-photo-gallery"
+import Gallery from "react-photo-gallery";
 import { render } from "react-dom";
-
+import * as React from "react";
+import { useTheme } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import MobileStepper from "@mui/material/MobileStepper";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import SwipeableViews from "react-swipeable-views";
+import { autoPlay } from "react-swipeable-views-utils";
+import Grid from "@mui/material/Grid";
 
 // import styles
 import "lightgallery/css/lightgallery.css";
@@ -19,135 +28,89 @@ import "lightgallery/css/lg-thumbnail.css";
 import lgZoom from "lightgallery/plugins/zoom";
 import lgVideo from "lightgallery/plugins/video";
 
-// If you want you can use SCSS instead of css
-
-// import plugins if you need
-
-// import plugins if you need
-
-// export const TourPackageSlider = ({ tourPackage }) => {
-//   return (
-//     <div className="flex gallery-container" id="animated-thumbnails-gallery">
-//       <LightGallery
-//       autoplayFirstVideo= {false}
-//       pager= {false}
-//       galleryId= "nature"
-//       plugins={[lgZoom, lgVideo]}
-     
-//       mode="lg-fade">
-//         {tourPackage.images.map((image, i) => (
-//           <div className="img-responsive w-60">
-//             <a className="gallery-item" href={image}>
-//               <img
-//                 src={image}
-//                 alt={"Imagen " + i}
-//                 className="img-responsive w-60"
-//               />
-//             </a>
-//           </div>
-//         ))}
-//       </LightGallery>
-//     </div>
-  
-//   );
-// };
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 export const TourPackageSlider = ({ tourPackage }) => {
-  React.useLayoutEffect = React.useEffect 
+  const theme = useTheme();
+  const [activeStep, setActiveStep] = React.useState(0);
+  const maxSteps = tourPackage.length;
 
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
 
-  console.log('imageNNN',tourPackage)
-  console.log('data')
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleStepChange = (step: number) => {
+    setActiveStep(step);
+  };
+
   return (
-    <Gallery photos={tourPackage}  />
-    );
+    <Box >
+      <Grid  >
+        <Grid xs={12} >
+          <AutoPlaySwipeableViews
+            axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+            index={activeStep}
+            onChangeIndex={handleStepChange}
+            enableMouseEvents
+          >
+            {tourPackage.map((step, index) => (
+              <div>
+                {Math.abs(activeStep - index) <= 2 ? (
+                  <Box
+                    component="img"
+                    sx={{
+                      height:"45vmin",
+                      background:"black",
+                      display: "block",
+                      maxWidth: "auto",
+                      overflow: "hidden",
+                      width: "100%",
+                    }}
+                    src={step.imgPath}
+                  />
+                ) : null}
+              </div>
+            ))}
+          </AutoPlaySwipeableViews>
+        </Grid>{" "}
+        <Grid xs={12} >
+          <MobileStepper
+            steps={maxSteps}
+            position="static"
+            activeStep={activeStep}
+            nextButton={
+              <Button
+                size="small"
+                onClick={handleNext}
+                disabled={activeStep === maxSteps - 1}
+              >
+                {theme.direction === "rtl" ? (
+                  <KeyboardArrowLeft />
+                ) : (
+                  <KeyboardArrowRight />
+                )}
+              </Button>
+            }
+            backButton={
+              <Button
+                size="small"
+                onClick={handleBack}
+                disabled={activeStep === 0}
+              >
+                {theme.direction === "rtl" ? (
+                  <KeyboardArrowRight />
+                ) : (
+                  <KeyboardArrowLeft />
+                )}
+              </Button>
+            }
+          />
+        </Grid>
+      </Grid>
+    </Box>
+  );
 };
-
-
-const photos = [
-  {
-    src: "https://source.unsplash.com/2ShvY8Lf6l0/800x599",
-    width: 4,
-    height: 3
-  },
-  {
-    src: "https://source.unsplash.com/Dm-qxdynoEc/800x799",
-    width: 1,
-    height: 1
-  },
-  {
-    src: "https://source.unsplash.com/qDkso9nvCg0/600x799",
-    width: 3,
-    height: 4
-  },
-  {
-    src: "https://source.unsplash.com/iecJiKe_RNg/600x799",
-    width: 3,
-    height: 4
-  },
-  {
-    src: "https://source.unsplash.com/epcsn8Ed8kY/600x799",
-    width: 3,
-    height: 4
-  },
-  {
-    src: "https://source.unsplash.com/NQSWvyVRIJk/800x599",
-    width: 4,
-    height: 3
-  },
-  {
-    src: "https://source.unsplash.com/zh7GEuORbUw/600x799",
-    width: 3,
-    height: 4
-  },
-  {
-    src: "https://source.unsplash.com/PpOHJezOalU/800x599",
-    width: 4,
-    height: 3
-  },
-  {
-    src: "https://source.unsplash.com/I1ASdgphUH4/800x599",
-    width: 4,
-    height: 3
-  },
-  {
-    src: "https://source.unsplash.com/XiDA78wAZVw/600x799",
-    width: 3,
-    height: 4
-  },
-  {
-    src: "https://source.unsplash.com/x8xJpClTvR0/800x599",
-    width: 4,
-    height: 3
-  },
-  {
-    src: "https://source.unsplash.com/u9cG4cuJ6bU/4927x1000",
-    width: 4927,
-    height: 1000
-  },
-  {
-    src: "https://source.unsplash.com/qGQNmBE7mYw/800x599",
-    width: 4,
-    height: 3
-  },
-  {
-    src: "https://source.unsplash.com/NuO6iTBkHxE/800x599",
-    width: 4,
-    height: 3
-  },
-  {
-    src: "https://source.unsplash.com/pF1ug8ysTtY/600x400",
-    width: 4,
-    height: 3
-  },
-  {
-    src: "https://source.unsplash.com/A-fubu9QJxE/800x533",
-    width: 4,
-    height: 3
-  },
-  {
-    src: "https://source.unsplash.com/5P91SF0zNsI/740x494",
-    width: 4,
-    height: 3
-  }
-];
