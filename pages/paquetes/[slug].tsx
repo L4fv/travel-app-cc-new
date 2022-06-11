@@ -25,6 +25,9 @@ import { TourPackageCalendar } from "../../components/tourPackages/Calendar";
 import { TourPackageDetails } from "../../components/tourPackages/Details";
 import { TourPackageCapacity } from "../../components/tourPackages/Capacity";
 import * as React from "react";
+ 
+import DefaultForm from "../../utils/model";
+
 
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -71,21 +74,17 @@ SwiperCore.use([Navigation, Pagination, A11y, EffectCube, Thumbs]);
 export default function TourPackagePage(props) {
   const router = useRouter();
   const { slug } = router.query;
-  const [llegada, setValueLlegada] = React.useState<Date | null>(null);
-  const [age, setAge] = React.useState("");
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value as string);
-  };
+  const selectIcon = [1,3]
+  const allIcon = DefaultForm.itemIcon()
+  const itemsIcon =[]
+    selectIcon.map((x)=>
+    itemsIcon.push(allIcon.find(y=>y.id===x))
+    )
   const { data: tourPackage, error } = useTourPackage(slug, props.tourPackage);
 
-  const [selectedDayRange, setSelectedDayRange] = useState({
-    from: null,
-    to: null,
-  });
+  
   const [mp, setMercadoPago] = useState({});
 
-  const [peopleQuantity, setPeopleQuantity] = useState(tourPackage || 1);
 
   if (error) return <Error statusCode={404} />;
 
@@ -96,7 +95,6 @@ export default function TourPackagePage(props) {
       </Layout>
     );
 
-  const hasOffer = hasActiveOffer(tourPackage);
   const images = [];
   function getRandomArbitrary(min, max) {
     return parseInt(Math.random() * (max - min) + min);
@@ -110,14 +108,7 @@ export default function TourPackagePage(props) {
   ) {
     listPersons.push(index);
   }
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(2),
-    textAlign: "start",
-    borderRadius: "0px",
-    color: theme.palette.text.secondary,
-  }));
+  
   tourPackage.images.map((x) => {
     images.push({ imgPath: x });
   });
@@ -145,17 +136,15 @@ export default function TourPackagePage(props) {
         <Grid container className="bond">
           {/* header */}
           <Grid xs={12}>
-           
-                  <TourPackageSlider tourPackage={images} />
-              
+            <TourPackageSlider tourPackage={images} />
           </Grid>
           {/* header */}
           {/* Body */}
-          <Grid xs={12} >
+          <Grid xs={12}>
             <Box sx={{ flexGrow: 1 }}>
-              <Grid container >
+              <Grid container>
                 {/* 1columna */}
-                <Grid sx={{padding:"0 0 0 20px"}} xs={12} md={8}>
+                <Grid sx={{ padding: "0 0 0 20px" }} xs={12} md={8}>
                   <div>
                     <h1 className="subHeader">{tourPackage.name}</h1>
                     <div className="subResumeBody mb-6">
@@ -193,33 +182,14 @@ export default function TourPackagePage(props) {
                   </div>
 
                   <div className="iconItems">
-                    <div className="spaceIcon">
-                      <div className="  mb-2">
-                        <MasksIcon sx={{ color: "#444444" }} />
+                    {itemsIcon.map((x) => (
+                      <div className="spaceIcon spaceLeftRigth">
+                        <div className="  mb-2">
+                          <x.icon sx={{ color: "#444444" }} />
+                        </div>
+                        <div>{x.description}</div>
                       </div>
-                      <div>Higiene</div>
-                    </div>
-
-                    <div className=" spaceIcon spaceLeftRigth">
-                      <div className=" mb-2">
-                        <RestaurantMenuSharpIcon sx={{ color: "#444444" }} />
-                      </div>
-                      <div>Comidas</div>
-                    </div>
-
-                    <div className="spaceIcon spaceLeftRigth">
-                      <div className=" mb-2">
-                        <DirectionsCarSharpIcon sx={{ color: "#444444" }} />
-                      </div>
-                      <div>Traslado</div>
-                    </div>
-
-                    <div className="spaceIcon spaceLeftRigth">
-                      <div className=" mb-2">
-                        <LocalBarSharpIcon sx={{ color: "#444444" }} />
-                      </div>
-                      <div>Bebidas</div>
-                    </div>
+                    ))}
                   </div>
 
                   <div>
@@ -230,7 +200,7 @@ export default function TourPackagePage(props) {
                 </Grid>
                 {/* 1columna */}
                 {/* 2columna */}
-                <Grid    xs={0} md={4}>
+                <Grid xs={0} md={4}>
                   <Grid className="stickyDate">
                     <TourCardReserva tourPackage={tourPackage} mp={mp} />
                   </Grid>{" "}

@@ -1,3 +1,7 @@
+import MasksIcon from "@mui/icons-material/Masks";
+import RestaurantMenuSharpIcon from "@mui/icons-material/RestaurantMenuSharp";
+import DirectionsCarSharpIcon from "@mui/icons-material/DirectionsCarSharp";
+import LocalBarSharpIcon from "@mui/icons-material/LocalBarSharp";
 export default class DefaultForm {
   static formReservation() {
     //console.log('store: ', store)
@@ -11,7 +15,7 @@ export default class DefaultForm {
       documentInvoice: "",
       observation: "",
       checked: false,
-      checked2: false
+      checked2: false,
     };
   }
 
@@ -21,7 +25,25 @@ export default class DefaultForm {
       documentReservation: true,
       fullName: true,
       mail: true,
-      phoneNumber: true
+      phoneNumber: true,
     };
+  }
+  static itemIcon() {
+    return [
+      { id: 1, description: "Higiene", icon: MasksIcon },
+      {
+        id: 2,
+        description: "Comidas",
+
+        icon: RestaurantMenuSharpIcon,
+      },
+      {
+        id: 3,
+        description: "Transporte",
+
+        icon: DirectionsCarSharpIcon,
+      },
+      { id: 4, description: "Bebidas", icon: LocalBarSharpIcon },
+    ];
   }
 }

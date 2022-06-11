@@ -34,7 +34,7 @@ export const TourPackageSlider = ({ tourPackage }) => {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = tourPackage.length;
-
+  console.log('tourPackage_slide',tourPackage)
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -46,11 +46,17 @@ export const TourPackageSlider = ({ tourPackage }) => {
   const handleStepChange = (step: number) => {
     setActiveStep(step);
   };
-
+  {
+    /* <Gallery photos={photos} />; */
+  }
+const photos =[]
+tourPackage.map((x)=>{
+  photos.push({src:x.imgPath})
+})
   return (
-    <Box >
-      <Grid  >
-        <Grid xs={12} >
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid>
+        <Grid className="displaySlider" xs={12} md={0}>
           <AutoPlaySwipeableViews
             axis={theme.direction === "rtl" ? "x-reverse" : "x"}
             index={activeStep}
@@ -63,8 +69,8 @@ export const TourPackageSlider = ({ tourPackage }) => {
                   <Box
                     component="img"
                     sx={{
-                      height:"45vmin",
-                      background:"black",
+                      height: "45vmin",
+                      background: "black",
                       display: "block",
                       maxWidth: "auto",
                       overflow: "hidden",
@@ -76,41 +82,40 @@ export const TourPackageSlider = ({ tourPackage }) => {
               </div>
             ))}
           </AutoPlaySwipeableViews>
-        </Grid>{" "}
-        <Grid xs={12} >
-          <MobileStepper
-            steps={maxSteps}
-            position="static"
-            activeStep={activeStep}
-            nextButton={
-              <Button
-                size="small"
-                onClick={handleNext}
-                disabled={activeStep === maxSteps - 1}
-              >
-                {theme.direction === "rtl" ? (
-                  <KeyboardArrowLeft />
-                ) : (
-                  <KeyboardArrowRight />
-                )}
-              </Button>
-            }
-            backButton={
-              <Button
-                size="small"
-                onClick={handleBack}
-                disabled={activeStep === 0}
-              >
-                {theme.direction === "rtl" ? (
-                  <KeyboardArrowRight />
-                ) : (
-                  <KeyboardArrowLeft />
-                )}
-              </Button>
-            }
-          />
+        </Grid>
+        <Grid className="displayGallery" item xs={12}>
+          <Box >
+            <Grid container>
+              <Grid sx={{ background: "red" }} xs={7}>
+                <Gallery photos={[photos.[0]]} />
+              </Grid>
+              <Grid sx={{ background: "blue" }} xs={5}>
+                <Box>
+                  <Grid container>
+                    <Grid sx={{ background: "brown" }} xs={12}>
+                      <Gallery photos={[photos.[1]]} />
+                    </Grid>
+                    <Grid  sx={{ background: "yellow" }} xs={12}>
+                      <Box >
+                        <Grid container>
+                          <Grid  xs={6}>
+                            <Gallery photos={[photos.[2]]} />
+                          </Grid>
+                          <Grid  xs={6}>
+                            <Gallery photos={[photos.[3]]} />
+                          </Grid>
+                        </Grid>
+                      </Box>{" "}
+                    </Grid>
+                  </Grid>
+                </Box>
+              </Grid>
+            </Grid>
+          </Box>
         </Grid>
       </Grid>
     </Box>
+
+    // Anterior widgets
   );
 };

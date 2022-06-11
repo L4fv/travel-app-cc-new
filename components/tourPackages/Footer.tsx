@@ -5,6 +5,8 @@ import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
+import { config } from "../../config";
+
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -43,13 +45,18 @@ export const TourPackageFooter = ({ tourPackage }) => {
     <div >
       <Grid sx={{ display: "flex", justifyContent: "space-around" }}>
         <div className="text-center ">
-          <div className="inline-flex px-8 py-1 bg-tertiary text-white rounded-full shadow-lg">
+          <div className="inline-flex  py-1 text-black rounded-full">
             <div>
               {hasOffer && (
                 <span className="line-through">S/.{tourPackage.price}</span>
               )}{" "}
+              <span style={{color:"#222222",fontSize:"18px",fontWeight:"bold",paddingRight:"5px"}}>
               S/.
-              {hasOffer ? tourPackage.offer.price : tourPackage.price} / persona
+              {hasOffer ? tourPackage.offer.price : tourPackage.price}
+              </span>
+              <span style={{color:"#222222",fontSize:"12px"}}>
+               /persona
+              </span>
               {hasOffer && (
                 <span className="text-white mt-1 font-bold">
                   {" "}
@@ -59,7 +66,10 @@ export const TourPackageFooter = ({ tourPackage }) => {
             </div>
           </div>
         </div>
-        <Button variant="contained" onClick={handleClickOpen}>
+        <Button variant="contained" onClick={handleClickOpen} style={{
+          backgroundColor: config.colors.primary.DEFAULT,
+        
+        }}>
           Reserva
         </Button>
       </Grid >
