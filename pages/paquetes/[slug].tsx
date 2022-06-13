@@ -140,8 +140,8 @@ export default function TourPackagePage(props) {
           </Grid>
           {/* header */}
           {/* Body */}
-          <Grid xs={12}>
-            <Box sx={{ flexGrow: 1 }}>
+          <Grid  xs={12}>
+            <Box sx={{ flexGrow: 1,paddingTop:"15px"}}>
               <Grid container>
                 {/* 1columna */}
                 <Grid sx={{ padding: "0 0 0 20px" }} xs={12} md={8}>
@@ -192,7 +192,7 @@ export default function TourPackagePage(props) {
                     ))}
                   </div>
 
-                  <div>
+                  <div className="py-8">
                     <NoSSR>
                       <TourPackageDetails tourPackage={tourPackage} />
                     </NoSSR>

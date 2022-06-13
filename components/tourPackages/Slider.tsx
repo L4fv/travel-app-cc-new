@@ -34,7 +34,7 @@ export const TourPackageSlider = ({ tourPackage }) => {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = tourPackage.length;
-  console.log('tourPackage_slide',tourPackage)
+  console.log("tourPackage_slide", tourPackage);
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -49,10 +49,17 @@ export const TourPackageSlider = ({ tourPackage }) => {
   {
     /* <Gallery photos={photos} />; */
   }
-const photos =[]
-tourPackage.map((x)=>{
-  photos.push({src:x.imgPath})
-})
+  const photos = [];
+  let indice = 0;
+  tourPackage.map((x) => {
+    photos.push({
+      src: x.imgPath,
+      width: size[indice].width,
+      height: size[indice].height,
+    });
+    indice++;
+  });
+  console.log("photos", photos);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid>
@@ -83,35 +90,43 @@ tourPackage.map((x)=>{
             ))}
           </AutoPlaySwipeableViews>
         </Grid>
-        <Grid className="displayGallery" item xs={12}>
-          <Box >
-            <Grid container>
-              <Grid sx={{ background: "red" }} xs={7}>
-                <Gallery photos={[photos.[0]]} />
-              </Grid>
-              <Grid sx={{ background: "blue" }} xs={5}>
-                <Box>
-                  <Grid container>
-                    <Grid sx={{ background: "brown" }} xs={12}>
-                      <Gallery photos={[photos.[1]]} />
-                    </Grid>
-                    <Grid  sx={{ background: "yellow" }} xs={12}>
-                      <Box >
-                        <Grid container>
-                          <Grid  xs={6}>
-                            <Gallery photos={[photos.[2]]} />
-                          </Grid>
-                          <Grid  xs={6}>
-                            <Gallery photos={[photos.[3]]} />
-                          </Grid>
-                        </Grid>
-                      </Box>{" "}
-                    </Grid>
-                  </Grid>
-                </Box>
-              </Grid>
-            </Grid>
-          </Box>
+
+        <Grid className="displayGallery">
+          <Gallery
+            photos={[
+              {
+                src: "https://travel-app-space.nyc3.digitaloceanspaces.com/app/tour-packages/609dcc536f19af00bbb6d144/r8UCjiv4A3jntC0PLDYh9.jpeg",
+                width: 3,
+                height: 2,
+              },
+              {
+                src: "https://travel-app-space.nyc3.digitaloceanspaces.com/app/tour-packages/609dcc536f19af00bbb6d144/01Xct384PEAtyZbl6KS4O.png",
+                width: 1,
+                height: 1,
+              },
+
+              {
+                src: "https://travel-app-space.nyc3.digitaloceanspaces.com/app/tour-packages/609dcc536f19af00bbb6d144/u6b_zelMEY3GheJj71Zu_.jpeg",
+                width: 4,
+                height: 3,
+              },
+              {
+                src: "https://travel-app-space.nyc3.digitaloceanspaces.com/app/tour-packages/609dcc536f19af00bbb6d144/lhgzpzKBrZ38V_j3UoQri.jpeg",
+                width: 1,
+                height: 1,
+              },
+              {
+                src: "https://travel-app-space.nyc3.digitaloceanspaces.com/app/tour-packages/609dcc536f19af00bbb6d144/LBLLqp6yjqUH17wpnR-k1.jpeg",
+                width: 4,
+                height: 3,
+              },
+              {
+                src: "https://travel-app-space.nyc3.digitaloceanspaces.com/app/tour-packages/609dcc536f19af00bbb6d144/v3PKRhDPFMZ6dx1GMol7f.jpeg",
+                width: 3,
+                height: 4,
+              },
+            ]}
+          />
         </Grid>
       </Grid>
     </Box>
@@ -119,3 +134,30 @@ tourPackage.map((x)=>{
     // Anterior widgets
   );
 };
+
+const size = [
+  { width: 3, height: 2 },
+  { width: 1, height: 1 },
+  { width: 4, height: 3 },
+  { width: 1, height: 1 },
+  {
+    width: 4,
+    height: 3,
+  },
+  {
+    width: 3,
+    height: 4,
+  },
+  {
+    width: 2,
+    height: 1,
+  },
+  {
+    width: 2,
+    height: 1,
+  },
+  {
+    width: 4,
+    height: 3,
+  },
+];
