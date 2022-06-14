@@ -110,7 +110,6 @@ export const TourPackageContact = ({
         advance: cuota,
       },
     });
-    console.log("data ", data);
 
     // Inicializa el checkout
     mp.checkout({
@@ -121,7 +120,20 @@ export const TourPackageContact = ({
     });
     setLoading(false);
   };
+  if (rangeFrom && rangeTo) {
+    const from = format(
+      new Date(rangeFrom),
+      "d 'de' LLLL",
+      { locale: es }
+    );
+    const to = format(
+      new Date(rangeTo),
+      "d 'de' LLLL",
+      { locale: es }
+    );
 
+    message += `desde el *${from}* ` + `hasta el *${to}*`;
+  }
 
   const encoded = encodeURIComponent(message);
   return (
