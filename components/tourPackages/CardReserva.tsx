@@ -33,16 +33,18 @@ import { mdiMargin } from "@mdi/js";
 export const TourCardReserva = ({ tourPackage, mp }) => {
   const hasOffer = hasActiveOffer(tourPackage);
   const [llegada, setValueLlegada] = React.useState<Date | null>(null);
-  const [age, setAge] = React.useState("");
-  const [selectedDayRange, setSelectedDayRange] = useState({
-    from: null,
-    to: null,
-  });
+  const [selectedDayFrom, setSelectedDayFrom] = React.useState<Date | null>(null);
+  const [selectedDayTo, setSelectedDayTo] = React.useState<Date | null>(null);
 
-  const [peopleQuantity, setPeopleQuantity] = useState(tourPackage || 1);
+  const [peopleQuantity, setPeopleQuantity] = React.useState<Date | null>(null);
   const handleChange = (event: SelectChangeEvent) => {
     setPeopleQuantity(event.target.value as string);
   };
+  const DayFromTo = (event: SelectChangeEvent) => {
+    setSelectedDayFrom(event as string);
+    setSelectedDayTo( addDays(new Date(event), tourPackage.duration + 1) as string)
+  };
+ 
   const listPersons = [];
   for (let index = tourPackage.capacity.min; index <= 10; index++) {
     listPersons.push(index);
@@ -65,6 +67,7 @@ export const TourCardReserva = ({ tourPackage, mp }) => {
                     value={llegada}
                     onChange={(newValue) => {
                       setValueLlegada(newValue);
+                      DayFromTo(newValue);
                     }}
                     renderInput={(params) => (
                       <TextField className="buttomDate" {...params} />
@@ -80,6 +83,7 @@ export const TourCardReserva = ({ tourPackage, mp }) => {
                         : null
                     }
                     label="Salida"
+                    
                     disabled
                     renderInput={(params) => (
                       <TextField className="buttomDate" {...params} />
@@ -115,7 +119,8 @@ export const TourCardReserva = ({ tourPackage, mp }) => {
           <Typography>
             <TourPackageContact
               tourPackage={tourPackage}
-              range={selectedDayRange}
+              rangeFrom={selectedDayFrom}
+              rangeTo={selectedDayTo}
               quantity={peopleQuantity}
               mp={mp}
             />
