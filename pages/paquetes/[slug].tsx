@@ -25,9 +25,8 @@ import { TourPackageCalendar } from "../../components/tourPackages/Calendar";
 import { TourPackageDetails } from "../../components/tourPackages/Details";
 import { TourPackageCapacity } from "../../components/tourPackages/Capacity";
 import * as React from "react";
- 
-import DefaultForm from "../../utils/model";
 
+import DefaultForm from "../../utils/model";
 
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -74,17 +73,12 @@ SwiperCore.use([Navigation, Pagination, A11y, EffectCube, Thumbs]);
 export default function TourPackagePage(props) {
   const router = useRouter();
   const { slug } = router.query;
-  const selectIcon = [1,3]
-  const allIcon = DefaultForm.itemIcon()
-  const itemsIcon =[]
-    selectIcon.map((x)=>
-    itemsIcon.push(allIcon.find(y=>y.id===x))
-    )
+  const allIcon = DefaultForm.itemIcon();
+  console.log("");
+  
   const { data: tourPackage, error } = useTourPackage(slug, props.tourPackage);
 
-  
   const [mp, setMercadoPago] = useState({});
-
 
   if (error) return <Error statusCode={404} />;
 
@@ -100,6 +94,10 @@ export default function TourPackagePage(props) {
     return parseInt(Math.random() * (max - min) + min);
   }
   console.log("slug tourPackage", tourPackage);
+  const itemsIcon = [];
+  tourPackage.listIcons.map((x) =>
+    itemsIcon.push(allIcon.find((y) => y.id === x))
+  );
   const listPersons = [];
   for (
     let index = tourPackage.capacity.min;
@@ -108,7 +106,7 @@ export default function TourPackagePage(props) {
   ) {
     listPersons.push(index);
   }
-  
+
   tourPackage.images.map((x) => {
     images.push({ imgPath: x });
   });
@@ -135,13 +133,13 @@ export default function TourPackagePage(props) {
       <Box sx={{ flexGrow: 1 }}>
         <Grid container className="bond">
           {/* header */}
-          <Grid xs={12}>
+          <Grid className="styleHeader" xs={12}>
             <TourPackageSlider tourPackage={images} />
           </Grid>
           {/* header */}
           {/* Body */}
-          <Grid  xs={12}>
-            <Box sx={{ flexGrow: 1,paddingTop:"15px"}}>
+          <Grid xs={12}>
+            <Box sx={{ flexGrow: 1, paddingTop: "15px" }}>
               <Grid container>
                 {/* 1columna */}
                 <Grid sx={{ padding: "0 0 0 20px" }} xs={12} md={8}>

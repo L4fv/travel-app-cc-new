@@ -99,7 +99,7 @@ export const TourCardReserva = ({ tourPackage, mp }) => {
           >
             <Box sx={{ margin: "20px 0px", maxWidth: "350px", width: "100%" }}>
               <FormControl fullWidth>
-                <InputLabel block id="demo-simple-select-label">
+                <InputLabel  id="demo-simple-select-label">
                   Cantidad de Personas
                 </InputLabel>
                 <Select

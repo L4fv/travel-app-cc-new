@@ -110,7 +110,7 @@ export const TourPackageContact = ({
         advance: cuota,
       },
     });
-
+    console.log('data',data)
     // Inicializa el checkout
     mp.checkout({
       preference: {
@@ -120,6 +120,8 @@ export const TourPackageContact = ({
     });
     setLoading(false);
   };
+  console.log('rangeFrom',rangeFrom)
+  console.log('rangeTo',rangeTo)
   if (rangeFrom && rangeTo) {
     const from = format(
       new Date(rangeFrom),
@@ -131,7 +133,8 @@ export const TourPackageContact = ({
       "d 'de' LLLL",
       { locale: es }
     );
-
+      console.log('from',from)
+      console.log('to',to)
     message += `desde el *${from}* ` + `hasta el *${to}*`;
   }
 

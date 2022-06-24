@@ -20,43 +20,6 @@ export const HomeMain = () => {
         </h2>
         <p className="md:text-lg">{description[config.brand]}</p>
         <HomeMainGrid />
-    {/* <h1>init</h1>
-    
-        {pickedData &&
-          pickedData.map(
-            ({
-              id,
-              city,
-              url,
-              description,
-              currency,
-              currentPrice,
-              ratings,
-              stars,
-              discount,
-              cashback,
-              lastPrice,
-              about
-            }) => (
-              <HeadoutPicks
-                key={id}
-                city={city}
-                about={about}
-                
-                url={url}
-                description={description}
-                currency={currency}
-                price={currentPrice}
-                ratings={ratings}
-                stars={stars}
-                discount={discount}
-                cashback={cashback}
-                lastPrice={lastPrice}
-              />
-            )
-          )}
-<h1>release</h1>
-        <CityCard urlLink={'cubaspa.com.pe123'} city={'lima'} description={'hola'}/> */}
       </div>
     </div>
   );
