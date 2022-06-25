@@ -1,8 +1,8 @@
 version: '2'
 services:
-    msa:
+    travel-front:
         restart: always
-        image: 'travel_app-front:TEST_1.8'
+        image: 'travel_app-front:TEST_2.1'
         env_file: .env
         ports:
-            - '5000:5000'
+            - '5001:3000'
