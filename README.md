@@ -1,8 +1,8 @@
-# travel_app
+# travel_app-front
 git push cc-front2 main:prod
 # DEPLOY PROD
     COMAND:
-         git pull && docker-compose down && docker build . -t travel_app:PROD_1.7  && docker-compose up -d --remove-orphans
+         git pull && docker-compose down && docker build . -t travel_app-front:TEST_1.7  && docker-compose up -d --remove-orphans
 
 # DEPLOY LOCAL
     npm run dev
