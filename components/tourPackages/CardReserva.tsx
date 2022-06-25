@@ -1,10 +1,7 @@
 import * as React from "react";
-import { render } from "react-dom";
-import { useState, useEffect } from "react";
+
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -12,12 +9,11 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import addDays from "date-fns/addDays";
 import Box from "@mui/material/Box";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 
 import { es } from "date-fns/locale"
 import {
-  getOfferRate,
-  getRemainingOfferDays,
+
   hasActiveOffer,
 } from "../../utils/product";
 import Grid from "@mui/material/Grid";
@@ -26,12 +22,10 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 
 import { TourPackageContact } from "../../components/tourPackages/Contact";
-import { mdiMargin } from "@mdi/js";
 
 
 
 export const TourCardReserva = ({ tourPackage, mp }) => {
-  const hasOffer = hasActiveOffer(tourPackage);
   const [llegada, setValueLlegada] = React.useState<Date | null>(null);
   const [selectedDayFrom, setSelectedDayFrom] = React.useState<Date | null>(null);
   const [selectedDayTo, setSelectedDayTo] = React.useState<Date | null>(null);

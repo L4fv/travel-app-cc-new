@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Head from "next/head";
 import Error from "next/error";
 import Script from "next/script";
@@ -14,47 +14,16 @@ import {
 import { TourPackageSlider } from "../../components/tourPackages/Slider";
 import { TourPackageFooter } from "../../components/tourPackages/Footer";
 import { TourCardReserva } from "../../components/tourPackages/CardReserva";
-import { TourPackageCalendar } from "../../components/tourPackages/Calendar";
+
 import { TourPackageDetails } from "../../components/tourPackages/Details";
-import { TourPackageCapacity } from "../../components/tourPackages/Capacity";
+
 import * as React from "react";
 
 import DefaultForm from "../../utils/model";
 
-import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import MasksIcon from "@mui/icons-material/Masks";
-import RestaurantMenuSharpIcon from "@mui/icons-material/RestaurantMenuSharp";
-import DirectionsCarSharpIcon from "@mui/icons-material/DirectionsCarSharp";
-import LocalBarSharpIcon from "@mui/icons-material/LocalBarSharp";
-import InfoIcon from "@mui/icons-material/Info";
-import { render } from "react-dom";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import addDays from "date-fns/addDays";
 
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-
-import { TourPackageContact } from "../../components/tourPackages/Contact";
-import {
-  getOfferRate,
-  getRemainingOfferDays,
-  hasActiveOffer,
-} from "../../utils/product";
-import { maxWidth, padding } from "@mui/system";
 declare global {
   interface Window {
     MercadoPago: any;
@@ -156,6 +125,12 @@ export default function TourPackagePage(props) {
                         <TourPackageDetails tourPackage={tourPackage} />
                       </div>
                     </div>
+                  </Grid>
+
+                  <Grid xs={0} md={4}>
+                    <Grid className="stickyDate">
+                      <TourCardReserva tourPackage={tourPackage} mp={mp} />
+                    </Grid>{" "}
                   </Grid>
                 </Grid>
               </Box>

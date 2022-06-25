@@ -2,7 +2,6 @@
 //import Gallery from "react-photo-gallery-next";
 import dynamic from 'next/dynamic'
 
-import { render } from "react-dom";
 import * as React from "react";
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -19,15 +18,8 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 export const TourPackageSlider = ({ tourPackage }) => {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
-  const maxSteps = tourPackage.length;
   console.log("tourPackage_slide", tourPackage);
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
+  
 
   const handleStepChange = (step: number) => {
     setActiveStep(step);
