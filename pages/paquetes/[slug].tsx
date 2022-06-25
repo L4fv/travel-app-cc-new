@@ -86,10 +86,7 @@ export default function TourPackagePage(props) {
     return parseInt(Math.random() * (max - min) + min);
   }
   console.log("slug tourPackage", tourPackage);
-  const itemsIcon = [];
-  tourPackage.listIcons.map((x) =>
-    itemsIcon.push(allIcon.find((y) => y.id === x))
-  );
+
   const listPersons = [];
   for (
     let index = tourPackage.capacity.min;
@@ -104,59 +101,62 @@ export default function TourPackagePage(props) {
   });
   return (
     <Layout>
-      <Head>
-        <title>
-          {tourPackage.name} | {config.name}
-        </title>
-      </Head>
-      <Script
-        id="mercadopago-js"
-        src="https://sdk.mercadopago.com/js/v2"
-        onLoad={() => {
-          setMercadoPago(
-            new window.MercadoPago(
-              `${process.env.NEXT_PUBLIC_PUBLICK_KEY_TEST_MERCADOPAGO}`,
-              { locale: "es-PE" }
-            )
-          );
-        }}
-      />
-      {/* <div className="w-full max-w-6xl mx-auto px-4 sm:px-8 py-8 md:py-12"> */}
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container className="bond">
-          {/* header */}
-          <Grid xs={12}>
-            <TourPackageSlider tourPackage={images} />
-          </Grid>
-          {/* header */}
-          {/* Body */}
-          <Grid xs={12}>
-            <Box sx={{ flexGrow: 1, paddingTop: "15px" }}>
-              <Grid container>
-                {/* 1columna */}
-                <Grid sx={{ padding: "0 0 0 20px" }} xs={12} md={8}>
-                  <div>
-                    <h1 className="subHeader">{tourPackage.name}</h1>
-                    <div className="subResumeBody mb-6">
-                      <span className="points">8.3</span>
-                      <span className="leftRigth">Fantástico</span>
-                      <span className="indexComentario">Ver Comentarios</span>
-                    </div>
+      <div>
+        <Head>
+          <title>
+            {tourPackage.name} | {config.name}
+          </title>
+        </Head>
+        <Script
+          id="mercadopago-js"
+          src="https://sdk.mercadopago.com/js/v2"
+          onLoad={() => {
+            setMercadoPago(
+              new window.MercadoPago(
+                `${process.env.NEXT_PUBLIC_PUBLICK_KEY_TEST_MERCADOPAGO}`,
+                { locale: "es-PE" }
+              )
+            );
+          }}
+        />
+        {/* <div className="w-full max-w-6xl mx-auto px-4 sm:px-8 py-8 md:py-12"> */}
+        <Box sx={{ flexGrow: 1 }}>
+          <Grid container className="bond">
+            {/* header */}
+            <Grid xs={12}>
+              <TourPackageSlider tourPackage={images} />
+            </Grid>
+            {/* header */}
+            {/* Body */}
+            <Grid xs={12}>
+              <Box sx={{ flexGrow: 1, paddingTop: "15px" }}>
+                <Grid container>
+                  {/* 1columna */}
+                  <Grid sx={{ padding: "0 0 0 20px" }} xs={12} md={8}>
+                    <div>
+                      <h1 className="subHeader">{tourPackage.name}</h1>
+                      <div className="subResumeBody mb-6">
+                        <span className="points">8.3</span>
+                        <span className="leftRigth">Fantástico</span>
+                        <span className="indexComentario">Ver Comentarios</span>
+                      </div>
 
-                    <div className="iconItems">
-                      {itemsIcon.map((x) => (
-                        <div className="spaceIcon spaceLeftRigth">
-                          <div className="  mb-2">
-                            <x.icon sx={{ color: "#444444" }} />
+                      <div className="iconItems">
+                        {itemsIcon.map((x) => (
+                          <div className="spaceIcon spaceLeftRigth">
+                            <div className="  mb-2">
+                              <x.icon sx={{ color: "#444444" }} />
+                            </div>
+                            <div>{x.description}</div>
                           </div>
-                          <div>{x.description}</div>
-                        </div>
-                      ))}
-                    </div>
+                        ))}
+                      </div>
 
-                  <div className="py-8">
-                    <TourPackageDetails tourPackage={tourPackage} />
-                  </div>
+                      <div className="py-8">
+                        <TourPackageDetails tourPackage={tourPackage} />
+                      </div>
+                    </div>
+                  </Grid>
                 </Grid>
               </Box>
             </Grid>
