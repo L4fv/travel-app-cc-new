@@ -1,6 +1,5 @@
 import { isDesktop } from "react-device-detect";
 import { config } from "../../config";
-import { NoSSR } from "../shared/NoSSR";
 
 const HTHeroContent = () => {
   return (

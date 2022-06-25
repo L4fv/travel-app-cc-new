@@ -33,7 +33,6 @@ export const TourPackageSlider = ({ tourPackage }) => {
     setActiveStep(step);
   };
   {
-    /* <Gallery photos={photos} />; */
   }
   const photos = [];
   let indice = 0;
@@ -79,39 +78,7 @@ export const TourPackageSlider = ({ tourPackage }) => {
 
         <Grid className="displayGallery">
           <Gallery
-            photos={[
-              {
-                src: "https://travel-app-space.nyc3.digitaloceanspaces.com/app/tour-packages/609dcc536f19af00bbb6d144/r8UCjiv4A3jntC0PLDYh9.jpeg",
-                width: 3,
-                height: 2,
-              },
-              {
-                src: "https://travel-app-space.nyc3.digitaloceanspaces.com/app/tour-packages/609dcc536f19af00bbb6d144/01Xct384PEAtyZbl6KS4O.png",
-                width: 1,
-                height: 1,
-              },
-
-              {
-                src: "https://travel-app-space.nyc3.digitaloceanspaces.com/app/tour-packages/609dcc536f19af00bbb6d144/u6b_zelMEY3GheJj71Zu_.jpeg",
-                width: 4,
-                height: 3,
-              },
-              {
-                src: "https://travel-app-space.nyc3.digitaloceanspaces.com/app/tour-packages/609dcc536f19af00bbb6d144/lhgzpzKBrZ38V_j3UoQri.jpeg",
-                width: 1,
-                height: 1,
-              },
-              {
-                src: "https://travel-app-space.nyc3.digitaloceanspaces.com/app/tour-packages/609dcc536f19af00bbb6d144/LBLLqp6yjqUH17wpnR-k1.jpeg",
-                width: 4,
-                height: 3,
-              },
-              {
-                src: "https://travel-app-space.nyc3.digitaloceanspaces.com/app/tour-packages/609dcc536f19af00bbb6d144/v3PKRhDPFMZ6dx1GMol7f.jpeg",
-                width: 3,
-                height: 4,
-              },
-            ]}
+            photos={photos}
           />
         </Grid>
       </Grid>

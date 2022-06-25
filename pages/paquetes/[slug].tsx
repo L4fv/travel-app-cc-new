@@ -49,7 +49,6 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 import { TourPackageContact } from "../../components/tourPackages/Contact";
-import { NoSSR } from "../../components/shared/NoSSR";
 import {
   getOfferRate,
   getRemainingOfferDays,
@@ -87,6 +86,10 @@ export default function TourPackagePage(props) {
     return parseInt(Math.random() * (max - min) + min);
   }
   console.log("slug tourPackage", tourPackage);
+  const itemsIcon = [];
+  tourPackage.listIcons.map((x) =>
+    itemsIcon.push(allIcon.find((y) => y.id === x))
+  );
   const listPersons = [];
   for (
     let index = tourPackage.capacity.min;
@@ -139,76 +142,40 @@ export default function TourPackagePage(props) {
                       <span className="leftRigth">Fantástico</span>
                       <span className="indexComentario">Ver Comentarios</span>
                     </div>
-                    <div className=" headerDescription  mb-8">
-                      <span className="pocketTime">
-                        {" "}
-                        <AccessTimeIcon
-                          sx={{
-                            fontSize: "16px",
-                            lineHeight: "14px",
-                            textAlign: "start",
-                            letterSpacing: "normal",
-                          }}
-                        />
-                      </span>
-                      <span className="duration">Duración: 12 Hs.</span>
-                      <span className="reservation">
-                        {" "}
-                        <InfoIcon
-                          sx={{
-                            fontSize: "16px",
-                            lineHeight: "18px",
-                            textAlign: "start",
-                            letterSpacing: "normal",
-                            marginRight: "4px",
-                          }}
-                        />
-                        Reserva flexible
-                      </span>
-                    </div>
-                  </div>
 
-                  <div className="iconItems">
-                    {itemsIcon.map((x) => (
-                      <div className="spaceIcon spaceLeftRigth">
-                        <div className="  mb-2">
-                          <x.icon sx={{ color: "#444444" }} />
+                    <div className="iconItems">
+                      {itemsIcon.map((x) => (
+                        <div className="spaceIcon spaceLeftRigth">
+                          <div className="  mb-2">
+                            <x.icon sx={{ color: "#444444" }} />
+                          </div>
+                          <div>{x.description}</div>
                         </div>
-                        <div>{x.description}</div>
-                      </div>
-                    ))}
-                  </div>
+                      ))}
+                    </div>
 
                   <div className="py-8">
                     <TourPackageDetails tourPackage={tourPackage} />
                   </div>
                 </Grid>
-                {/* 1columna */}
-                {/* 2columna */}
-                <Grid xs={0} md={4}>
-                  <Grid className="stickyDate">
-                    <TourCardReserva tourPackage={tourPackage} mp={mp} />
-                  </Grid>{" "}
-                </Grid>
-                {/* 2columna */}
-              </Grid>
-            </Box>
-          </Grid>
-          {/* Body */}
-          {/* Footer */}
+              </Box>
+            </Grid>
+            {/* Body */}
+            {/* Footer */}
 
-          <Grid className="classFooter" xs={12}>
-            <Box sx={{ flexGrow: 1 }}>
-              <Grid>
+            <Grid className="classFooter" xs={12}>
+              <Box sx={{ flexGrow: 1 }}>
                 <Grid>
-                  <TourPackageFooter tourPackage={tourPackage} />
+                  <Grid>
+                    <TourPackageFooter tourPackage={tourPackage} mp={mp} />
+                  </Grid>
                 </Grid>
-              </Grid>
-            </Box>
+              </Box>
+            </Grid>
+            {/* Footer */}
           </Grid>
-          {/* Footer */}
-        </Grid>
-      </Box>
+        </Box>
+      </div>
     </Layout>
   );
 }
