@@ -2,7 +2,7 @@ version: '2'
 services:
     msa:
         restart: always
-        image: 'travel_app:PROD_1.6'
+        image: 'travel_app:PROD_1.7'
         env_file: .env
         ports:
             - '5000:5000'
