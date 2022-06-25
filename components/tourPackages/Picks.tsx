@@ -4,18 +4,11 @@ import Link from "next/link";
 export const HeadoutPicks = ({
   description,
   price,
-  discount,
-  cashback,
-  currency,
-  lastPrice,
-  ratings,
   stars,
   city,
   about,
   days,
-  showMore,
   min,
-  highlight,
   url,
   slug,
 }) => {
@@ -24,7 +17,7 @@ export const HeadoutPicks = ({
   };
   let style;
   console.log("find", slug);
-  console.log('description',description)
+  console.log("description", description);
   if (state.listed) {
     style = {
       color: "#f43361",
@@ -49,11 +42,7 @@ export const HeadoutPicks = ({
   return (
     <Link key={slug} href={"/paquetes/" + slug}>
       <div className="exp-card">
-        {showMore ? (
-          <div className="show-more">
-            <p>View All</p>
-          </div>
-        ) : (
+        {
           <React.Fragment>
             <div
               className="exp-card-img"
@@ -118,34 +107,18 @@ export const HeadoutPicks = ({
                           </p>
                         </div>
                       )}
-                      {ratings ? (
-                        ratings === 1 ? (
-                          <p id="ratings">{`(${ratings} Rating)`}</p>
-                        ) : (
-                          <p id="ratings">{`(${ratings} Ratings)`}</p>
-                        )
-                      ) : (
-                        <p id="ratings">Recién llegados</p>
-                      )}
+                      {<p id="ratings">Recién llegados</p>}
                     </div>
                   </div>
                   <div className="price">
                     <p>Desde</p>
-                    {<p id="last-price">{`S/.${lastPrice}`}</p>}
-                    {lastPrice && city !== "DUBAI" ? (
-                      <p id="last-price">{`S/.${lastPrice}`}</p>
-                    ) : null}
-                    {currency === "AED" ? (
-                      <p id="price">{`S/. ${price}`}</p>
-                    ) : (
-                      <p id="price">{`S/.${price}`}</p>
-                    )}
+                    {<p id="price">{`S/.${price}`}</p>}
                   </div>
                 </div>
               </div>
             </div>
           </React.Fragment>
-        )}
+        }
       </div>
     </Link>
   );

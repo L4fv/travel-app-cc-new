@@ -47,7 +47,6 @@ export const TourPackageSlider = ({ tourPackage }) => {
     setActiveStep(step);
   };
   {
-    /* <Gallery photos={photos} />; */
   }
   const photos = [];
   let indice = 0;

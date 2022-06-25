@@ -29,7 +29,7 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export const TourPackageFooter = ({ tourPackage }) => {
+export const TourPackageFooter = ({ tourPackage,mp }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -82,7 +82,7 @@ export const TourPackageFooter = ({ tourPackage }) => {
         >
          
           <Grid  sx={{ display: "flex", justifyContent: "center"}}>
-                <TourCardReserva tourPackage={tourPackage} />
+                <TourCardReserva tourPackage={tourPackage} mp={mp} />
           </Grid>{" "}
         </Dialog>
       </Grid>

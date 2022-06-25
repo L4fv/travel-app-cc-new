@@ -36,13 +36,15 @@ export const TourCardReserva = ({ tourPackage, mp }) => {
   const [selectedDayFrom, setSelectedDayFrom] = React.useState<Date | null>(null);
   const [selectedDayTo, setSelectedDayTo] = React.useState<Date | null>(null);
 
-  const [peopleQuantity, setPeopleQuantity] = React.useState<Date | null>(null);
-  const handleChange = (event: SelectChangeEvent) => {
-    setPeopleQuantity(event.target.value as string);
+  const [peopleQuantity, setPeopleQuantity] = React.useState<number | null>(null);
+  const handleChange = (event: any) => {
+    setPeopleQuantity(event.target.value );
   };
-  const DayFromTo = (event: SelectChangeEvent) => {
-    setSelectedDayFrom(event as string);
-    setSelectedDayTo( addDays(new Date(event), tourPackage.duration + 1) as string)
+  const DayFromTo = (event : any) => {
+    console.log('event',event )
+    console.log('tpye', typeof event)
+    setSelectedDayFrom(event )
+    setSelectedDayTo( addDays(new Date(event ) , tourPackage.duration + 1))
   };
  
   const listPersons = [];
@@ -83,7 +85,7 @@ export const TourCardReserva = ({ tourPackage, mp }) => {
                         : null
                     }
                     label="Salida"
-                    
+                    onChange={null}
                     disabled
                     renderInput={(params) => (
                       <TextField className="buttomDate" {...params} />
