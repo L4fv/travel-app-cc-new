@@ -61,6 +61,7 @@ export const TourCardReserva = ({ tourPackage, mp }) => {
                     label="Llegada"
                     inputFormat="dd/MM/yyyy"
                     value={llegada}
+                    minDate={new Date()}
                     onChange={(newValue) => {
                       setValueLlegada(newValue);
                       DayFromTo(newValue);
