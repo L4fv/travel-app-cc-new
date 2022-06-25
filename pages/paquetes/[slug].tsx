@@ -51,9 +51,7 @@ export default function TourPackagePage(props) {
     );
 
   const images = [];
-  function getRandomArbitrary(min, max) {
-    return parseInt(Math.random() * (max - min) + min);
-  }
+
   console.log("slug tourPackage", tourPackage);
 
   const listPersons = [];
@@ -109,17 +107,18 @@ export default function TourPackagePage(props) {
                         <span className="leftRigth">Fantástico</span>
                         <span className="indexComentario">Ver Comentarios</span>
                       </div>
-
-                      <div className="iconItems">
-                        {itemsIcon.map((x) => (
-                          <div className="spaceIcon spaceLeftRigth">
-                            <div className="  mb-2">
-                              <x.icon sx={{ color: "#444444" }} />
+                      {itemsIcon.length > 0 ? (
+                        <div className="iconItems">
+                          {itemsIcon.map((x) => (
+                            <div className="spaceIcon spaceLeftRigth">
+                              <div className="  mb-2">
+                                <x.icon sx={{ color: "#444444" }} />
+                              </div>
+                              <div>{x.description}</div>
                             </div>
-                            <div>{x.description}</div>
-                          </div>
-                        ))}
-                      </div>
+                          ))}
+                        </div>
+                      ) : null}
 
                       <div className="py-8">
                         <TourPackageDetails tourPackage={tourPackage} />
