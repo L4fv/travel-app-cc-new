@@ -1,15 +1,25 @@
-FROM node:16-alpine
+FROM  node:16-alpine  as BUILD_IMAGE
 
-RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
+WORKDIR /app
 
-WORKDIR /home/node/app
+# Resolve node_modules for caching
+COPY ./package.json ./
+COPY ./yarn.lock ./
+RUN yarn install --production=true --frozen-lockfile
 
-COPY package*.json ./
+# Copy all for build and release cache if package.json update
+COPY . .
 
-USER node
+#------------------------------------------------------------------------------------
 
-RUN npm install
+# Create new namespace for final Docker Image
+FROM  node:16-alpine 
 
-COPY --chown=node:node . .
+# Only copy your source code without system file
+COPY --from=BUILD_IMAGE /app /app
+
+WORKDIR /app
+
+#ENV STRAPI_LOG_LEVEL=debug
 
 CMD [ "node", "./src/app.js" ]
