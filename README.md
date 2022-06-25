@@ -2,7 +2,7 @@
 git push cc-front2 main:prod
 # DEPLOY PROD
     COMAND:
-         git pull && docker-compose down && docker build . -t travel-front-last:TEST_2.5  && docker-compose up -d --remove-orphans
+         git pull && docker-compose down && docker build . -t travel-front-last:TEST_2.6  && docker-compose up -d --remove-orphans
 
 # DEPLOY LOCAL
     npm run dev

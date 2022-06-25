@@ -22,4 +22,4 @@ WORKDIR /app
 
 #ENV STRAPI_LOG_LEVEL=debug
 
-CMD [ "node", "./src/app.js" ]
+CMD [ "yarn", "start" ]
