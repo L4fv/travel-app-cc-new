@@ -19,6 +19,7 @@ FROM  node:16-alpine
 COPY --from=BUILD_IMAGE /app /app
 
 WORKDIR /app
+RUN yarn build
 
 #ENV STRAPI_LOG_LEVEL=debug
 
