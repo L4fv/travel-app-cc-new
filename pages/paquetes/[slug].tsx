@@ -4,13 +4,6 @@ import Error from "next/error";
 import Script from "next/script";
 
 import { useRouter } from "next/router";
-import SwiperCore, {
-  Navigation,
-  Pagination,
-  A11y,
-  EffectCube,
-  Thumbs,
-} from "swiper";
 import { config } from "../../config";
 import { Layout } from "../../components/shared/Layout";
 import {
@@ -25,9 +18,8 @@ import { TourPackageCalendar } from "../../components/tourPackages/Calendar";
 import { TourPackageDetails } from "../../components/tourPackages/Details";
 import { TourPackageCapacity } from "../../components/tourPackages/Capacity";
 import * as React from "react";
- 
-import DefaultForm from "../../utils/model";
 
+import DefaultForm from "../../utils/model";
 
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -69,22 +61,17 @@ declare global {
     MercadoPago: any;
   }
 }
-SwiperCore.use([Navigation, Pagination, A11y, EffectCube, Thumbs]);
 
 export default function TourPackagePage(props) {
   const router = useRouter();
   const { slug } = router.query;
-  const selectIcon = [1,3]
-  const allIcon = DefaultForm.itemIcon()
-  const itemsIcon =[]
-    selectIcon.map((x)=>
-    itemsIcon.push(allIcon.find(y=>y.id===x))
-    )
+  const selectIcon = [1, 3];
+  const allIcon = DefaultForm.itemIcon();
+  const itemsIcon = [];
+  selectIcon.map((x) => itemsIcon.push(allIcon.find((y) => y.id === x)));
   const { data: tourPackage, error } = useTourPackage(slug, props.tourPackage);
 
-  
   const [mp, setMercadoPago] = useState({});
-
 
   if (error) return <Error statusCode={404} />;
 
@@ -108,7 +95,7 @@ export default function TourPackagePage(props) {
   ) {
     listPersons.push(index);
   }
-  
+
   tourPackage.images.map((x) => {
     images.push({ imgPath: x });
   });
@@ -140,8 +127,8 @@ export default function TourPackagePage(props) {
           </Grid>
           {/* header */}
           {/* Body */}
-          <Grid  xs={12}>
-            <Box sx={{ flexGrow: 1,paddingTop:"15px"}}>
+          <Grid xs={12}>
+            <Box sx={{ flexGrow: 1, paddingTop: "15px" }}>
               <Grid container>
                 {/* 1columna */}
                 <Grid sx={{ padding: "0 0 0 20px" }} xs={12} md={8}>
@@ -193,9 +180,7 @@ export default function TourPackagePage(props) {
                   </div>
 
                   <div className="py-8">
-                    <NoSSR>
-                      <TourPackageDetails tourPackage={tourPackage} />
-                    </NoSSR>
+                    <TourPackageDetails tourPackage={tourPackage} />
                   </div>
                 </Grid>
                 {/* 1columna */}

@@ -1,19 +1,13 @@
 import { useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 
-const SwiperStyled = styled(Swiper)`
-  --swiper-theme-color: black;
-  --swiper-navigation-size: 20px;
-`;
+
 
 export const TourPackageDetails = ({ tourPackage }) => {
   const [index, setIndex] = useState(0);
-  const [swiper, setSwiper] = useState(null);
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,

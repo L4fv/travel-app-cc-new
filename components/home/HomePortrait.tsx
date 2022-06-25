@@ -43,28 +43,26 @@ export const HomePortrait = () => {
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(${bgImgUrl})`,
       }}
     >
-      <NoSSR>
-        {isDesktop && (
-          <div>
-            <video
-              className={`w-auto h-auto min-w-full min-h-full max-w-none
+      {isDesktop && (
+        <div>
+          <video
+            className={`w-auto h-auto min-w-full min-h-full max-w-none
               absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2
               pointer-events-none`}
-              src={config.heroVideo.url}
-              muted={true}
-              loop={true}
-              autoPlay={true}
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                backgroundImage:
-                  "linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1))",
-              }}
-            />
-          </div>
-        )}
-      </NoSSR>
+            src={config.heroVideo.url}
+            muted={true}
+            loop={true}
+            autoPlay={true}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1))",
+            }}
+          />
+        </div>
+      )}
       {content[config.brand]}
     </div>
   );
