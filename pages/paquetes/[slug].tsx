@@ -3,6 +3,9 @@ import Head from "next/head";
 import Error from "next/error";
 import Script from "next/script";
 
+import Avatar from "@mui/material/Avatar";
+import Stack from "@mui/material/Stack";
+
 import { useRouter } from "next/router";
 import { config } from "../../config";
 import { Layout } from "../../components/shared/Layout";
@@ -107,12 +110,13 @@ export default function TourPackagePage(props) {
                         <span className="leftRigth">Fantástico</span>
                         <span className="indexComentario">Ver Comentarios</span>
                       </div>
+
                       {itemsIcon.length > 0 ? (
                         <div className="iconItems">
                           {itemsIcon.map((x) => (
                             <div className="spaceIcon spaceLeftRigth">
-                              <div className="  mb-2">
-                                <x.icon sx={{ color: "#444444" }} />
+                              <div className="mb-2 iconCSS">
+                                <Avatar alt="Remy Sharp" src={x.src} />
                               </div>
                               <div>{x.description}</div>
                             </div>

@@ -9,7 +9,7 @@ export default function Home({ tourPackages }) {
 
   return (
     <Layout>
-      <div>
+      <div className="divState">
         <HomePortrait />
         <HomeMain />
         <HomeExperience />
