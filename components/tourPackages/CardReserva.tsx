@@ -1,4 +1,4 @@
-import * as React from "react";
+import {useState, useEffect} from "react";
 
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -11,11 +11,8 @@ import addDays from "date-fns/addDays";
 import Box from "@mui/material/Box";
 import Select from "@mui/material/Select";
 
-import { es } from "date-fns/locale"
-import {
-
-  hasActiveOffer,
-} from "../../utils/product";
+import { es } from "date-fns/locale";
+import { hasActiveOffer } from "../../utils/product";
 import Grid from "@mui/material/Grid";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -23,40 +20,49 @@ import FormControl from "@mui/material/FormControl";
 
 import { TourPackageContact } from "../../components/tourPackages/Contact";
 
-
-
 export const TourCardReserva = ({ tourPackage, mp }) => {
-  const [llegada, setValueLlegada] = React.useState<Date | null>(null);
-  const [selectedDayFrom, setSelectedDayFrom] = React.useState<Date | null>(null);
-  const [selectedDayTo, setSelectedDayTo] = React.useState<Date | null>(null);
+  const [llegada, setValueLlegada] = useState<Date | null>("");
+  const [selectedDayFrom, setSelectedDayFrom] = useState<Date | null>("");
+  const [selectedDayTo, setSelectedDayTo] = useState<Date | null>("");
+  const [isPriceItem, setIsPriceItem] = useState(parseInt(tourPackage.price));
 
-  const [peopleQuantity, setPeopleQuantity] = React.useState<number | null>(null);
+  const [peopleQuantity, setPeopleQuantity] = useState<number>(parseInt(tourPackage.peopleQuantity));
   const handleChange = (event: any) => {
-    setPeopleQuantity(event.target.value );
+    setPeopleQuantity(event.target.value);
   };
-  const DayFromTo = (event : any) => {
-    console.log('event',event )
-    console.log('tpye', typeof event)
-    setSelectedDayFrom(event )
-    setSelectedDayTo( addDays(new Date(event ) , tourPackage.duration + 1))
+  const DayFromTo = (event: any) => {
+    console.log("event", event);
+    console.log("tpye", typeof event);
+    setSelectedDayFrom(event);
+    setSelectedDayTo(addDays(new Date(event), tourPackage.duration + 1));
   };
- 
+
   const listPersons = [];
   for (let index = tourPackage.capacity.min; index <= 10; index++) {
     listPersons.push(index);
   }
+
+  useEffect(() => {
+    console.log("peopleQuantity ",typeof peopleQuantity, peopleQuantity)
+    setIsPriceItem(parseInt(peopleQuantity)*tourPackage.price)
+  
+
+  }, [peopleQuantity])
+  
+
   return (
     <div>
       <Card>
         <CardContent className="paddingCard">
           <Typography variant="h5" component="div">
             <Grid>
+              <Grid sx={{  py: 2, textAlign: "left" }}>
+                <Box  sx={{ fontWeight: "bold"}}>
+                  S/. {isPriceItem.toFixed(2)} / persona
+                </Box>
+              </Grid>
               <Grid className="timeClass">
-                <LocalizationProvider
-            
-                  locale={es}
-                  dateAdapter={AdapterDateFns}
-                >
+                <LocalizationProvider locale={es} dateAdapter={AdapterDateFns}>
                   <DatePicker
                     label="Llegada"
                     inputFormat="dd/MM/yyyy"
@@ -96,7 +102,7 @@ export const TourCardReserva = ({ tourPackage, mp }) => {
           >
             <Box sx={{ margin: "20px 0px", maxWidth: "350px", width: "100%" }}>
               <FormControl fullWidth>
-                <InputLabel  id="demo-simple-select-label">
+                <InputLabel id="demo-simple-select-label">
                   Cantidad de Personas
                 </InputLabel>
                 <Select

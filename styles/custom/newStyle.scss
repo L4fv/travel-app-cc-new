@@ -200,18 +200,15 @@
   width: 1150px;
   margin: 0 auto;
 }
-.divState{
+.divState {
   overflow-x: hidden;
-
 }
 
-.CardsCSS{
-    display: flex;
-    justify-content: center;
-    justify-items: center;
-    flex-direction: column;
-    
-  
+.CardsCSS {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  flex-direction: column;
 }
 .exp-card {
   position: relative;
@@ -353,7 +350,7 @@
 .spaceLeftRigth {
   margin-left: 25px;
 }
-.iconCSS{
+.iconCSS {
   display: flex;
   justify-content: center;
 }
@@ -500,10 +497,12 @@
   padding: 0px;
 }
 .paddingCard {
-  padding-top: 27px;
   display: flex;
   flex-direction: column;
-  margin: auto;
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
 }
 .buttomDate {
   margin: 0 1px;
@@ -515,16 +514,14 @@
   @media only screen and (min-width: 769px) {
     display: none;
   }
-
 }
 .displayGallery {
   @media only screen and (max-width: 768px) {
     display: none;
   }
-
 }
 .styleHeader {
-  overflow:hidden;
+  overflow: hidden;
 }
 .bond {
   @media only screen and (min-width: 1440px) {

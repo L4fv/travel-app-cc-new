@@ -5,7 +5,7 @@ import { HeadoutPicks } from "../tourPackages/Picks";
 export const HomeMainGrid = () => {
   const { data: tourPackages = [] } = useTourPackages();
 
-  if (!tourPackages.length) return null;
+  if (!tourPackages.length) return "";
   console.log("product", tourPackages);
   return (
     <div className="text-left sm:text-center"> 
