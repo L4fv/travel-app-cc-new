@@ -39,7 +39,6 @@ export const TourPackageContact = ({
   let message = `Buen día. Quisiera reservar el paquete *${tourPackage.name}* para ${quantity} personas `;
   const [open, setOpen] = useState(false);
 
-  // const [isOpenReserva, setReserva] = useState(true);
   const [isLoadingMp, setLoading] = useState(false);
   const validationSchema = yup.object({
     fullName: yup.string().required("Nombres es requerido"),
@@ -110,7 +109,7 @@ export const TourPackageContact = ({
         advance: cuota,
       },
     });
-    console.log('data',data)
+    console.log("data", data);
     // Inicializa el checkout
     mp.checkout({
       preference: {
@@ -120,30 +119,23 @@ export const TourPackageContact = ({
     });
     setLoading(false);
   };
-  console.log('rangeFrom',rangeFrom)
-  console.log('rangeTo',rangeTo)
+  console.log("rangeFrom", rangeFrom);
+  console.log("rangeTo", rangeTo);
   if (rangeFrom && rangeTo) {
-    const from = format(
-      new Date(rangeFrom),
-      "d 'de' LLLL",
-      { locale: es }
-    );
-    const to = format(
-      new Date(rangeTo),
-      "d 'de' LLLL",
-      { locale: es }
-    );
-      console.log('from',from)
-      console.log('to',to)
+    const from = format(new Date(rangeFrom), "d 'de' LLLL", { locale: es });
+    const to = format(new Date(rangeTo), "d 'de' LLLL", { locale: es });
+    console.log("from", from);
+    console.log("to", to);
     message += `desde el *${from}* ` + `hasta el *${to}*`;
   }
+ 
 
   const encoded = encodeURIComponent(message);
   return (
     <div className="text-center ">
       <Button
         variant="contained"
-        // disabled={isOpenReserva}
+        disabled={!rangeFrom || !quantity}
         onClick={handleOpenModal}
         className="inline-flex items-center  text-md px-8 py-3 font-bold text-white rounded-full shadow-lg hover:shadow-xl"
         style={{
@@ -361,47 +353,20 @@ export const TourPackageContact = ({
                           onChange={handleChange}
                         >
                           <MenuItem
-                            value={(tourPackage.price * quantity * 10) / 100}
-                          >
-                            10% - S/.
-                            {(
-                              (tourPackage.price * quantity * 10) /
-                              100
-                            ).toFixed(2)}
-                          </MenuItem>
-                          <MenuItem
-                            value={(tourPackage.price * quantity * 20) / 100}
-                          >
-                            20% - S/.
-                            {(
-                              (tourPackage.price * quantity * 20) /
-                              100
-                            ).toFixed(2)}
-                          </MenuItem>
-                          <MenuItem
-                            value={(tourPackage.price * quantity * 30) / 100}
-                          >
-                            30% - S/.
-                            {(
-                              (tourPackage.price * quantity * 30) /
-                              100
-                            ).toFixed(2)}
-                          </MenuItem>
-                          <MenuItem
-                            value={(tourPackage.price * quantity * 40) / 100}
-                          >
-                            40% - S/.
-                            {(
-                              (tourPackage.price * quantity * 40) /
-                              100
-                            ).toFixed(2)}
-                          </MenuItem>
-                          <MenuItem
                             value={(tourPackage.price * quantity * 50) / 100}
                           >
                             50% - S/.
                             {(
                               (tourPackage.price * quantity * 50) /
+                              100
+                            ).toFixed(2)}
+                          </MenuItem>
+                          <MenuItem
+                            value={(tourPackage.price * quantity * 100) / 100}
+                          >
+                            100% - S/.
+                            {(
+                              (tourPackage.price * quantity * 100) /
                               100
                             ).toFixed(2)}
                           </MenuItem>

@@ -67,7 +67,7 @@ export const TourPackageDetails = ({ tourPackage }) => {
          indicatorColor="secondary"
           value={value}
           onChange={handleChange}
-          background="red"
+         
           variant="scrollable"
           scrollButtons="auto"
           aria-label="basic tabs example"

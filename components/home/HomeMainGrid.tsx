@@ -8,8 +8,8 @@ export const HomeMainGrid = () => {
   if (!tourPackages.length) return null;
   console.log("product", tourPackages);
   return (
-    <div className=" my-12 text-left sm:text-center"> 
-      <div  className=" CardsCSS max-w-6xl mx-auto grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-12">
+    <div className="text-left sm:text-center"> 
+      <div  className=" CardsCSS  grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-12">
         {tourPackages.map((product) => (
           <HeadoutPicks
             key={product.id}
