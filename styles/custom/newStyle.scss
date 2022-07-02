@@ -200,18 +200,16 @@
   width: 1150px;
   margin: 0 auto;
 }
-.divState{
+.divState {
   overflow-x: hidden;
-
 }
 
-.CardsCSS{
-    display: flex;
-    justify-content: center;
-    justify-items: center;
-    flex-direction: column;
-    
-  
+.CardsCSS {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  flex-direction: column;
 }
 .exp-card {
   position: relative;
@@ -353,7 +351,7 @@
 .spaceLeftRigth {
   margin-left: 25px;
 }
-.iconCSS{
+.iconCSS {
   display: flex;
   justify-content: center;
 }
@@ -515,16 +513,14 @@
   @media only screen and (min-width: 769px) {
     display: none;
   }
-
 }
 .displayGallery {
   @media only screen and (max-width: 768px) {
     display: none;
   }
-
 }
 .styleHeader {
-  overflow:hidden;
+  overflow: hidden;
 }
 .bond {
   @media only screen and (min-width: 1440px) {
