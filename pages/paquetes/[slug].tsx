@@ -107,8 +107,7 @@ export default function TourPackagePage(props) {
                       <h1 className="subHeader">{tourPackage.name}</h1>
                       <div className="subResumeBody mb-6">
                         <span className="points">8.3</span>
-                        <span className="leftRigth">Fantástico</span>
-                        <span className="indexComentario">Ver Comentarios</span>
+                        <span className="leftRigth">Fantástico</span>                        
                       </div>
 
                       {itemsIcon.length > 0 ? (
@@ -122,9 +121,9 @@ export default function TourPackagePage(props) {
                             </div>
                           ))}
                         </div>
-                      ) : null}
+                      ) : ""}
 
-                      <div className="py-8">
+                      <div className="py-4">
                         <TourPackageDetails tourPackage={tourPackage} />
                       </div>
                     </div>

@@ -62,7 +62,7 @@ export const TourPackageSlider = ({ tourPackage }) => {
                     }}
                     src={step.imgPath}
                   />
-                ) : null}
+                ) : ""}
               </div>
             ))}
           </AutoPlaySwipeableViews>
