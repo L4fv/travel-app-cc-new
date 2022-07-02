@@ -2,9 +2,9 @@ const colors = require("tailwindcss/colors");
 const { config } = require("./config");
 
 module.exports = {
-  mode: "jit",
-  purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
-  darkMode: false, // or 'media' or 'class'
+  mode: 'jit',
+  content: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
+  
   theme: {
     extend: {
       fontFamily: {
@@ -20,11 +20,6 @@ module.exports = {
       },
     },
   },
-  variants: {
-    extend: {
-      opacity: ["disabled"],
-      backgroundColor: ["disabled"],
-    },
-  },
+ 
   plugins: [require("@tailwindcss/typography")],
 };

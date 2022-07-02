@@ -9,11 +9,10 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import addDays from "date-fns/addDays";
 import Box from "@mui/material/Box";
-import Select from "@mui/material/Select";
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 import { es } from "date-fns/locale"
 import {
-
   hasActiveOffer,
 } from "../../utils/product";
 import Grid from "@mui/material/Grid";
@@ -95,7 +94,7 @@ export const TourCardReserva = ({ tourPackage, mp }) => {
             sx={{ display: "flex", justifyContent: "center" }}
           >
             <Box sx={{ margin: "20px 0px", maxWidth: "350px", width: "100%" }}>
-              <FormControl fullWidth>
+              <FormControl fullWidth >
                 <InputLabel  id="demo-simple-select-label">
                   Cantidad de Personas
                 </InputLabel>

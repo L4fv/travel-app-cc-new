@@ -53,10 +53,9 @@ export const TourPackageSlider = ({ tourPackage }) => {
                   <Box
                     component="img"
                     sx={{
-                      height: "45vmin",
+                      height: "250px",
                       background: "black",
-                      display: "block",
-                      maxWidth: "auto",
+                      display: "block",                      
                       overflow: "hidden",
                       width: "100%",
                     }}

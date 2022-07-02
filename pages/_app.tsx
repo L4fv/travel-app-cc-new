@@ -8,6 +8,7 @@ import theme from '../theme';
 import createEmotionCache from '../createEmotionCache';
 import "../styles/globals.scss";
 import { config } from "../config";
+import { makeStyles } from '@mui/styles';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -15,8 +16,16 @@ const clientSideEmotionCache = createEmotionCache();
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }
+console.log("theme ",theme)
+const useStyles = makeStyles(() => ({
+  root: {
+    color: theme.palette.primary.main,    
+  }
+}));
 
 export default function MyApp(props: MyAppProps) {
+  const classes = useStyles();
+
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   return (
     <CacheProvider value={emotionCache}>
@@ -24,7 +33,7 @@ export default function MyApp(props: MyAppProps) {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <title>{config.name}</title>
       </Head>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme} className={classes.root}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
         <Component {...pageProps} />
