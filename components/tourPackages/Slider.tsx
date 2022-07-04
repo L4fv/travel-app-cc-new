@@ -1,6 +1,6 @@
-
 //import Gallery from "react-photo-gallery-next";
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic";
+import { config } from "../../config";
 
 import * as React from "react";
 import { useTheme } from "@mui/material/styles";
@@ -10,16 +10,16 @@ import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
 import Grid from "@mui/material/Grid";
 
-const Gallery = dynamic(() => import('react-photo-gallery-next'), {  // no ssr
-  ssr: false
-})
+const Gallery = dynamic(() => import("react-photo-gallery-next"), {
+  // no ssr
+  ssr: false,
+});
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 export const TourPackageSlider = ({ tourPackage }) => {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   console.log("tourPackage_slide", tourPackage);
-  
 
   const handleStepChange = (step: number) => {
     setActiveStep(step);
@@ -36,6 +36,14 @@ export const TourPackageSlider = ({ tourPackage }) => {
     });
     indice++;
   });
+  while (photos.length < 5) {
+    photos.push({
+      src: config.assetImg(config.images.logo),
+      width: 3,
+      height: 3,
+    });
+  }
+
   console.log("photos", photos);
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -62,16 +70,16 @@ export const TourPackageSlider = ({ tourPackage }) => {
                     }}
                     src={step.imgPath}
                   />
-                ) : ""}
+                ) : (
+                  ""
+                )}
               </div>
             ))}
           </AutoPlaySwipeableViews>
         </Grid>
 
         <Grid className="displayGallery">
-          <Gallery
-            photos={photos}
-          />
+          <Gallery photos={photos} />
         </Grid>
       </Grid>
     </Box>
