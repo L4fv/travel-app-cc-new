@@ -30,9 +30,9 @@ export const TourPackageFooter = ({ tourPackage, mp }) => {
   const hasOffer = hasActiveOffer(tourPackage);
 
   return (
-    <div>
+    <div >
       <Grid sx={{ display: "flex", justifyContent: "space-around" }}>
-        <div className="text-center ">
+        <div className="text-center">
           <div className="inline-flex  py-1 text-black rounded-full">
             <div>
               {hasOffer && (
@@ -77,7 +77,7 @@ export const TourPackageFooter = ({ tourPackage, mp }) => {
           onClose={handleClose}
           TransitionComponent={Transition}
         >
-          <Grid sx={{ display: "flex", justifyContent: "center" }}>
+          <Grid sx={{ display: "flex", justifyContent: "center",borderRadius:"0px" }}>
             <TourCardReserva tourPackage={tourPackage} mp={mp} />
           </Grid>{" "}
         </Dialog>

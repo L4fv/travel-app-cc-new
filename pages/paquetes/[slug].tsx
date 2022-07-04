@@ -71,7 +71,7 @@ export default function TourPackagePage(props) {
   });
   return (
     <Layout>
-      <div>
+      <div >
         <Head>
           <title>
             {tourPackage.name} | {config.name}
@@ -99,10 +99,10 @@ export default function TourPackagePage(props) {
             {/* header */}
             {/* Body */}
             <Grid xs={12}>
-              <Box sx={{ flexGrow: 1, paddingTop: "15px" }}>
+              <Box >
                 <Grid container>
                   {/* 1columna */}
-                  <Grid sx={{ padding: "0 0 0 20px" }} xs={12} md={8}>
+                  <Grid sx={{ padding: "8px" }} xs={12} md={8}>
                     <div>
                       <h1 className="subHeader">{tourPackage.name}</h1>
                       <div className="subResumeBody mb-6">
@@ -113,17 +113,17 @@ export default function TourPackagePage(props) {
                       {itemsIcon.length > 0 ? (
                         <div className="iconItems">
                           {itemsIcon.map((x) => (
-                            <div className="spaceIcon spaceLeftRigth">
+                            <div className="spaceIcon ">
                               <div className="mb-2 iconCSS">
-                                <Avatar alt="Remy Sharp" src={x.src} />
+                                <Avatar className="avatar"  src={x.src} />
                               </div>
-                              <div>{x.description}</div>
+                              <div className="descriptionIcon">{x.description}</div>
                             </div>
                           ))}
                         </div>
                       ) : ""}
 
-                      <div className="py-4">
+                      <div>
                         <TourPackageDetails tourPackage={tourPackage} />
                       </div>
                     </div>
@@ -140,8 +140,8 @@ export default function TourPackagePage(props) {
             {/* Body */}
             {/* Footer */}
 
-            <Grid className="classFooter" xs={12}>
-              <Box sx={{ flexGrow: 1 }}>
+            <Grid className="classFooter mt-12 " xs={12}>
+              <Box >
                 <Grid>
                   <Grid>
                     <TourPackageFooter tourPackage={tourPackage} mp={mp} />

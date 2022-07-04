@@ -63,11 +63,10 @@ export const TourPackageDetails = ({ tourPackage }) => {
     <Box sx={{ width: "100%" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
-         textColor="secondary"
-         indicatorColor="secondary"
+          textColor="secondary"
+          indicatorColor="secondary"
           value={value}
           onChange={handleChange}
-         
           variant="scrollable"
           scrollButtons="auto"
           aria-label="basic tabs example"
@@ -83,17 +82,7 @@ export const TourPackageDetails = ({ tourPackage }) => {
       <TabPanel value={value} index={0}>
         <Grid container spacing={1}>
           {" "}
-          <Grid
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "start",
-              textAlign: "start",
-            }}
-            item
-            xs={12}
-            md={12}
-          >
+          <Grid xs={12} md={12}>
             <div
               className="prose overflow-hidden"
               dangerouslySetInnerHTML={{
@@ -105,16 +94,7 @@ export const TourPackageDetails = ({ tourPackage }) => {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <Grid container spacing={1}>
-          <Grid
-            sx={{
-              display: "flex",
-              justifyContent: "start",
-              textAlign: "start",
-            }}
-            item
-            xs={12}
-            md={12}
-          >
+          <Grid xs={12} md={12}>
             <div
               className="prose overflow-hidden"
               dangerouslySetInnerHTML={{
@@ -126,16 +106,7 @@ export const TourPackageDetails = ({ tourPackage }) => {
       </TabPanel>
       <TabPanel value={value} index={2}>
         <Grid container spacing={1}>
-          <Grid
-            sx={{
-              display: "flex",
-              justifyContent: "start",
-              textAlign: "start",
-            }}
-            item
-            xs={12}
-            md={12}
-          >
+          <Grid xs={12} md={12}>
             <div
               className="prose overflow-hidden"
               dangerouslySetInnerHTML={{
@@ -147,16 +118,7 @@ export const TourPackageDetails = ({ tourPackage }) => {
       </TabPanel>
       <TabPanel value={value} index={2}>
         <Grid container spacing={1}>
-          <Grid
-            sx={{
-              display: "flex",
-              justifyContent: "start",
-              textAlign: "start",
-            }}
-            item
-            xs={12}
-            md={12}
-          >
+          <Grid xs={12} md={12}>
             <div
               className="prose overflow-hidden"
               dangerouslySetInnerHTML={{
@@ -168,16 +130,7 @@ export const TourPackageDetails = ({ tourPackage }) => {
       </TabPanel>
       <TabPanel value={value} index={2}>
         <Grid container spacing={1}>
-          <Grid
-            sx={{
-              display: "flex",
-              justifyContent: "start",
-              textAlign: "start",
-            }}
-            item
-            xs={12}
-            md={12}
-          >
+          <Grid xs={12} md={12}>
             <div
               className="prose overflow-hidden"
               dangerouslySetInnerHTML={{
@@ -190,16 +143,7 @@ export const TourPackageDetails = ({ tourPackage }) => {
       <TabPanel value={value} index={2}>
         <div className=" mb-2"></div>
         <Grid container spacing={1}>
-          <Grid
-            sx={{
-              display: "flex",
-              justifyContent: "start",
-              textAlign: "start",
-            }}
-            item
-            xs={12}
-            md={12}
-          >
+          <Grid xs={12} md={12}>
             <div
               className="prose overflow-hidden"
               dangerouslySetInnerHTML={{
@@ -234,7 +178,7 @@ export const TourPackageDetails = ({ tourPackage }) => {
     //         justifyContent: "start",
     //         textAlign: "start",
     //       }}
-    //       item
+    //
     //       xs={12}
     //       md={12}
     //     >
@@ -259,7 +203,7 @@ export const TourPackageDetails = ({ tourPackage }) => {
     //         justifyContent: "start",
     //         textAlign: "start",
     //       }}
-    //       item
+    //
     //       xs={12}
     //       md={12}
     //     >
@@ -284,7 +228,7 @@ export const TourPackageDetails = ({ tourPackage }) => {
     //         justifyContent: "start",
     //         textAlign: "start",
     //       }}
-    //       item
+    //
     //       xs={12}
     //       md={12}
     //     >
@@ -309,7 +253,7 @@ export const TourPackageDetails = ({ tourPackage }) => {
     //         justifyContent: "start",
     //         textAlign: "start",
     //       }}
-    //       item
+    //
     //       xs={12}
     //       md={12}
     //     >
@@ -334,7 +278,7 @@ export const TourPackageDetails = ({ tourPackage }) => {
     //         justifyContent: "start",
     //         textAlign: "start",
     //       }}
-    //       item
+    //
     //       xs={12}
     //       md={12}
     //     >
@@ -358,7 +302,7 @@ export const TourPackageDetails = ({ tourPackage }) => {
     //         justifyContent: "start",
     //         textAlign: "start",
     //       }}
-    //       item
+    //
     //       xs={12}
     //       md={12}
     //     >

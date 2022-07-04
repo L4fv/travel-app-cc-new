@@ -34,6 +34,7 @@ export const TourPackageContact = ({
 }) => {
   let [cuota, setCuota] = React.useState("");
   const handleChange = (event) => {
+    console.log('event',event)
     setCuota(event.target.value);
   };
   let message = `Buen día. Quisiera reservar el paquete *${tourPackage.name}* para ${quantity} personas `;
@@ -119,8 +120,7 @@ export const TourPackageContact = ({
     });
     setLoading(false);
   };
-  console.log("rangeFrom", rangeFrom);
-  console.log("rangeTo", rangeTo);
+  
   if (rangeFrom && rangeTo) {
     const from = format(new Date(rangeFrom), "d 'de' LLLL", { locale: es });
     const to = format(new Date(rangeTo), "d 'de' LLLL", { locale: es });
@@ -128,6 +128,11 @@ export const TourPackageContact = ({
     console.log("to", to);
     message += `desde el *${from}* ` + `hasta el *${to}*`;
   }
+//  console.log('checked2',formik.values.checked2)
+//  if(formik.values.checked2== false ){
+//     setCuota(null)
+//    console.log('cuota',cuota)
+//  }
  
 
   const encoded = encodeURIComponent(message);
@@ -279,9 +284,11 @@ export const TourPackageContact = ({
                       id="checked2"
                       checked={formik.values.checked2}
                       onChange={formik.handleChange}
+                      onClick={()=>setCuota(null)}
                       inputProps={{ "aria-label": "controlled" }}
                     />
                   }
+                  
                   label="¿Desea dar un monto a adelantar?"
                 />
               </Grid>
@@ -361,15 +368,7 @@ export const TourPackageContact = ({
                               100
                             ).toFixed(2)}
                           </MenuItem>
-                          <MenuItem
-                            value={(tourPackage.price * quantity * 100) / 100}
-                          >
-                            100% - S/.
-                            {(
-                              (tourPackage.price * quantity * 100) /
-                              100
-                            ).toFixed(2)}
-                          </MenuItem>
+                         
                         </Select>
                       </FormControl>
                     </Box>

@@ -39,14 +39,16 @@ export const TourPackageSlider = ({ tourPackage }) => {
   while (photos.length < 5) {
     photos.push({
       src: config.assetImg(config.images.logo),
-      width: 3,
-      height: 3,
+      width: size[indice].width,
+      height: size[indice].height,
     });
+    indice++;
+
   }
 
   console.log("photos", photos);
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box >
       <Grid>
         <Grid className="displaySlider" xs={12} md={0}>
           <AutoPlaySwipeableViews
@@ -60,14 +62,7 @@ export const TourPackageSlider = ({ tourPackage }) => {
                 {Math.abs(activeStep - index) <= 2 ? (
                   <Box
                     component="img"
-                    sx={{
-                      height: "45vmin",
-                      background: "black",
-                      display: "block",
-                      maxWidth: "auto",
-                      overflow: "hidden",
-                      width: "100%",
-                    }}
+                    className="imageSlider"
                     src={step.imgPath}
                   />
                 ) : (
@@ -100,17 +95,5 @@ const size = [
   {
     width: 3,
     height: 4,
-  },
-  {
-    width: 2,
-    height: 1,
-  },
-  {
-    width: 2,
-    height: 1,
-  },
-  {
-    width: 4,
-    height: 3,
   },
 ];

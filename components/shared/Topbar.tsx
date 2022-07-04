@@ -6,7 +6,7 @@ import { config } from "../../config";
 export const Topbar = () => {
   return (
     <div className="sticky top-0 inset-x-0 bg-white shadow z-20">
-      <nav className="px-4 sm:px-8 py-2 sm:py-4 max-w-6xl mx-auto flex items-center space-x-6">
+      <nav className="px-4 sm:px-8 py-2 sm: max-w-6xl mx-auto flex items-center space-x-6">
         <Link href="/">
           <a className="mr-auto">
             <img
