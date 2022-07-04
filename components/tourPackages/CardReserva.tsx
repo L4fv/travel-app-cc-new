@@ -20,9 +20,9 @@ import { TourPackageContact } from "../../components/tourPackages/Contact";
 import { textAlign } from "@mui/system";
 
 export const TourCardReserva = ({ tourPackage, mp }) => {
-  const [llegada, setValueLlegada] = useState<Date | null>("");
-  const [selectedDayFrom, setSelectedDayFrom] = useState<Date | null>("");
-  const [selectedDayTo, setSelectedDayTo] = useState<Date | null>("");
+  const [llegada, setValueLlegada] = useState<Date | null>();
+  const [selectedDayFrom, setSelectedDayFrom] = useState<Date | null>();
+  const [selectedDayTo, setSelectedDayTo] = useState<Date | null>();
 
   const [peopleQuantity, setPeopleQuantity] = useState<number>(2);
   const handleChange = (event: any) => {
@@ -39,13 +39,13 @@ export const TourCardReserva = ({ tourPackage, mp }) => {
   for (let index = tourPackage.capacity.min; index <= 10; index++) {
     listPersons.push({ value: index, label: `${index} Personas` });
   }
-  const [isPriceItem, setIsPriceItem] = useState(
+  const [isPriceItem, setIsPriceItem] = useState<number>(
     parseInt(listPersons[0].value)
   );
 
   useEffect(() => {
     console.log("peopleQuantity ", typeof peopleQuantity, peopleQuantity);
-    setIsPriceItem(parseInt(peopleQuantity) * tourPackage.price);
+    setIsPriceItem(peopleQuantity * parseInt(tourPackage.price));
   }, [peopleQuantity]);
 
   return (
