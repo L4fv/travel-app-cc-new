@@ -26,29 +26,41 @@ export const TourPackageSlider = ({ tourPackage }) => {
   };
   {
   }
-  const photos = [];
+  
+  const unsplashPhotos = [];
   let indice = 0;
   tourPackage.map((x) => {
-    photos.push({
+    unsplashPhotos.push({
       src: x.imgPath,
       width: size[indice].width,
       height: size[indice].height,
     });
     indice++;
   });
-  while (photos.length < 5) {
-    photos.push({
+  while (unsplashPhotos.length < 5) {
+    unsplashPhotos.push({
       src: config.assetImg(config.images.logo),
       width: size[indice].width,
       height: size[indice].height,
     });
     indice++;
-
   }
-
-  console.log("photos", photos);
+  const photos = unsplashPhotos.map((photo) => ({
+    src: unsplashLink(photo.id, photo.width, photo.height),
+    width: photo.width,
+    height: photo.height,
+    images: breakpoints.map((breakpoint) => {
+        const height = Math.round((photo.height / photo.width) * breakpoint);
+        return {
+            src: unsplashLink(photo.id, breakpoint, height),
+            width: breakpoint,
+            height,
+        };
+    }),
+}));
+  console.log("unsplashPhotos", unsplashPhotos);
   return (
-    <Box >
+    <Box>
       <Grid>
         <Grid className="displaySlider" xs={12} md={0}>
           <AutoPlaySwipeableViews
@@ -74,7 +86,7 @@ export const TourPackageSlider = ({ tourPackage }) => {
         </Grid>
 
         <Grid className="displayGallery">
-          <Gallery photos={photos} />
+          <Gallery margin={10}  photos={photos} layout="masonry" />
         </Grid>
       </Grid>
     </Box>
@@ -84,16 +96,26 @@ export const TourPackageSlider = ({ tourPackage }) => {
 };
 
 const size = [
-  { width: 3, height: 2 },
-  { width: 1, height: 1 },
-  { width: 4, height: 3 },
-  { width: 1, height: 1 },
   {
-    width: 4,
-    height: 3,
+    width: 250,
+    height: 100,
   },
   {
-    width: 3,
-    height: 4,
+    width: 1080,
+    height: 1620,
   },
+  {
+    width: 1080,
+    height: 720,
+  },
+  {
+    width: 1080,
+    height:721,
+  },
+  {
+    width: 1080,
+    height: 1620,
+
+  },
+ 
 ];

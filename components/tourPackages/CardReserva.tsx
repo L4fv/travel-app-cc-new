@@ -9,6 +9,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import addDays from "date-fns/addDays";
 import Box from "@mui/material/Box";
+import React from 'react';
 
 import { es } from "date-fns/locale";
 import Grid from "@mui/material/Grid";
@@ -49,11 +50,18 @@ export const TourCardReserva = ({ tourPackage, mp }) => {
   }, [peopleQuantity]);
 
   return (
-    <div >
-      <Card sx={{display:"flex",justifyContent:"center"}}>
+    <div>
+      <Card
+        sx={{
+          boxShadow: "rgba(0, 0, 0, 0.12) 0px 6px 16px 0px",
+          maxWidth:"340px",
+
+        }}
+      >
+ 
         <CardContent className="paddingCard">
           <Typography variant="h5" component="div">
-            <Grid container spacing={2} sx={{textAlign:"center"}}>
+            <Grid container spacing={2} sx={{ textAlign: "center" }}>
               <Grid item xs={12}>
                 {" "}
                 <Box sx={{ fontWeight: "bold" }}>
@@ -102,6 +110,7 @@ export const TourCardReserva = ({ tourPackage, mp }) => {
               <Grid item xs={12}>
                 {" "}
                 <TextField
+                  sx={{ width: "100%", textAlign: "start" }}
                   id="outlined-select-currency"
                   select
                   label="Numero de Personas"
@@ -116,7 +125,7 @@ export const TourCardReserva = ({ tourPackage, mp }) => {
                 </TextField>
               </Grid>
             </Grid>
-            <Grid  xs={12}>
+            <Grid sx={{ paddingTop: "10px" }} xs={12}>
               <Typography>
                 <TourPackageContact
                   tourPackage={tourPackage}
@@ -127,84 +136,7 @@ export const TourCardReserva = ({ tourPackage, mp }) => {
                 />
               </Typography>
             </Grid>
-            {/* <Grid>
-              <Grid sx={{ py: 2, textAlign: "center" }}>
-                <Box sx={{ fontWeight: "bold" }}>
-                  S/. {isPriceItem.toFixed(2)}
-                </Box>
-              </Grid>
-              <Grid className="flex justify-center">
-                <Grid xs={6}>
-                  <LocalizationProvider
-                    locale={es}
-                    dateAdapter={AdapterDateFns}
-                  >
-                    <DatePicker
-                      label="Llegada"
-                      inputFormat="dd/MM/yyyy"
-                      value={llegada}
-                      minDate={new Date()}
-                      onChange={(newValue) => {
-                        setValueLlegada(newValue);
-                        DayFromTo(newValue);
-                      }}
-                      renderInput={(params) => (
-                        <TextField className="buttomDate" {...params} />
-                      )}
-                    />
-                  </LocalizationProvider>
-                </Grid>
-                <Grid xs={6}>
-                  <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <DatePicker
-                      inputFormat="dd/MM/yyyy"
-                      value={
-                        llegada
-                          ? addDays(new Date(llegada), tourPackage.duration + 1)
-                          : null
-                      }
-                      label="Salida"
-                      onChange={null}
-                      disabled
-                      renderInput={(params) => (
-                        <TextField className="buttomDate" {...params} />
-                      )}
-                    />
-                  </LocalizationProvider>
-                </Grid>
-              </Grid>
-            </Grid> */}
           </Typography>
-          {/* <Typography
-            color="text.secondary"
-            sx={{ display: "flex", justifyContent: "center" }}
-          >
-            <Box sx={{ margin: "20px 0px" }}>
-              <TextField
-                id="outlined-select-currency"
-                select
-                label="Numero de Personas"
-                value={peopleQuantity}
-                onChange={handleChange}
-                helperText="Por favor seleccione una cantidad de Personas"
-              >
-                {listPersons.map((x) => (
-                  <MenuItem key={x.value} value={x.value}>
-                    {x.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </Box>
-          </Typography> */}
-          {/* <Typography>
-            <TourPackageContact
-              tourPackage={tourPackage}
-              rangeFrom={selectedDayFrom}
-              rangeTo={selectedDayTo}
-              quantity={peopleQuantity}
-              mp={mp}
-            />
-          </Typography> */}
         </CardContent>
       </Card>
     </div>

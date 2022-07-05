@@ -144,8 +144,7 @@ export const TourPackageContact = ({
         onClick={handleOpenModal}
         className="inline-flex items-center  text-md px-8 py-3 font-bold text-white rounded-full shadow-lg hover:shadow-xl"
         style={{
-          backgroundColor: config.colors.primary.DEFAULT,
-          margin: 8,
+          backgroundColor: "#03A691",
           padding: "0.8rem 3rem",
           borderColor: config.colors.primary.DEFAULT,
         }}
