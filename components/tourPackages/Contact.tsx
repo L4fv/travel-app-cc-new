@@ -30,6 +30,7 @@ export const TourPackageContact = ({
   rangeFrom,
   rangeTo,
   quantity,
+  isPriceItem,
   mp,
 }) => {
   let [cuota, setCuota] = React.useState("");
@@ -152,7 +153,7 @@ export const TourPackageContact = ({
       >
         Reserva Online
       </Button>
-      {/* <Button
+      <Button
         variant="contained"
         href={`https://wa.me/${config.contactPhone}?text=${encoded}`}
         className="inline-flex items-center  text-md px-8 py-3 font-bold text-white rounded-full shadow-lg hover:shadow-xl"
@@ -160,8 +161,8 @@ export const TourPackageContact = ({
         startIcon={<Icon path={mdiWhatsapp} size={1.5} />}
       >
         <span>Reserva WHATSAPP</span>
-      </Button> */}
-
+      </Button>
+        <p  className="text-lg font-semibold">TOTAL S/{isPriceItem.toFixed(2)}</p>
       <Dialog
         open={open}
         onClose={handleClose}

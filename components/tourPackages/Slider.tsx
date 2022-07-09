@@ -24,41 +24,21 @@ export const TourPackageSlider = ({ tourPackage }) => {
   const handleStepChange = (step: number) => {
     setActiveStep(step);
   };
-  {
-  }
-  
-  const unsplashPhotos = [];
+  const photos = [];
   let indice = 0;
   tourPackage.map((x) => {
-    unsplashPhotos.push({
+    photos.push({
       src: x.imgPath,
-      width: size[indice].width,
-      height: size[indice].height,
     });
     indice++;
   });
-  while (unsplashPhotos.length < 5) {
-    unsplashPhotos.push({
+  while (photos.length < 5) {
+    photos.push({
       src: config.assetImg(config.images.logo),
-      width: size[indice].width,
-      height: size[indice].height,
     });
     indice++;
   }
-  const photos = unsplashPhotos.map((photo) => ({
-    src: unsplashLink(photo.id, photo.width, photo.height),
-    width: photo.width,
-    height: photo.height,
-    images: breakpoints.map((breakpoint) => {
-        const height = Math.round((photo.height / photo.width) * breakpoint);
-        return {
-            src: unsplashLink(photo.id, breakpoint, height),
-            width: breakpoint,
-            height,
-        };
-    }),
-}));
-  console.log("unsplashPhotos", unsplashPhotos);
+
   return (
     <Box>
       <Grid>
@@ -86,7 +66,107 @@ export const TourPackageSlider = ({ tourPackage }) => {
         </Grid>
 
         <Grid className="displayGallery">
-          <Gallery margin={10}  photos={photos} layout="masonry" />
+          {/* <Gallery photos={photos} /> */}
+          <Grid
+            container
+            sx={{
+              height: "420px",
+              margin: "24px 0",
+            }}
+          >
+            <Grid
+              xs={6}
+              sx={{
+                borderRadius: "10px 0px 0px 10px",
+                height: "100%",
+                padding: "0 8px 0 0",
+              }}
+            >
+              <img
+                src={photos[0].src}
+                style={{
+                  borderRadius: "10px 0px 0px 10px",
+                  objectFit: "cover",
+                  height: "100%",
+                  width: "100%",
+                }}
+              />
+            </Grid>
+            <Grid
+              container
+              xs={6}
+              sx={{
+                borderRadius: "10px 0px 0px 10px",
+                height: "100%!important",
+              }}
+            >
+              <Grid
+                xs={6}
+                sx={{
+                  height: "50%!important",
+                  padding: "0 8px 8px 0",
+                }}
+              >
+                <img
+                  src={photos[1].src}
+                  style={{
+                    objectFit: "cover",
+                    height: "100%",
+                    width: "100%",
+                  }}
+                />{" "}
+              </Grid>
+              <Grid
+                xs={6}
+                sx={{
+                  height: "50%!important",
+                  padding: "0 0 8px 0",
+                }}
+              >
+                <img
+                  src={photos[2].src}
+                  style={{
+                    borderRadius: "0px 10px 0px 0px",
+                    objectFit: "cover",
+                    height: "100%",
+                    width: "100%",
+                  }}
+                />{" "}
+              </Grid>
+              <Grid
+                xs={6}
+                sx={{
+                  height: "50%!important",
+                  padding: "0 8px 0 0",
+                }}
+              >
+                <img
+                  src={photos[3].src}
+                  style={{
+                    objectFit: "cover",
+                    height: "100%",
+                    width: "100%",
+                  }}
+                />{" "}
+              </Grid>
+              <Grid
+                xs={6}
+                sx={{
+                  height: "50%!important",
+                }}
+              >
+                <img
+                  src={photos[4].src}
+                  style={{
+                    borderRadius: "0px 0px 10px 0px",
+                    objectFit: "cover",
+                    height: "100%",
+                    width: "100%",
+                  }}
+                />{" "}
+              </Grid>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </Box>
@@ -94,28 +174,3 @@ export const TourPackageSlider = ({ tourPackage }) => {
     // Anterior widgets
   );
 };
-
-const size = [
-  {
-    width: 250,
-    height: 100,
-  },
-  {
-    width: 1080,
-    height: 1620,
-  },
-  {
-    width: 1080,
-    height: 720,
-  },
-  {
-    width: 1080,
-    height:721,
-  },
-  {
-    width: 1080,
-    height: 1620,
-
-  },
- 
-];

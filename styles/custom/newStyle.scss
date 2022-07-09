@@ -205,7 +205,7 @@
 .CardsCSS {
   margin: auto;
   width: 100%;
-  padding: 8px;
+  padding: 12px;
   display: flex;
   justify-content: center;
   justify-items: center;
@@ -348,8 +348,8 @@
 }
 .avatar{
   @media only screen and (max-width: 500px) {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
   }
   
 }
@@ -371,12 +371,12 @@
   justify-content: center;
 }
 .spaceIcon {
-  margin-left: 25px;
+  margin: 0 8px ;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 
-  margin-right: 25px;
+  
 }
 .reservation {
   display: flex;
@@ -514,11 +514,11 @@
   padding: 0px;
 }
 .paddingCard {
-  max-width: 300px;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   border: none;
-  padding-bottom: 8px;
+  
   box-shadow: rgba(0, 0, 0, 0.12)0px;
 }
 .buttomDate {
@@ -570,11 +570,12 @@ Gallery{
     display: none;
   }
   display: flex;
-  justify-content: center;
+  justify-content: right;
   position: -webkit-sticky;
   position: sticky;
   margin: 2px;
-  top: 150px;
+  margin-top: 36px;
+  top: 120px;
 }
 
 .space-rigth {
