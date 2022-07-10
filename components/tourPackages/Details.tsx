@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
+
 import Grid from "@mui/material/Grid";
+import Chip from "@mui/material/Chip";
+import Router, { useRouter } from "next/router";
 
 import * as React from "react";
 import PropTypes from "prop-types";
@@ -44,276 +45,69 @@ function a11yProps(index) {
 }
 
 export const TourPackageDetails = ({ tourPackage }) => {
-  console.log("tourPackageDetails", tourPackage);
-  const description = tourPackage.details[0].description;
-  const initPoint = tourPackage.details[1].description;
-  const itinerario = tourPackage.details[2].description;
-  const actividades = tourPackage.details[3].description;
-  const noIncluye = tourPackage.details[4].description;
-  const notas = tourPackage.details[5].description;
-  console.log("description", description);
-
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  const formatHtml = (payload) => {
+    const liReplace = new RegExp("<li><br></li>", "g");
+    const pReplace = new RegExp("<p><br></p>", "g");
+    const firstReplace = payload.replace(liReplace, "");
+    const secondReplace = firstReplace.replace(pReplace, "");
+    return secondReplace;
+  };
+
+  const textToString = (payload) => {
+    const liReplace = new RegExp(" ", "g");
+    return payload.replace(liReplace, "_");
+  };
+
   return (
-    <Box sx={{ width: "100%" }}>
+    <Grid container xs={12} >
+      <Grid className="" sx={{ padding: "16px 0" }}>
+        {tourPackage.details.map(
+          (x) =>
+            x.description && (
+              <Chip
+                label={x.title.toUpperCase()}
+                variant="outlined"
+                className="mx-2"
+                clickable 
+                component="a"
+                href={`#${textToString(x.title)}`}
+              />
+            )
+        )}
+      </Grid>
+
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs
-          textColor="secondary"
-          indicatorColor="secondary"
-          value={value}
-          onChange={handleChange}
-          variant="scrollable"
-          scrollButtons="auto"
-          aria-label="basic tabs example"
-        >
-          <Tab label="Incluye" {...a11yProps(0)} />
-          <Tab label="Punto de Partida" {...a11yProps(1)} />
-          <Tab label="Itinerario" {...a11yProps(2)} />
-          <Tab label="Actividades" {...a11yProps(3)} />
-          <Tab label="No Incluye" {...a11yProps(4)} />
-          <Tab label="Notas" {...a11yProps(5)} />
-        </Tabs>
+        {tourPackage.details.map(
+          (x) =>
+            x.description && (
+              <Grid className="content-information" id={textToString(x.title)}>
+                <Grid className="" sx={{ padding: "8px 0" }}>
+                  <span className="text-2xl font-bold">
+                    {x.title.toUpperCase()}
+                  </span>
+                </Grid>
+                <Grid>
+                  <Grid container spacing={1}>
+                    <Grid container sx={{ padding: "8px" }} xs={12} md={12}>
+                      <Grid
+                        className="break-words prose overflow-hidden"
+                        dangerouslySetInnerHTML={{
+                          __html: formatHtml(x.description),
+                        }}
+                      />
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+            )
+        )}
       </Box>
-      <TabPanel value={value} index={0}>
-        <Grid container spacing={1}>
-          {" "}
-          <Grid xs={12} md={12}>
-            <div
-              className="prose overflow-hidden"
-              dangerouslySetInnerHTML={{
-                __html: description,
-              }}
-            />
-          </Grid>
-        </Grid>
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <Grid container spacing={1}>
-          <Grid xs={12} md={12}>
-            <div
-              className="prose overflow-hidden"
-              dangerouslySetInnerHTML={{
-                __html: initPoint,
-              }}
-            />
-          </Grid>
-        </Grid>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <Grid container spacing={1}>
-          <Grid xs={12} md={12}>
-            <div
-              className="prose overflow-hidden"
-              dangerouslySetInnerHTML={{
-                __html: itinerario,
-              }}
-            />
-          </Grid>
-        </Grid>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <Grid container spacing={1}>
-          <Grid xs={12} md={12}>
-            <div
-              className="prose overflow-hidden"
-              dangerouslySetInnerHTML={{
-                __html: actividades,
-              }}
-            />
-          </Grid>
-        </Grid>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <Grid container spacing={1}>
-          <Grid xs={12} md={12}>
-            <div
-              className="prose overflow-hidden"
-              dangerouslySetInnerHTML={{
-                __html: noIncluye,
-              }}
-            />
-          </Grid>
-        </Grid>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <div className=" mb-2"></div>
-        <Grid container spacing={1}>
-          <Grid xs={12} md={12}>
-            <div
-              className="prose overflow-hidden"
-              dangerouslySetInnerHTML={{
-                __html: notas,
-              }}
-            />
-          </Grid>
-        </Grid>
-      </TabPanel>
-    </Box>
-
-    //   <Tabs value={value} onChange={handleChange} aria-label="disabled tabs example">
-    //   <Tab label="Incluye" />
-    //   <Tab label="Punto de Partida" />
-    //   <Tab label="Itinerario" />
-    //   <Tab label="Actividades" />
-    //   <Tab label="No Incluye" />
-    //   <Tab label="Notas" />
-    // </Tabs>
-    // <div>
-    //   <div>
-    //     <h1 className="titleBody">Incluye</h1>
-    //   </div>
-
-    //   <div className=" mb-2"></div>
-
-    //   <Grid container spacing={1}>
-    //     <Grid
-    //       sx={{
-    //         display: "flex",
-    //         flexDirection: "column",
-    //         justifyContent: "start",
-    //         textAlign: "start",
-    //       }}
-    //
-    //       xs={12}
-    //       md={12}
-    //     >
-    //       <div
-    //         className="prose overflow-hidden"
-    //         dangerouslySetInnerHTML={{
-    //           __html: description,
-    //         }}
-    //       />
-    //     </Grid>
-    //   </Grid>
-
-    //   <div>
-    //     <h1 className="titleBody">Punto de Partida</h1>
-    //   </div>
-    //   <div className=" mb-2"></div>
-
-    //   <Grid container spacing={1}>
-    //     <Grid
-    //       sx={{
-    //         display: "flex",
-    //         justifyContent: "start",
-    //         textAlign: "start",
-    //       }}
-    //
-    //       xs={12}
-    //       md={12}
-    //     >
-    //       <div
-    //         className="prose overflow-hidden"
-    //         dangerouslySetInnerHTML={{
-    //           __html: initPoint,
-    //         }}
-    //       />
-    //     </Grid>
-    //   </Grid>
-
-    //   <div>
-    //     <h1 className="titleBody">Itinerario</h1>
-    //   </div>
-    //   <div className=" mb-2"></div>
-
-    //   <Grid container spacing={1}>
-    //     <Grid
-    //       sx={{
-    //         display: "flex",
-    //         justifyContent: "start",
-    //         textAlign: "start",
-    //       }}
-    //
-    //       xs={12}
-    //       md={12}
-    //     >
-    //       <div
-    //         className="prose overflow-hidden"
-    //         dangerouslySetInnerHTML={{
-    //           __html: itinerario,
-    //         }}
-    //       />
-    //     </Grid>
-    //   </Grid>
-
-    //   <div>
-    //     <h1 className="titleBody">Actividades</h1>
-    //   </div>
-    //   <div className=" mb-2"></div>
-
-    //   <Grid container spacing={1}>
-    //     <Grid
-    //       sx={{
-    //         display: "flex",
-    //         justifyContent: "start",
-    //         textAlign: "start",
-    //       }}
-    //
-    //       xs={12}
-    //       md={12}
-    //     >
-    //       <div
-    //         className="prose overflow-hidden"
-    //         dangerouslySetInnerHTML={{
-    //           __html: actividades,
-    //         }}
-    //       />
-    //     </Grid>
-    //   </Grid>
-
-    //   <div>
-    //     <h1 className="titleBody">No Incluye</h1>
-    //   </div>
-    //   <div className=" mb-2"></div>
-
-    //   <Grid container spacing={1}>
-    //     <Grid
-    //       sx={{
-    //         display: "flex",
-    //         justifyContent: "start",
-    //         textAlign: "start",
-    //       }}
-    //
-    //       xs={12}
-    //       md={12}
-    //     >
-    //       <div
-    //         className="prose overflow-hidden"
-    //         dangerouslySetInnerHTML={{
-    //           __html: noIncluye,
-    //         }}
-    //       />
-    //     </Grid>
-    //   </Grid>
-
-    //   <div>
-    //     <h1 className="titleBody">Notas</h1>
-    //   </div>
-    //   <div className=" mb-2"></div>
-    //   <Grid container spacing={1}>
-    //     <Grid
-    //       sx={{
-    //         display: "flex",
-    //         justifyContent: "start",
-    //         textAlign: "start",
-    //       }}
-    //
-    //       xs={12}
-    //       md={12}
-    //     >
-    //       <div
-    //         className="prose overflow-hidden"
-    //         dangerouslySetInnerHTML={{
-    //           __html: notas,
-    //         }}
-    //       />
-    //     </Grid>
-    //   </Grid>
-    // </div>
+    </Grid>
   );
 };

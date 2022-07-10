@@ -201,7 +201,6 @@
   margin: 0 auto;
 }
 
-
 .CardsCSS {
   margin: auto;
   width: 100%;
@@ -210,7 +209,7 @@
   justify-content: center;
   justify-items: center;
   flex-direction: column;
-  max-width: 1200px;// test purpose pather component center
+  max-width: 1200px; // test purpose pather component center
 }
 .exp-card {
   position: relative;
@@ -281,10 +280,11 @@
   width: 100%;
   height: 166px;
 }
-.imageSlider{
+.imageSlider {
+  background-color: #03a691;
   width: 100%;
-	height: 200px;
-	object-fit: cover;
+  height: 200px;
+  object-fit: cover;
   @media only screen and (min-width: 425px) {
     height: 320px;
   }
@@ -341,20 +341,18 @@
   display: flex;
   align-items: center;
 }
-.descriptionIcon{
+.descriptionIcon {
   @media only screen and (max-width: 500px) {
     display: none;
   }
 }
-.avatar{
+.avatar {
   @media only screen and (max-width: 500px) {
     width: 16px;
     height: 16px;
   }
-  
 }
 .iconItems {
- 
   display: flex;
   justify-content: start;
   font-size: 12px;
@@ -362,8 +360,6 @@
   line-height: normal;
   letter-spacing: normal;
   color: #888888;
-
- 
 }
 
 .iconCSS {
@@ -371,17 +367,15 @@
   justify-content: center;
 }
 .spaceIcon {
-  margin: 0 8px ;
+  margin: 0 8px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-
-  
 }
 .reservation {
   display: flex;
   align-items: center;
-  font-family: Rubik, Arial, sans-serif;
+
   font-size: 13px;
   line-height: 14px;
   text-align: start;
@@ -422,7 +416,7 @@
 .subHeader {
   @media only screen and (max-width: 500px) {
   }
-  font-family: Rubik, Arial, sans-serif;
+
   font-size: 28px;
   text-align: start;
   line-height: 32px;
@@ -435,7 +429,6 @@
   padding: 0px;
 }
 .titleBody {
-  font-family: Rubik, Arial, sans-serif;
   font-size: 24px;
   line-height: 31.92px;
   text-align: start;
@@ -449,7 +442,6 @@
   padding-top: 10px;
 }
 .leftRigth {
-  font-family: Rubik, Arial, sans-serif;
   font-size: 14px;
   line-height: 14px;
   text-align: start;
@@ -518,20 +510,15 @@
   display: flex;
   flex-direction: column;
   border: none;
-  
-  box-shadow: rgba(0, 0, 0, 0.12)0px;
+
+  box-shadow: rgba(0, 0, 0, 0.12) 0px;
 }
 .buttomDate {
   width: 100%;
   margin: 0 1px;
- 
 }
-.displaySlider {
-  @media only screen and (min-width: 769px) {
-    display: none;
-  }
-}
-Gallery{
+
+Gallery {
 }
 .displayGallery {
   @media only screen and (max-width: 768px) {
@@ -582,7 +569,6 @@ Gallery{
   text-align: center;
 }
 .points {
-  font-family: Rubik, Arial, sans-serif;
   font-size: 13px;
   line-height: 13px;
   text-align: start;
@@ -706,4 +692,20 @@ Gallery{
   .section-divide-hr {
     width: 70%;
   }
+}
+
+@media only screen and (min-width: 768px) {
+  .content-information {
+    padding: 25px 30px;
+  }
+}
+.content-information {
+  width: 100%;  
+  max-width: 680px;
+  border: 1px solid #eeeff1;
+  border-radius: 8px;
+  padding: 20px 20px;
+  margin: 16px 0;
+  
+  
 }

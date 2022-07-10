@@ -33,11 +33,9 @@ export const TourPackageContact = ({
   isPriceItem,
   mp,
 }) => {
-  let [cuota, setCuota] = React.useState("");
-  const handleChange = (event) => {
-    console.log('event',event)
-    setCuota(event.target.value);
-  };
+  let [cuota, setCuota] = React.useState(false);
+  let [newPriceItem, setNewPriceItem] = React.useState(isPriceItem);
+
   let message = `Buen día. Quisiera reservar el paquete *${tourPackage.name}* para ${quantity} personas `;
   const [open, setOpen] = useState(false);
 
@@ -70,6 +68,16 @@ export const TourPackageContact = ({
     },
   });
   /* event.preventDefault(); */
+  console.log("formik.values.checked2 ",formik.values.checked2)
+  useEffect(() => {
+    console.log("cuota ----",formik.values.checked2)
+    if(formik.values.checked2){
+      setNewPriceItem((isPriceItem * 50) / 100);
+    }else{
+      setNewPriceItem(isPriceItem );
+    }
+    
+  }, [formik.values.checked2, isPriceItem]);
 
   const handleOpenModal = () => {
     setCuota(null);
@@ -121,7 +129,7 @@ export const TourPackageContact = ({
     });
     setLoading(false);
   };
-  
+
   if (rangeFrom && rangeTo) {
     const from = format(new Date(rangeFrom), "d 'de' LLLL", { locale: es });
     const to = format(new Date(rangeTo), "d 'de' LLLL", { locale: es });
@@ -129,19 +137,14 @@ export const TourPackageContact = ({
     console.log("to", to);
     message += `desde el *${from}* ` + `hasta el *${to}*`;
   }
-//  console.log('checked2',formik.values.checked2)
-//  if(formik.values.checked2== false ){
-//     setCuota(null)
-//    console.log('cuota',cuota)
-//  }
- 
+
 
   const encoded = encodeURIComponent(message);
   return (
     <div className="text-center ">
       <Button
         variant="contained"
-        disabled={!rangeFrom || !quantity}
+        //disabled={!rangeFrom || !quantity}
         onClick={handleOpenModal}
         className="inline-flex items-center  text-md px-8 py-3 font-bold text-white rounded-full shadow-lg hover:shadow-xl"
         style={{
@@ -162,7 +165,7 @@ export const TourPackageContact = ({
       >
         <span>Reserva WHATSAPP</span>
       </Button>
-        <p  className="text-lg font-semibold">TOTAL S/{isPriceItem.toFixed(2)}</p>
+      <p className="text-lg font-semibold">TOTAL S/{isPriceItem.toFixed(2)}</p>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -187,7 +190,6 @@ export const TourPackageContact = ({
                   label="Número de DNI*"
                   type="numeric"
                   fullWidth
-                  variant="standard"
                   error={
                     formik.touched.documentReservation &&
                     Boolean(formik.errors.documentReservation)
@@ -206,7 +208,6 @@ export const TourPackageContact = ({
                   margin="dense"
                   label="Nombres completos*"
                   fullWidth
-                  variant="standard"
                   error={
                     formik.touched.fullName && Boolean(formik.errors.fullName)
                   }
@@ -223,7 +224,6 @@ export const TourPackageContact = ({
                   label="Email*"
                   type="email"
                   fullWidth
-                  variant="standard"
                   error={formik.touched.mail && Boolean(formik.errors.mail)}
                   onChange={formik.handleChange}
                   helperText={formik.touched.mail && formik.errors.mail}
@@ -236,7 +236,6 @@ export const TourPackageContact = ({
                   margin="dense"
                   label="Telefono"
                   fullWidth
-                  variant="standard"
                   onChange={formik.handleChange}
                   error={
                     formik.touched.phoneNumber &&
@@ -261,7 +260,6 @@ export const TourPackageContact = ({
                     formik.touched.observation &&
                     Boolean(formik.errors.observation)
                   }
-                  variant="standard"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -274,7 +272,7 @@ export const TourPackageContact = ({
                       inputProps={{ "aria-label": "controlled" }}
                     />
                   }
-                  label="¿Desea que se le envíe una factura?"
+                  label="Quiero que me envién una factura"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -283,13 +281,11 @@ export const TourPackageContact = ({
                     <Checkbox
                       id="checked2"
                       checked={formik.values.checked2}
-                      onChange={formik.handleChange}
-                      onClick={()=>setCuota(null)}
+                      onChange={formik.handleChange}                      
                       inputProps={{ "aria-label": "controlled" }}
                     />
                   }
-                  
-                  label="¿Desea dar un monto a adelantar?"
+                  label="Quiero Reservar con el 50% del total"
                 />
               </Grid>
 
@@ -302,7 +298,6 @@ export const TourPackageContact = ({
                       margin="dense"
                       label="Número de RUC*"
                       fullWidth
-                      variant="standard"
                       error={
                         formik.touched.documentInvoice &&
                         Boolean(formik.errors.documentInvoice)
@@ -317,7 +312,6 @@ export const TourPackageContact = ({
                       margin="dense"
                       label="Razon Social*"
                       fullWidth
-                      variant="standard"
                       error={
                         formik.touched.fullNameInvoice &&
                         Boolean(formik.errors.fullNameInvoice)
@@ -332,7 +326,6 @@ export const TourPackageContact = ({
                       margin="dense"
                       label="Dirección de facturación*"
                       fullWidth
-                      variant="standard"
                       error={
                         formik.touched.addressInvoice &&
                         Boolean(formik.errors.addressInvoice)
@@ -344,39 +337,7 @@ export const TourPackageContact = ({
               ) : (
                 <div></div>
               )}
-              {formik.values.checked2 ? (
-                <Grid container spacing={1}>
-                  <Grid item xs={12} sm={12}>
-                    <Box sx={{ minWidth: 120 }}>
-                      <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">
-                          ¿Cuanto desea adelantar?
-                        </InputLabel>
-                        <Select
-                          labelId="demo-simple-select-label"
-                          id="demo-simple-select"
-                          value={cuota}
-                          label="Cuotas"
-                          onChange={handleChange}
-                        >
-                          <MenuItem
-                            value={(tourPackage.price * quantity * 50) / 100}
-                          >
-                            50% - S/.
-                            {(
-                              (tourPackage.price * quantity * 50) /
-                              100
-                            ).toFixed(2)}
-                          </MenuItem>
-                         
-                        </Select>
-                      </FormControl>
-                    </Box>
-                  </Grid>
-                </Grid>
-              ) : (
-                <div></div>
-              )}
+
             </Grid>
           </DialogContent>
           <DialogActions>
@@ -396,8 +357,7 @@ export const TourPackageContact = ({
               }}
               disabled={isLoadingMp}
             >
-              Lo quiero S/.{cuota ? cuota : tourPackage.price * quantity}
-              {/* Lo quiero S/.{tourPackage.price * quantity} */}
+              Lo quiero S/. {newPriceItem.toFixed(2)}
             </Button>
           </DialogActions>
         </form>

@@ -9,17 +9,13 @@ import Box from "@mui/material/Box";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
 import Grid from "@mui/material/Grid";
+import Hidden from "@mui/material/Hidden";
 
-const Gallery = dynamic(() => import("react-photo-gallery-next"), {
-  // no ssr
-  ssr: false,
-});
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 export const TourPackageSlider = ({ tourPackage }) => {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
-  console.log("tourPackage_slide", tourPackage);
 
   const handleStepChange = (step: number) => {
     setActiveStep(step);
@@ -42,7 +38,7 @@ export const TourPackageSlider = ({ tourPackage }) => {
   return (
     <Box>
       <Grid>
-        <Grid className="displaySlider" xs={12} md={0}>
+        <Grid xs={12} sx={{ display: { sm: "none", xs: "block" } }}>
           <AutoPlaySwipeableViews
             axis={theme.direction === "rtl" ? "x-reverse" : "x"}
             index={activeStep}
@@ -50,7 +46,7 @@ export const TourPackageSlider = ({ tourPackage }) => {
             enableMouseEvents
           >
             {tourPackage.map((step, index) => (
-              <div>
+              <Grid container xs={12}>
                 {Math.abs(activeStep - index) <= 2 ? (
                   <Box
                     component="img"
@@ -58,15 +54,13 @@ export const TourPackageSlider = ({ tourPackage }) => {
                     src={step.imgPath}
                   />
                 ) : (
-                  ""
+                  <></>
                 )}
-              </div>
+              </Grid>
             ))}
           </AutoPlaySwipeableViews>
         </Grid>
-
         <Grid className="displayGallery">
-          {/* <Gallery photos={photos} /> */}
           <Grid
             container
             sx={{

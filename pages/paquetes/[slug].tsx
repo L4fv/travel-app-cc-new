@@ -112,7 +112,7 @@ export default function TourPackagePage(props) {
               <Grid
                 xs={12}
                 sx={{
-                  background:"sky"
+                  background: "sky",
                 }}
               >
                 <TourPackageSlider tourPackage={images} />
@@ -120,48 +120,51 @@ export default function TourPackagePage(props) {
               {/* header */}
               {/* Body */}
               <Grid xs={12}>
-                <Box>
-                  <Grid container>
-                    {/* 1columna */}
-                    <Grid sx={{ padding: "8px" }} xs={12} md={8}>
-                      <div>
-                        <h1 className="subHeader font-semibold">{tourPackage.name}</h1>
-                        <div className="subResumeBody mb-6">
-                          <span className="points">8.3</span>
-                          <span className="leftRigth">Fantástico</span>
-                        </div>
-
-                        {itemsIcon.length > 0 ? (
-                          <div className="iconItems ">
-                            {itemsIcon.map((x) => (
-                              <div className="spaceIcon ">
-                                <div className="mb-2 iconCSS ">
-                                  <Avatar className="avatar" src={x.src}    sx={{ width: 16, height: 16 }}
-/>
-                                </div>
-                                <div className="descriptionIcon ">
-                                  {x.description}
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        ) : (
-                          ""
-                        )}
-
-                        <div>
-                          <TourPackageDetails tourPackage={tourPackage} />
-                        </div>
+                <Grid container>
+                  {/* 1columna */}
+                  <Grid sx={{ padding: "8px" }} xs={12} md={8}>
+                    <div>
+                      <h1 className="subHeader font-semibold">
+                        {tourPackage.name}
+                      </h1>
+                      <div className="subResumeBody mb-6">
+                        <span className="points">8.3</span>
+                        <span className="leftRigth">Fantástico</span>
                       </div>
-                    </Grid>
 
-                    <Grid xs={0} md={4}>
-                      <Grid className="stickyDate">
-                        <TourCardReserva tourPackage={tourPackage} mp={mp} />
-                      </Grid>{" "}
-                    </Grid>
+                      {itemsIcon.length > 0 ? (
+                        <div className="iconItems ">
+                          {itemsIcon.map((x) => (
+                            <div className="spaceIcon ">
+                              <div className="mb-2 iconCSS ">
+                                <Avatar
+                                  className="avatar"
+                                  src={x.src}
+                                  sx={{ width: 16, height: 16 }}
+                                />
+                              </div>
+                              <div className="descriptionIcon ">
+                                {x.description}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        ""
+                      )}
+
+                      <Grid xs={12}>
+                        <TourPackageDetails tourPackage={tourPackage} />
+                      </Grid>
+                    </div>
                   </Grid>
-                </Box>
+
+                  <Grid xs={0} md={4}>
+                    <Grid className="stickyDate">
+                      <TourCardReserva tourPackage={tourPackage} mp={mp} />
+                    </Grid>{" "}
+                  </Grid>
+                </Grid>
               </Grid>
               {/* Body */}
               {/* Footer */}

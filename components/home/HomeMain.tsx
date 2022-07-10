@@ -13,7 +13,7 @@ export const HomeMain = () => {
   };
   
   return (
-    <div className=" sm: py-12 text-center bg-red" >
+    <div className=" sm: py-12 text-center" >
       <div className="  mx-auto " >
         <h2 className="text-2xl md:text-4xl text-primary  uppercase font-bold mb-8">
           Disfruta de tus vacaciones 
