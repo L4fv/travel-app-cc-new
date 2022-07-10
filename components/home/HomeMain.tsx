@@ -13,50 +13,13 @@ export const HomeMain = () => {
   };
   
   return (
-    <div className="px-4 sm:px-8 py-12 text-center bg-red" >
-      <div className="max-w-6xl mx-auto bg-red" >
+    <div className=" sm: py-12 text-center" >
+      <div className="  mx-auto " >
         <h2 className="text-2xl md:text-4xl text-primary  uppercase font-bold mb-8">
           Disfruta de tus vacaciones 
         </h2>
-        <p className="md:text-lg">{description[config.brand]}</p>
+        <p className=" md:text-lg ">{description[config.brand]}</p>
         <HomeMainGrid />
-    {/* <h1>init</h1>
-    
-        {pickedData &&
-          pickedData.map(
-            ({
-              id,
-              city,
-              url,
-              description,
-              currency,
-              currentPrice,
-              ratings,
-              stars,
-              discount,
-              cashback,
-              lastPrice,
-              about
-            }) => (
-              <HeadoutPicks
-                key={id}
-                city={city}
-                about={about}
-                
-                url={url}
-                description={description}
-                currency={currency}
-                price={currentPrice}
-                ratings={ratings}
-                stars={stars}
-                discount={discount}
-                cashback={cashback}
-                lastPrice={lastPrice}
-              />
-            )
-          )}
-<h1>release</h1>
-        <CityCard urlLink={'cubaspa.com.pe123'} city={'lima'} description={'hola'}/> */}
       </div>
     </div>
   );

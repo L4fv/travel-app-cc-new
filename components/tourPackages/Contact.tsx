@@ -8,11 +8,11 @@ import axios from "axios";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import * as React from "react";
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import Snackbar from "@mui/material/Snackbar";
 import Button from "@mui/material/Button";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -25,12 +25,17 @@ import DialogContent from "@mui/material/DialogContent";
 
 import DialogTitle from "@mui/material/DialogTitle";
 import DefaultForm from "../../utils/model";
-export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
-   let [cuota, setCuota] = React.useState("");
+export const TourPackageContact = ({
+  tourPackage,
+  rangeFrom,
+  rangeTo,
+  quantity,
+  isPriceItem,
+  mp,
+}) => {
+  let [cuota, setCuota] = React.useState(false);
+  let [newPriceItem, setNewPriceItem] = React.useState(isPriceItem);
 
-  const handleChange = (event) => {
-    setCuota(event.target.value);
-  };
   let message = `Buen día. Quisiera reservar el paquete *${tourPackage.name}* para ${quantity} personas `;
   const [open, setOpen] = useState(false);
 
@@ -63,9 +68,19 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
     },
   });
   /* event.preventDefault(); */
+  console.log("formik.values.checked2 ",formik.values.checked2)
+  useEffect(() => {
+    console.log("cuota ----",formik.values.checked2)
+    if(formik.values.checked2){
+      setNewPriceItem((isPriceItem * 50) / 100);
+    }else{
+      setNewPriceItem(isPriceItem );
+    }
+    
+  }, [formik.values.checked2, isPriceItem]);
 
   const handleOpenModal = () => {
-    setCuota(null)
+    setCuota(null);
     setOpen(true);
   };
 
@@ -89,7 +104,7 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
         documentInvoice: v.checked ? v.documentInvoice : v.documentReservation,
         fullNameInvoice: v.checked ? v.fullNameInvoice : v.fullName,
         addressInvoice: v.checked ? v.addressInvoice : "",
-        price: cuota? (cuota as any/quantity):tourPackage.price ,
+        price: cuota ? (cuota as any) / quantity : tourPackage.price,
         title: tourPackage.name,
         mail: v.mail,
         phoneNumber: v.phoneNumber,
@@ -100,12 +115,11 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
         origen: config.domain,
         titleMail: config.name,
         brand: config.brand,
-        totalPrice:tourPackage.price*quantity,
-        advance:cuota,
+        totalPrice: tourPackage.price * quantity,
+        advance: cuota,
       },
     });
-    console.log("data ", data);
-
+    console.log("data", data);
     // Inicializa el checkout
     mp.checkout({
       preference: {
@@ -116,31 +130,26 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
     setLoading(false);
   };
 
-  if (range.from && range.to) {
-    const from = format(
-      new Date(2022, range.from.month - 1, range.from.day),
-      "d 'de' LLLL",
-      { locale: es }
-    );
-    const to = format(
-      new Date(2022, range.to.month - 1, range.to.day),
-      "d 'de' LLLL",
-      { locale: es }
-    );
-
+  if (rangeFrom && rangeTo) {
+    const from = format(new Date(rangeFrom), "d 'de' LLLL", { locale: es });
+    const to = format(new Date(rangeTo), "d 'de' LLLL", { locale: es });
+    console.log("from", from);
+    console.log("to", to);
     message += `desde el *${from}* ` + `hasta el *${to}*`;
   }
 
+
   const encoded = encodeURIComponent(message);
   return (
-    <div className="text-center mb-8">
+    <div className="text-center ">
       <Button
         variant="contained"
+        //disabled={!rangeFrom || !quantity}
         onClick={handleOpenModal}
         className="inline-flex items-center  text-md px-8 py-3 font-bold text-white rounded-full shadow-lg hover:shadow-xl"
         style={{
-          backgroundColor: config.colors.primary.DEFAULT,
-          margin: 8,
+          backgroundColor: "#03A691",
+          padding: "0.8rem 3rem",
           borderColor: config.colors.primary.DEFAULT,
         }}
         startIcon={<Icon path={mdiCreditCardOutline} size={1.5} />}
@@ -156,7 +165,7 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
       >
         <span>Reserva WHATSAPP</span>
       </Button>
-
+      <p className="text-lg font-semibold">TOTAL S/{isPriceItem.toFixed(2)}</p>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -181,7 +190,6 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
                   label="Número de DNI*"
                   type="numeric"
                   fullWidth
-                  variant="standard"
                   error={
                     formik.touched.documentReservation &&
                     Boolean(formik.errors.documentReservation)
@@ -200,7 +208,6 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
                   margin="dense"
                   label="Nombres completos*"
                   fullWidth
-                  variant="standard"
                   error={
                     formik.touched.fullName && Boolean(formik.errors.fullName)
                   }
@@ -217,7 +224,6 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
                   label="Email*"
                   type="email"
                   fullWidth
-                  variant="standard"
                   error={formik.touched.mail && Boolean(formik.errors.mail)}
                   onChange={formik.handleChange}
                   helperText={formik.touched.mail && formik.errors.mail}
@@ -230,7 +236,6 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
                   margin="dense"
                   label="Telefono"
                   fullWidth
-                  variant="standard"
                   onChange={formik.handleChange}
                   error={
                     formik.touched.phoneNumber &&
@@ -255,7 +260,6 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
                     formik.touched.observation &&
                     Boolean(formik.errors.observation)
                   }
-                  variant="standard"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -268,7 +272,7 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
                       inputProps={{ "aria-label": "controlled" }}
                     />
                   }
-                  label="¿Desea que se le envíe una factura?"
+                  label="Quiero que me envién una factura"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -277,11 +281,11 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
                     <Checkbox
                       id="checked2"
                       checked={formik.values.checked2}
-                      onChange={formik.handleChange}
+                      onChange={formik.handleChange}                      
                       inputProps={{ "aria-label": "controlled" }}
                     />
                   }
-                  label="¿Desea dar un monto a adelantar?"
+                  label="Quiero Reservar con el 50% del total"
                 />
               </Grid>
 
@@ -294,7 +298,6 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
                       margin="dense"
                       label="Número de RUC*"
                       fullWidth
-                      variant="standard"
                       error={
                         formik.touched.documentInvoice &&
                         Boolean(formik.errors.documentInvoice)
@@ -309,7 +312,6 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
                       margin="dense"
                       label="Razon Social*"
                       fullWidth
-                      variant="standard"
                       error={
                         formik.touched.fullNameInvoice &&
                         Boolean(formik.errors.fullNameInvoice)
@@ -324,7 +326,6 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
                       margin="dense"
                       label="Dirección de facturación*"
                       fullWidth
-                      variant="standard"
                       error={
                         formik.touched.addressInvoice &&
                         Boolean(formik.errors.addressInvoice)
@@ -336,39 +337,15 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
               ) : (
                 <div></div>
               )}
-              {formik.values.checked2 ? (
-                <Grid container spacing={1}>
-                  <Grid item xs={12} sm={12}>
-                    <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">¿Cuanto desea adelantar?</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={cuota}
-          label="Cuotas"
-          onChange={handleChange}
-         
-        >
-          <MenuItem value={tourPackage.price * quantity * 10 / 100}>10%  -  S/.{(tourPackage.price * quantity * 10 / 100).toFixed(2)}</MenuItem>
-          <MenuItem value={tourPackage.price * quantity*20/100}>20%  -  S/.{(tourPackage.price * quantity*20/100).toFixed(2)}</MenuItem>
-          <MenuItem value={tourPackage.price * quantity*30/100}>30%  -  S/.{(tourPackage.price * quantity*30/100).toFixed(2)}</MenuItem>
-          <MenuItem value={tourPackage.price * quantity*40/100}>40%  -  S/.{(tourPackage.price * quantity*40/100).toFixed(2)}</MenuItem>
-          <MenuItem value={tourPackage.price * quantity*50/100}>50%  -  S/.{(tourPackage.price * quantity*50/100).toFixed(2)}</MenuItem>
-        </Select>
-      </FormControl>
-    </Box>
-                  </Grid>
-                  
-                </Grid>
-              ) : (
-                <div></div>
-              )}
+
             </Grid>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} style={{ color: config.colors.primary.DEFAULT }}>
-              Atras 
+            <Button
+              onClick={handleClose}
+              style={{ color: config.colors.primary.DEFAULT }}
+            >
+              Atras
             </Button>
             <Button
               variant="contained"
@@ -380,8 +357,7 @@ export const TourPackageContact = ({ tourPackage, range, quantity, mp }) => {
               }}
               disabled={isLoadingMp}
             >
-              Lo quiero S/.{cuota?cuota:tourPackage.price * quantity}
-              {/* Lo quiero S/.{tourPackage.price * quantity} */}
+              Lo quiero S/. {newPriceItem.toFixed(2)}
             </Button>
           </DialogActions>
         </form>

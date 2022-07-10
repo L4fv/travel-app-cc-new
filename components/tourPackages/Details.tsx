@@ -1,52 +1,113 @@
 import { useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import styled from "styled-components";
 
-const SwiperStyled = styled(Swiper)`
-  --swiper-theme-color: black;
-  --swiper-navigation-size: 20px;
-`;
+import Grid from "@mui/material/Grid";
+import Chip from "@mui/material/Chip";
+import Router, { useRouter } from "next/router";
 
-export const TourPackageDetails = ({ tourPackage }) => {
-  const [index, setIndex] = useState(0);
-  const [swiper, setSwiper] = useState(null);
+import * as React from "react";
+import PropTypes from "prop-types";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 
-  const description = tourPackage.details[index].description;
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
   return (
-    <div className="mt-12">
-      <h2 className="text-gray-600 text-xl lg:text-3xl font-bold mb-4">
-        Detalles
-      </h2>
-      <SwiperStyled
-        slidesPerView="auto"
-        centeredSlides={true}
-        navigation
-        grabCursor
-        spaceBetween={24}
-        onSwiper={setSwiper}
-      >
-        {tourPackage.details.map((detail, i) => (
-          <SwiperSlide key={i} className="w-auto my-4">
-            <h3
-              className={`cursor-pointer ${i === index && "font-bold"}`}
-              onClick={() => {
-                setIndex(i);
-                swiper.slideTo(i);
-              }}
-            >
-              {detail.title}
-            </h3>
-          </SwiperSlide>
-        ))}
-      </SwiperStyled>
-      <hr className="mt-2 mb-8 mx-8" />
-      <div
-        className="prose overflow-hidden"
-        dangerouslySetInnerHTML={{
-          __html: description,
-        }}
-      />
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
     </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
+  };
+}
+
+export const TourPackageDetails = ({ tourPackage }) => {
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  const formatHtml = (payload) => {
+    const liReplace = new RegExp("<li><br></li>", "g");
+    const pReplace = new RegExp("<p><br></p>", "g");
+    const firstReplace = payload.replace(liReplace, "");
+    const secondReplace = firstReplace.replace(pReplace, "");
+    return secondReplace;
+  };
+
+  const textToString = (payload) => {
+    const liReplace = new RegExp(" ", "g");
+    return payload.replace(liReplace, "_");
+  };
+
+  return (
+    <Grid container xs={12} >
+      <Grid className="" sx={{ padding: "16px 0" }}>
+        {tourPackage.details.map(
+          (x) =>
+            x.description && (
+              <Chip
+                label={x.title.toUpperCase()}
+                variant="outlined"
+                className="mx-2"
+                clickable 
+                component="a"
+                href={`#${textToString(x.title)}`}
+              />
+            )
+        )}
+      </Grid>
+
+      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        {tourPackage.details.map(
+          (x) =>
+            x.description && (
+              <Grid className="content-information" id={textToString(x.title)}>
+                <Grid className="" sx={{ padding: "8px 0" }}>
+                  <span className="text-2xl font-bold">
+                    {x.title.toUpperCase()}
+                  </span>
+                </Grid>
+                <Grid>
+                  <Grid container spacing={1}>
+                    <Grid container sx={{ padding: "8px" }} xs={12} md={12}>
+                      <Grid
+                        className="break-words prose overflow-hidden"
+                        dangerouslySetInnerHTML={{
+                          __html: formatHtml(x.description),
+                        }}
+                      />
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+            )
+        )}
+      </Box>
+    </Grid>
   );
 };

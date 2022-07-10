@@ -1,16 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Head from "next/head";
 import Error from "next/error";
 import Script from "next/script";
 
+import Avatar from "@mui/material/Avatar";
+import Stack from "@mui/material/Stack";
+
 import { useRouter } from "next/router";
-import SwiperCore, {
-  Navigation,
-  Pagination,
-  A11y,
-  EffectCube,
-  Thumbs,
-} from "swiper";
 import { config } from "../../config";
 import { Layout } from "../../components/shared/Layout";
 import {
@@ -19,34 +15,34 @@ import {
   useTourPackage,
 } from "../../hooks/useTourPackages";
 import { TourPackageSlider } from "../../components/tourPackages/Slider";
-import { TourPackageCalendar } from "../../components/tourPackages/Calendar";
+import { TourPackageFooter } from "../../components/tourPackages/Footer";
+import { TourCardReserva } from "../../components/tourPackages/CardReserva";
+
 import { TourPackageDetails } from "../../components/tourPackages/Details";
-import { TourPackageCapacity } from "../../components/tourPackages/Capacity";
-import { TourPackageContact } from "../../components/tourPackages/Contact";
-import { NoSSR } from "../../components/shared/NoSSR";
-import {
-  getOfferRate,
-  getRemainingOfferDays,
-  hasActiveOffer,
-} from "../../utils/product";
+
+import * as React from "react";
+
+import DefaultForm from "../../utils/model";
+
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+
 declare global {
   interface Window {
     MercadoPago: any;
   }
 }
-SwiperCore.use([Navigation, Pagination, A11y, EffectCube, Thumbs]);
 
 export default function TourPackagePage(props) {
   const router = useRouter();
   const { slug } = router.query;
+  const selectIcon = [1, 3];
+  const allIcon = DefaultForm.itemIcon();
+  const itemsIcon = [];
+  selectIcon.map((x) => itemsIcon.push(allIcon.find((y) => y.id === x)));
   const { data: tourPackage, error } = useTourPackage(slug, props.tourPackage);
-  const [selectedDayRange, setSelectedDayRange] = useState({
-    from: null,
-    to: null,
-  });
-  const [mp, setMercadoPago] = useState({});
 
-  const [peopleQuantity, setPeopleQuantity] = useState(tourPackage || 1);
+  const [mp, setMercadoPago] = useState({});
 
   if (error) return <Error statusCode={404} />;
 
@@ -57,101 +53,135 @@ export default function TourPackagePage(props) {
       </Layout>
     );
 
-  const hasOffer = hasActiveOffer(tourPackage);
+  const images = [];
 
+  console.log("slug tourPackage", tourPackage);
+
+  const listPersons = [];
+  for (
+    let index = tourPackage.capacity.min;
+    index <= tourPackage.capacity.max;
+    index++
+  ) {
+    listPersons.push(index);
+  }
+
+  tourPackage.images.map((x) => {
+    images.push({ imgPath: x });
+  });
   return (
     <Layout>
-      <Head>
-        <title>
-          {tourPackage.name} | {config.name}
-        </title>
-      </Head>
-      <Script
-        id="mercadopago-js"
-        src="https://sdk.mercadopago.com/js/v2"
-        onLoad={() => {
-          setMercadoPago(
-            new window.MercadoPago(
-              `${process.env.NEXT_PUBLIC_PUBLICK_KEY_TEST_MERCADOPAGO}`,
-              { locale: "es-PE" }
-            )
-          );
-        }}
-      />
-      <div className="w-full max-w-6xl mx-auto px-4 sm:px-8 py-8 md:py-12">
-        <div className="grid grid-cols-1 md:grid-cols-[1fr,320px] lg:grid-cols-[1fr,380px] gap-6 md:gap-8 lg:gap-x-16 mb-6">
-          <div className="min-w-0">
-            <h1 className="text-primary text-3xl lg:text-4xl font-bold mb-6">
-              {tourPackage.name}
-            </h1>
-            <NoSSR>
-              <TourPackageSlider tourPackage={tourPackage} />
-              <TourPackageDetails tourPackage={tourPackage} />
-            </NoSSR>
-          </div>
-          <div>
-            <div className="text-center my-6">
-              <div className="inline-flex px-8 py-2 bg-secondary text-white rounded-full shadow-lg">
-                {tourPackage.duration + 1} días / {tourPackage.duration} noches
-              </div>
-            </div>
-            <TourPackageCalendar
-              tourPackage={tourPackage}
-              range={selectedDayRange}
-              handleChange={setSelectedDayRange}
-            />
-            <div className="text-center mt-8 md:mt-12 mb-6">
-              <div className="inline-flex px-8 py-2 bg-tertiary text-white rounded-full shadow-lg">
-                <div>
-                  {hasOffer && (
-                    <span className="line-through">S/.{tourPackage.price}</span>
-                  )}{" "}
-                  S/.
-                  {hasOffer ? tourPackage.offer.price : tourPackage.price} por
-                  persona
-                  {hasOffer && (
-                    <span className="text-white mt-1 font-bold">
-                      {" "}
-                      (-{getOfferRate(tourPackage)}%)
-                    </span>
-                  )}
-                </div>
-              </div>
-            </div>
-            <TourPackageCapacity
-              defaultCapacity={tourPackage.capacity.min}
-              min={tourPackage.capacity.min}
-              max={tourPackage.capacity.max}
-              onChange={setPeopleQuantity}
-            />
-            <div className="text-center my-4">
-              <div>TOTAL</div>
-              {hasOffer && (
-                <div className="text-gray-400 line-through">
-                  S/.{tourPackage.price * peopleQuantity}
-                </div>
-              )}
-              <div className="text-primary font-bold text-xl">
-                {hasOffer && "Oferta: "}
-                S/.
-                {(hasOffer ? tourPackage.offer.price : tourPackage.price) *
-                  peopleQuantity}
-              </div>
-              {hasOffer && (
-                <p className="text-red-500">
-                  La oferta termina en {getRemainingOfferDays(tourPackage)}.
-                </p>
-              )}
-            </div>
+      <div>
+        <Head>
+          <title>
+            {tourPackage.name} | {config.name}
+          </title>
+        </Head>
+        <Script
+          id="mercadopago-js"
+          src="https://sdk.mercadopago.com/js/v2"
+          onLoad={() => {
+            setMercadoPago(
+              new window.MercadoPago(
+                `${process.env.NEXT_PUBLIC_PUBLICK_KEY_TEST_MERCADOPAGO}`,
+                { locale: "es-PE" }
+              )
+            );
+          }}
+        />
+        {/* <div className="w-full max-w-6xl mx-auto px-4 sm:px-8 py-8 md:py-12"> */}
+        <Box
+          sx={{
+            flexGrow: 1,
+            display: "flex",
+            justifyContent: "center",
+            background: "#fff",
+          }}
+        >
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: "flex",
+              justifyContent: "center",
+              background: "green",
+              maxWidth: "1280px",
+            }}
+          >
+            <Grid container className="bond">
+              {/* header */}
+              <Grid
+                xs={12}
+                sx={{
+                  background: "sky",
+                }}
+              >
+                <TourPackageSlider tourPackage={images} />
+              </Grid>
+              {/* header */}
+              {/* Body */}
+              <Grid xs={12}>
+                <Grid container>
+                  {/* 1columna */}
+                  <Grid sx={{ padding: "8px" }} xs={12} md={8}>
+                    <div>
+                      <h1 className="subHeader font-semibold">
+                        {tourPackage.name}
+                      </h1>
+                      <div className="subResumeBody mb-6">
+                        <span className="points">8.3</span>
+                        <span className="leftRigth">Fantástico</span>
+                      </div>
 
-            <TourPackageContact
-              tourPackage={tourPackage}
-              range={selectedDayRange}
-              quantity={peopleQuantity}
-              mp={mp}
-            />
-          </div>
-        </div>
+                      {itemsIcon.length > 0 ? (
+                        <div className="iconItems ">
+                          {itemsIcon.map((x) => (
+                            <div className="spaceIcon ">
+                              <div className="mb-2 iconCSS ">
+                                <Avatar
+                                  className="avatar"
+                                  src={x.src}
+                                  sx={{ width: 16, height: 16 }}
+                                />
+                              </div>
+                              <div className="descriptionIcon ">
+                                {x.description}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        ""
+                      )}
+
+                      <Grid xs={12}>
+                        <TourPackageDetails tourPackage={tourPackage} />
+                      </Grid>
+                    </div>
+                  </Grid>
+
+                  <Grid xs={0} md={4}>
+                    <Grid className="stickyDate">
+                      <TourCardReserva tourPackage={tourPackage} mp={mp} />
+                    </Grid>{" "}
+                  </Grid>
+                </Grid>
+              </Grid>
+              {/* Body */}
+              {/* Footer */}
+
+              <Grid className="classFooter mt-12 " xs={12}>
+                <Box>
+                  <Grid>
+                    <Grid>
+                      <TourPackageFooter tourPackage={tourPackage} mp={mp} />
+                    </Grid>
+                  </Grid>
+                </Box>
+              </Grid>
+              {/* Footer */}
+            </Grid>
+          </Box>
+        </Box>
       </div>
     </Layout>
   );

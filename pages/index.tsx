@@ -9,9 +9,11 @@ export default function Home({ tourPackages }) {
 
   return (
     <Layout>
-      <HomePortrait />
-      <HomeMain />
-      <HomeExperience />
+      <div className="divState">
+        <HomePortrait />
+        <HomeMain />
+        <HomeExperience />
+      </div>
     </Layout>
   );
 }

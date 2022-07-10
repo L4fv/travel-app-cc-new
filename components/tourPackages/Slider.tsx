@@ -1,98 +1,168 @@
-import { useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import styled from "styled-components";
+//import Gallery from "react-photo-gallery-next";
+import dynamic from "next/dynamic";
 import { config } from "../../config";
 
-const SliderStyled = styled.div`
-  & .swiper-container-thumbs {
-    --swiper-navigation-size: 32px;
+import * as React from "react";
+import { useTheme } from "@mui/material/styles";
+import Box from "@mui/material/Box";
 
-    & .swiper-slide-thumb-active {
-      border-bottom: 3px solid ${config.colors.secondary.DEFAULT};
-    }
-  }
+import SwipeableViews from "react-swipeable-views";
+import { autoPlay } from "react-swipeable-views-utils";
+import Grid from "@mui/material/Grid";
+import Hidden from "@mui/material/Hidden";
 
-  .swiper-slide-prev,
-  .swiper-slide-next {
-    z-index: 2;
-  }
-
-  .swiper-slide-active {
-    z-index: 3;
-  }
-`;
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 export const TourPackageSlider = ({ tourPackage }) => {
-  const [thumbs, setThumbs] = useState(null);
+  const theme = useTheme();
+  const [activeStep, setActiveStep] = React.useState(0);
+
+  const handleStepChange = (step: number) => {
+    setActiveStep(step);
+  };
+  const photos = [];
+  let indice = 0;
+  tourPackage.map((x) => {
+    photos.push({ src: x.imgPath });
+    indice++;
+  });
+  while (photos.length < 5) {
+    photos.push({
+      src: config.assetImg(config.images.logo),
+    });
+    indice++;
+  }
 
   return (
-    <SliderStyled>
-      <Swiper
-        slidesPerView={1}
-        grabCursor
-        loop
-        effect="cube"
-        thumbs={{ swiper: thumbs }}
-        className="mb-12"
-      >
-        {tourPackage.images.map((image, i) => (
-          <SwiperSlide key={"image" + i}>
-            <div className="flex-none w-full pt-2/3 relative">
+    <Box>
+      <Grid>
+        <Grid xs={12} sx={{ display: { sm: "none", xs: "block" } }}>
+          <AutoPlaySwipeableViews
+            axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+            index={activeStep}
+            onChangeIndex={handleStepChange}
+            enableMouseEvents
+          >
+            {photos.map((step, index) => (
+              <Grid container xs={12}>
+                {Math.abs(activeStep - index) <= 2 ? (
+                  <Box
+                    component="img"
+                    className="imageSlider"
+                    src={step.src}
+                  />
+                ) : (
+                  <></>
+                )}
+              </Grid>
+            ))}
+          </AutoPlaySwipeableViews>
+        </Grid>
+        <Grid className="displayGallery">
+          <Grid
+            container
+            sx={{
+              height: "420px",
+              margin: "24px 0",
+            }}
+          >
+            <Grid
+              xs={6}
+              sx={{
+                borderRadius: "10px 0px 0px 10px",
+                height: "100%",
+                padding: "0 8px 0 0",
+              }}
+            >
               <img
-                src={image}
-                alt={"Imagen " + i}
-                className="absolute w-full h-full inset-0 object-cover"
+                src={photos[0].src}
+                style={{
+                  borderRadius: "10px 0px 0px 10px",
+                  objectFit: "cover",
+                  height: "100%",
+                  width: "100%",
+                }}
               />
-            </div>
-          </SwiperSlide>
-        ))}
-        {tourPackage.videos.map((video, i) => (
-          <SwiperSlide key={"video" + i}>
-            <div className="flex-none w-full pt-2/3 relative">
-              <iframe
-                className="absolute w-full h-full inset-0"
-                src={"https://www.youtube.com/embed/" + video}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+            </Grid>
+            <Grid
+              container
+              xs={6}
+              sx={{
+                borderRadius: "10px 0px 0px 10px",
+                height: "100%!important",
+              }}
+            >
+              <Grid
+                xs={6}
+                sx={{
+                  height: "50%!important",
+                  padding: "0 8px 8px 0",
+                }}
+              >
+                <img
+                  src={photos[1].src}
+                  style={{
+                    objectFit: "cover",
+                    height: "100%",
+                    width: "100%",
+                  }}
+                />{" "}
+              </Grid>
+              <Grid
+                xs={6}
+                sx={{
+                  height: "50%!important",
+                  padding: "0 0 8px 0",
+                }}
+              >
+                <img
+                  src={photos[2].src}
+                  style={{
+                    borderRadius: "0px 10px 0px 0px",
+                    objectFit: "cover",
+                    height: "100%",
+                    width: "100%",
+                  }}
+                />{" "}
+              </Grid>
+              <Grid
+                xs={6}
+                sx={{
+                  height: "50%!important",
+                  padding: "0 8px 0 0",
+                }}
+              >
+                <img
+                  src={photos[3].src}
+                  style={{
+                    objectFit: "cover",
+                    height: "100%",
+                    width: "100%",
+                  }}
+                />{" "}
+              </Grid>
+              <Grid
+                xs={6}
+                sx={{
+                  height: "50%!important",
+                }}
+              >
+                <img
+                  src={photos[4].src}
+                  style={{
+                    borderRadius: "0px 0px 10px 0px",
+                    objectFit: "cover",
+                    height: "100%",
+                    width: "100%",
+                  }}
+                />{" "}
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Box>
 
-      <Swiper
-        onSwiper={setThumbs}
-        spaceBetween={10}
-        slidesPerView={4}
-        watchSlidesVisibility={true}
-        watchSlidesProgress={true}
-        centerInsufficientSlides
-        navigation
-      >
-        {tourPackage.images.map((image, i) => (
-          <SwiperSlide key={"timage" + i}>
-            <div className="flex-none w-full pt-2/3 relative">
-              <img
-                src={image}
-                alt={"Imagen " + i}
-                className="absolute w-full h-full inset-0 object-cover"
-              />
-            </div>
-          </SwiperSlide>
-        ))}
-        {tourPackage.videos.map((video, i) => (
-          <SwiperSlide key={"tvideo" + i}>
-            <div className="flex-none w-full pt-2/3 relative">
-              <img
-                src={`https://img.youtube.com/vi/${video}/mqdefault.jpg`}
-                alt={"Imagen " + i}
-                className="absolute w-full h-full inset-0 object-cover"
-              />
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </SliderStyled>
+    // Anterior widgets
   );
 };
