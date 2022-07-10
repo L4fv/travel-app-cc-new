@@ -23,9 +23,7 @@ export const TourPackageSlider = ({ tourPackage }) => {
   const photos = [];
   let indice = 0;
   tourPackage.map((x) => {
-    photos.push({
-      src: x.imgPath,
-    });
+    photos.push({ src: x.imgPath });
     indice++;
   });
   while (photos.length < 5) {
@@ -45,13 +43,13 @@ export const TourPackageSlider = ({ tourPackage }) => {
             onChangeIndex={handleStepChange}
             enableMouseEvents
           >
-            {tourPackage.map((step, index) => (
+            {photos.map((step, index) => (
               <Grid container xs={12}>
                 {Math.abs(activeStep - index) <= 2 ? (
                   <Box
                     component="img"
                     className="imageSlider"
-                    src={step.imgPath}
+                    src={step.src}
                   />
                 ) : (
                   <></>
