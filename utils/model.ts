@@ -20,7 +20,7 @@ export default class DefaultForm {
       documentInvoice: "",
       observation: "",
       checked: false,
-      checked2: true,
+      isPercent: true,
     };
   }
 
