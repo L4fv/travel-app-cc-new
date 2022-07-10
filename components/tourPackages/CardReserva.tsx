@@ -8,33 +8,28 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import addDays from "date-fns/addDays";
-import Box from "@mui/material/Box";
-import React from "react";
 
 import { es } from "date-fns/locale";
 import Grid from "@mui/material/Grid";
 import MenuItem from "@mui/material/MenuItem";
-import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
 
 import { TourPackageContact } from "../../components/tourPackages/Contact";
-import { textAlign } from "@mui/system";
 
 export const TourCardReserva = ({ tourPackage, mp }) => {
   const [llegada, setValueLlegada] = useState<Date | null>(new Date());
-  const [selectedDayFrom, setSelectedDayFrom] = useState<Date | null>();
+  const [selectedDayFrom, setSelectedDayFrom] = useState<Date | null>(
+    new Date()
+  );
   const [selectedDayTo, setSelectedDayTo] = useState<Date | null>();
 
   const [peopleQuantity, setPeopleQuantity] = useState<number>(2);
   const handleChange = (event: any) => {
     setPeopleQuantity(event.target.value);
   };
-  const DayFromTo = (event: any) => {
-    console.log("event", event);
-    console.log("tpye", typeof event);
-    setSelectedDayFrom(event);
-    setSelectedDayTo(addDays(new Date(event), tourPackage.duration + 1));
-  };
+
+  useEffect(() => {    
+    setSelectedDayTo(addDays(selectedDayFrom, tourPackage.duration));
+  }, [selectedDayFrom]);
 
   const listPersons = [];
   for (let index = tourPackage.capacity.min; index <= 10; index++) {
@@ -54,7 +49,7 @@ export const TourCardReserva = ({ tourPackage, mp }) => {
       sx={{
         maxWidth: "480px",
         border: "1px solid rgb(221, 221, 221)",
-        borderRadius: "12px",        
+        borderRadius: "12px",
         boxShadow: "rgb(0 0 0 / 12%) 0px 6px 16px",
       }}
     >
@@ -62,8 +57,11 @@ export const TourCardReserva = ({ tourPackage, mp }) => {
         <Typography variant="h5" component="div">
           <Grid container spacing={2} sx={{ textAlign: "center" }}>
             <Grid item xs={12}>
-              <p className="font-thin	">                
-              <span className="font-semibold">S/. {tourPackage.price.toFixed(2)}</span>  / persona
+              <p className="font-thin	">
+                <span className="font-semibold">
+                  S/. {tourPackage.price.toFixed(2)}
+                </span>{" "}
+                / persona
               </p>
             </Grid>
 
@@ -76,7 +74,6 @@ export const TourCardReserva = ({ tourPackage, mp }) => {
                   minDate={new Date()}
                   onChange={(newValue) => {
                     setValueLlegada(newValue);
-                    DayFromTo(newValue);
                   }}
                   renderInput={(params) => (
                     <TextField className="buttomDate" {...params} />
@@ -91,7 +88,7 @@ export const TourCardReserva = ({ tourPackage, mp }) => {
                   inputFormat="dd/MM/yyyy"
                   value={
                     llegada
-                      ? addDays(new Date(llegada), tourPackage.duration )
+                      ? addDays(new Date(llegada), tourPackage.duration)
                       : null
                   }
                   label="Salida"

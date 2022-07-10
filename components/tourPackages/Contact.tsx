@@ -33,9 +33,9 @@ export const TourPackageContact = ({
   isPriceItem,
   mp,
 }) => {
-  let [cuota, setCuota] = React.useState(false);
   let [newPriceItem, setNewPriceItem] = React.useState(isPriceItem);
-
+  
+  console.log("rangeFrom ",rangeFrom, "rangeTo ", rangeTo)
   let message = `Buen día. Quisiera reservar el paquete *${tourPackage.name}* para ${quantity} personas `;
   const [open, setOpen] = useState(false);
 
@@ -47,7 +47,7 @@ export const TourPackageContact = ({
     addressInvoice: yup.string(),
     observation: yup.string(),
     checked: yup.boolean(),
-    checked2: yup.boolean(),
+    isPercent: yup.boolean(),
     documentReservation: yup
       .string()
       .min(8)
@@ -68,19 +68,16 @@ export const TourPackageContact = ({
     },
   });
   /* event.preventDefault(); */
-  console.log("formik.values.checked2 ",formik.values.checked2)
   useEffect(() => {
-    console.log("cuota ----",formik.values.checked2)
-    if(formik.values.checked2){
+    if(formik.values.isPercent){
       setNewPriceItem((isPriceItem * 50) / 100);
     }else{
       setNewPriceItem(isPriceItem );
     }
     
-  }, [formik.values.checked2, isPriceItem]);
+  }, [formik.values.isPercent, isPriceItem]);
 
   const handleOpenModal = () => {
-    setCuota(null);
     setOpen(true);
   };
 
@@ -104,7 +101,7 @@ export const TourPackageContact = ({
         documentInvoice: v.checked ? v.documentInvoice : v.documentReservation,
         fullNameInvoice: v.checked ? v.fullNameInvoice : v.fullName,
         addressInvoice: v.checked ? v.addressInvoice : "",
-        price: cuota ? (cuota as any) / quantity : tourPackage.price,
+        price: newPriceItem,        
         title: tourPackage.name,
         mail: v.mail,
         phoneNumber: v.phoneNumber,
@@ -115,11 +112,12 @@ export const TourPackageContact = ({
         origen: config.domain,
         titleMail: config.name,
         brand: config.brand,
-        totalPrice: tourPackage.price * quantity,
-        advance: cuota,
+        rangeFrom: rangeFrom,
+        rangeTo: rangeTo,
+        totalPrice: isPriceItem,
+        isPercent: v.isPercent,
       },
     });
-    console.log("data", data);
     // Inicializa el checkout
     mp.checkout({
       preference: {
@@ -129,15 +127,6 @@ export const TourPackageContact = ({
     });
     setLoading(false);
   };
-
-  if (rangeFrom && rangeTo) {
-    const from = format(new Date(rangeFrom), "d 'de' LLLL", { locale: es });
-    const to = format(new Date(rangeTo), "d 'de' LLLL", { locale: es });
-    console.log("from", from);
-    console.log("to", to);
-    message += `desde el *${from}* ` + `hasta el *${to}*`;
-  }
-
 
   const encoded = encodeURIComponent(message);
   return (
@@ -279,8 +268,8 @@ export const TourPackageContact = ({
                 <FormControlLabel
                   control={
                     <Checkbox
-                      id="checked2"
-                      checked={formik.values.checked2}
+                      id="isPercent"
+                      checked={formik.values.isPercent}
                       onChange={formik.handleChange}                      
                       inputProps={{ "aria-label": "controlled" }}
                     />
