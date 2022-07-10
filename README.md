@@ -1,14 +1,18 @@
+# FIRST INITIAL dokku
+git remote add dokku-cc-front-v2 dokku@mansionhoteltours.com:cc-front
+git push dokku-cc-front-v2 main:prod
 # travel_app-front
 git push cc-front2 main:prod
 # DEPLOY PROD
     COMAND:
-         git pull && docker-compose down && docker build . -t travel-front-last:TEST_3.1  && docker-compose up -d --remove-orphans
+         git pull && docker-compose down && docker build . -t travel-front-last:TEST_3.2  && docker-compose up -d --remove-orphans
 
 # DEPLOY LOCAL
     npm run dev
 
 dokku config:set lm-front NEXT_PUBLIC_BRAND=lm NEXT_PUBLIC_API_URL_EXT=https://api.mansionhoteltours.com NEXT_PUBLIC_API_URL=https://api.mansionhoteltours.com 
-
+# push
+40a324e1da21f22ca792527af4
 # DEPLOY
 git push cc-front main:prod && git push lm-front main:prod && git push sht-front main:prod && git push ht-front main:prod
 
