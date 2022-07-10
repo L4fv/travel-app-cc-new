@@ -2,7 +2,7 @@ version: '2'
 services:
     travel-front-last:
         restart: always
-        image: 'travel-front-last:TEST_3.2'
+        image: 'travel-front-last:TEST_3.3'
         env_file: .env
         ports:
             - '50001:3000'
