@@ -5,7 +5,7 @@ WORKDIR /app
 # Resolve node_modules for caching
 COPY ./package.json ./
 COPY ./yarn.lock ./
-RUN yarn install --production=true --frozen-lockfile
+RUN yarn install 
 
 # Copy all for build and release cache if package.json update
 COPY . .
