@@ -10,6 +10,7 @@ export const HomeMain = () => {
     lm: "Paquetes turísticos diseñados para escaparse de la rutina a un gran precio",
     sht: "Paquetes turísticos diseñados para escaparse de la rutina a un gran precio",
     ht: "Tenemos paquetes turísticos a la medida de tus aventuras a un gran precio",
+    htk: "Tenemos paquetes turísticos a la medida de tus aventuras a un gran precio",
   };
   
   return (

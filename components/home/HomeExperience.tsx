@@ -31,6 +31,7 @@ export const HomeExperience = () => {
     ht: <HTExperienceContent />,
     lm: <LMExperienceContent />,
     sht: <LMExperienceContent />,
+    htk: <LMExperienceContent />,
   };
   return (
     <div className="bg-white py-12">
