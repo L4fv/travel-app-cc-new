@@ -1,6 +1,6 @@
 import Icon from "@mdi/react";
 import Link from "next/link";
-import { mdiFacebook, mdiWhatsapp } from "@mdi/js";
+import { mdiFacebook, mdiWhatsapp, mdiInstagram } from "@mdi/js";
 import { config } from "../../config";
 
 export const Topbar = () => {
@@ -17,7 +17,7 @@ export const Topbar = () => {
           </a>
         </Link>
         <div className="flex items-center space-x-4 md:space-x-6 tracking-wider">
-          <a
+        <a
             href={`https://fb.com/${config.fbUsername}`}
             target="_blank"
             className="flex items-center space-x-1"
@@ -27,6 +27,18 @@ export const Topbar = () => {
               /{config.fbUsername}
             </span>
           </a>
+        {config.InsUsername && (
+          <a
+            href={`https://www.instagram.com/${config.InsUsername}`}
+            target="_blank"
+            className="flex items-center space-x-1"
+          >
+            <Icon path={mdiInstagram} size={1} color="#D300C5" />
+            <span className="text-sm hidden sm:block">
+              /{config.fbUsername}
+            </span>
+          </a>
+        )}          
           <a
             href={`https://wa.me/${config.contactPhone}?text=Buen+día,+`}
             target="_blank"

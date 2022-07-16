@@ -18,7 +18,6 @@ const brandConfig =
     : brand === "htk"
     ? htk
     : ht;
-
 const baseConfig = {
   brand,
   asset: (path) => `/${brand}${path}`,

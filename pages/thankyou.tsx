@@ -27,47 +27,56 @@ export default function CustomThankyou() {
             textAlign="center"
             alignItems="center"
             justifyContent="center"
-            style={{
-              maxWidth: "500px",
-            }}
           >
-            <Grid item>
-              <h2 className="text-center text-md px-2">
-                Por favor comunícate con uno de nuestros asesores para poder
-                detallar el tipo de habitaciones, itinerario, actividades y
-                cualquier duda que tengas.
-                <br></br> *Estaremos enviando su boleta/factura electrónica
-              </h2>
-            </Grid>
-            <Grid item xs={12}>
-              <Button
-                variant="outlined"
-                href={`https://wa.me/${config.contactPhone}?text="Hola"`}
-                className="inline-flex items-center  text-md px-8 py-3 font-bold text-white rounded-full shadow-lg hover:shadow-xl"
-                style={{
-                  backgroundColor: "#4fce5d",
-                  margin: 8,
-                  borderColor: "#4fce5d",
-                }}
-                startIcon={<Icon path={mdiWhatsapp} size={1.5} />}
-              >
-                <span>WHATSAPP</span>
-              </Button>{" "}
-            </Grid>
-            <Grid item xs={12}>
-              <Button
-                variant="outlined"
-                href="/"
-                className="inline-flex items-center  text-md px-8 py-3 font-bold text-white rounded-full shadow-lg hover:shadow-xl"
-                style={{
-                  backgroundColor: config.colors.primary.DEFAULT,
-                  margin: 8,
-                  borderColor: config.colors.primary.DEFAULT,
-                }}
-                startIcon={<Icon path={mdiArrowLeft} size={1.5} />}
-              >
-                <span>HOME</span>
-              </Button>
+            <Grid
+              container
+              spacing={2}
+              textAlign="center"
+              alignItems="center"
+              justifyContent="center"
+              style={{
+                maxWidth: "500px",
+                padding: "16px 0"
+              }}
+            >
+              <Grid item>
+                <h2 className="text-center text-md px-2">
+                  Por favor comunícate con uno de nuestros asesores para poder
+                  detallar el tipo de habitaciones, itinerario, actividades y
+                  cualquier duda que tengas.
+                  <br></br> *Estaremos enviando su boleta/factura electrónica
+                </h2>
+              </Grid>
+              <Grid item xs={12}>
+                <Button
+                  variant="outlined"
+                  href={`https://wa.me/${config.contactPhone}?text="Hola"`}
+                  className="inline-flex items-center  text-md px-8 py-3 font-bold text-white rounded-full shadow-lg hover:shadow-xl"
+                  style={{
+                    backgroundColor: "#4fce5d",
+                    margin: 8,
+                    borderColor: "#4fce5d",
+                  }}
+                  startIcon={<Icon path={mdiWhatsapp} size={1.5} />}
+                >
+                  <span>WHATSAPP</span>
+                </Button>{" "}
+              </Grid>
+              <Grid item xs={12}>
+                <Button
+                  variant="outlined"
+                  href="/"
+                  className="inline-flex items-center  text-md px-8 py-3 font-bold text-white rounded-full shadow-lg hover:shadow-xl"
+                  style={{
+                    backgroundColor: config.colors.primary.DEFAULT,
+                    margin: 8,
+                    borderColor: config.colors.primary.DEFAULT,
+                  }}
+                  startIcon={<Icon path={mdiArrowLeft} size={1.5} />}
+                >
+                  <span>HOME</span>
+                </Button>
+              </Grid>
             </Grid>
           </Grid>
         </div>

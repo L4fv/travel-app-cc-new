@@ -24,11 +24,11 @@ git push cc-front2 main:prod
 
 dokku config:set lm-front NEXT_PUBLIC_BRAND=lm NEXT_PUBLIC_API_URL_EXT=https://api.mansionhoteltours.com NEXT_PUBLIC_API_URL=https://api.mansionhoteltours.com 
 
-dokku config:set lm-front  NEXT_PUBLIC_GOOGLE_ANALYTICS=G-RPGG3HLKBE
-&& dokku config:set sht-front  NEXT_PUBLIC_GOOGLE_ANALYTICS=G-RPGG3HLKBE
-&& dokku config:set htk-front  NEXT_PUBLIC_GOOGLE_ANALYTICS=G-RPGG3HLKBE
-&& dokku config:set ht-front  NEXT_PUBLIC_GOOGLE_ANALYTICS=G-RPGG3HLKBE
-&& dokku config:set cc-front  NEXT_PUBLIC_GOOGLE_ANALYTICS=G-RPGG3HLKBE
+dokku config:set lm-front NEXT_PUBLIC_GOOGLE_ANALYTICS=G-RPGG3HLKBE
+&& dokku config:set sht-front NEXT_PUBLIC_GOOGLE_ANALYTICS=G-RPGG3HLKBE
+&& dokku config:set htk-front NEXT_PUBLIC_GOOGLE_ANALYTICS=G-RPGG3HLKBE
+&& dokku config:set ht-front NEXT_PUBLIC_GOOGLE_ANALYTICS=G-RPGG3HLKBE
+&& dokku config:set cc-front NEXT_PUBLIC_GOOGLE_ANALYTICS=G-RPGG3HLKBE
 
 # push
 40a324e1da21f22ca792527af4

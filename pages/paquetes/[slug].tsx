@@ -133,7 +133,7 @@ export default function TourPackagePage(props) {
                       </div>
 
                       {itemsIcon.length > 0 ? (
-                        <div className="iconItems ">
+                        <div className="iconItems">
                           {itemsIcon.map((x) => (
                             <div className="spaceIcon ">
                               <div className="mb-2 iconCSS ">
@@ -153,7 +153,7 @@ export default function TourPackagePage(props) {
                         ""
                       )}
 
-                      <Grid xs={12}>
+                      <Grid xs={12} sx={{ padding: "0 0 72px 0" }}>
                         <TourPackageDetails tourPackage={tourPackage} />
                       </Grid>
                     </div>

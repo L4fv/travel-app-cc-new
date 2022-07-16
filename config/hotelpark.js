@@ -1,12 +1,13 @@
 module.exports = {
-  name: "Totel Park Tarapoto",
-  fbUsername: "CocolandiaTours",
-  contactPhone: "51995624942",
+  name: "Hotel Park Tarapoto",
+  fbUsername: "HotelParkTarapoto",
+  InsUsername: "hotelparktarapoto",
+  contactPhone: "51980270631",
   domain: "https://hotelytourstarapoto.com",
   heroVideo: {
-    url: "https://travel-app-space.nyc3.digitaloceanspaces.com/common/Cocolandia%20Tours.mp4",
+    url: "https://travel-app-space.nyc3.digitaloceanspaces.com/htk/Hotel%20Park%20Tarapoto.mp4",
     start: 0,
-    end: 41,
+    end: 60,
   },
   colors: {
     primary: {
