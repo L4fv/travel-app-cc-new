@@ -5,7 +5,7 @@ module.exports = {
   contactPhone: "51980270631",
   domain: "https://hotelytourstarapoto.com",
   heroVideo: {
-    url: "https://travel-app-space.nyc3.digitaloceanspaces.com/htk/Hotel%20Park%20Tarapoto.mp4",
+    url: "https://travel-app-space.nyc3.digitaloceanspaces.com/htk/hotelpark.mp4",
     start: 0,
     end: 60,
   },

@@ -45,7 +45,7 @@ export const HomePortrait = () => {
       {isDesktop && (
         <div>
           <video
-            className={`w-auto h-auto min-w-full min-h-full max-w-none
+            className={`w-auto  min-w-full min-h-full max-w-none
               absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2
               pointer-events-none`}
             src={config.heroVideo.url}
