@@ -1,6 +1,7 @@
 module.exports = {
   name: "Cocolandia Tours",
   fbUsername: "CocolandiaTours",
+  InsUsername: "",
   contactPhone: "51995624942",
   domain: "https://cocolandiatours.com",
   heroVideo: {

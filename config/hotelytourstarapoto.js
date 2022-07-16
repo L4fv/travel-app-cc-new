@@ -1,6 +1,7 @@
 module.exports = {
   name: "Hotel & Tours Tarapoto",
   fbUsername: "hotelytourstarapoto",
+  InsUsername: "",
   contactPhone: "51924274581",
   domain:"https://hotelytourstarapoto.com",
   heroVideo: {

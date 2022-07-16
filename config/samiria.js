@@ -1,6 +1,7 @@
 module.exports = {
   name: "Samiria - Hotel & Tours - Tarapoto",
   fbUsername: "SamiriaHotelTours",
+  InsUsername: "",
   contactPhone: "51923993105",
   domain:"https://samiriahotelytours.com",
   heroVideo: {
