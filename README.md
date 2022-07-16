@@ -11,8 +11,8 @@ git push dokku-sht-front-v2 main:prod
 git remote add dokku-lm-front-v2 dokku@mansionhoteltours.com:lm-front
 git push dokku-lm-front-v2 main:prod
 
-git remote add dokku-hkt-front-v2 dokku@mansionhoteltours.com:hkt-front
-git push dokku-hkt-front-v2 main:prod
+git remote add dokku-hkt-front-v3 dokku@mansionhoteltours.com:hkt-front
+git push dokku-hkt-front-v3 main:prod
 # travel_app-front
 git push cc-front2 main:prod
 # DEPLOY PROD

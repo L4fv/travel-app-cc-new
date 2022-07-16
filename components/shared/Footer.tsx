@@ -16,9 +16,7 @@ export const Footer = () => {
             className="flex items-center space-x-1 py-2"
           >
             <Icon path={mdiFacebook} size={1} color="#4267B2" />
-            <span className="text-sm ">
-              /{config.fbUsername}
-            </span>
+            <span className="text-sm ">/{config.fbUsername}</span>
           </a>
           {config.InsUsername && (
             <a
@@ -27,24 +25,17 @@ export const Footer = () => {
               className="flex items-center space-x-1 py-2"
             >
               <Icon path={mdiInstagram} size={1} color="#D300C5" />
-              <span className="text-sm ">
-                /{config.fbUsername}
-              </span>
+              <span className="text-sm ">/{config.fbUsername}</span>
             </a>
           )}{" "}
         </div>
       </div>
-      {/* <div className="py-1 bg-black text-gray-400 text-xs text-center">
-        Developed by{" "}
-        <a
-          href="https://www.linkedin.com/in/carlos-duran/"
-          target="_blank"
-          className="underline"
-        >
-          Carlos Duran
+      <div className="py-1 bg-black text-gray-400 text-xs text-center">
+        Powered by{" "}
+        <a href="https://innout.pe" target="_blank" className="underline">
+          innout.pe
         </a>
-        .
-      </div> */}
+      </div>
     </>
   );
 };
