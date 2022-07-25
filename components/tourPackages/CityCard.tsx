@@ -15,9 +15,9 @@ export const CityCard = ({ urlLink, city, description }) => {
         />
         <div className="city-details">
           <div id="triangle" />
-          <p>{city}</p>
+          <span>{city}</span>
           <div id="city-hidden">
-            <p>{description}</p>
+            <span>{description}</span>
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ export const Footer = () => {
     <>
       <div className="p-10 bg-gray-800 text-gray-100 mt-auto">
         <div className="max-w-6xl mx-auto">
-          <p className="text-center">&copy; {config.name}</p>
+          <span className="text-center">&copy; {config.name}</span>
         </div>
         <div className="max-w-6xl mx-auto py-2">
           <a

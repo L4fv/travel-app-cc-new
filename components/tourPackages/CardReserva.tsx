@@ -57,12 +57,12 @@ export const TourCardReserva = ({ tourPackage, mp }) => {
         <Typography variant="h5" component="div">
           <Grid container spacing={2} sx={{ textAlign: "center" }}>
             <Grid item xs={12}>
-              <p className="font-thin	">
+              <span className="font-thin	">
                 <span className="font-semibold">
                   S/. {tourPackage.price.toFixed(2)}
                 </span>{" "}
                 / persona
-              </p>
+              </span>
             </Grid>
 
             <Grid item xs={12} sm={6}>
@@ -109,15 +109,15 @@ export const TourCardReserva = ({ tourPackage, mp }) => {
                 value={peopleQuantity}
                 onChange={handleChange}
               >
-                {listPersons.map((x) => (
-                  <MenuItem key={x.value} value={x.value}>
+                {listPersons.map((x,index) => (
+                  <MenuItem key={index} value={x.value}>
                     {x.label}
                   </MenuItem>
                 ))}
               </TextField>
             </Grid>
           </Grid>
-          <Grid sx={{ paddingTop: "10px" }} xs={12}>
+          <Grid item sx={{ paddingTop: "10px" }} xs={12}>
             <Typography>
               <TourPackageContact
                 isPriceItem={isPriceItem}

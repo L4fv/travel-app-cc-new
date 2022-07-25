@@ -110,6 +110,7 @@ export default function TourPackagePage(props) {
             <Grid container className="bond">
               {/* header */}
               <Grid
+              item
                 xs={12}
                 sx={{
                   background: "sky",
@@ -119,10 +120,10 @@ export default function TourPackagePage(props) {
               </Grid>
               {/* header */}
               {/* Body */}
-              <Grid xs={12}>
+              <Grid item xs={12}>
                 <Grid container>
                   {/* 1columna */}
-                  <Grid sx={{ padding: "8px" }} xs={12} md={8}>
+                  <Grid item sx={{ padding: "8px" }} xs={12} md={8}>
                     <div>
                       <h1 className="subHeader font-semibold">
                         {tourPackage.name}
@@ -134,8 +135,8 @@ export default function TourPackagePage(props) {
 
                       {itemsIcon.length > 0 ? (
                         <div className="iconItems">
-                          {itemsIcon.map((x) => (
-                            <div className="spaceIcon ">
+                          {itemsIcon.map((x, index) => (
+                            <div className="spaceIcon " key={index}>
                               <div className="mb-2 iconCSS ">
                                 <Avatar
                                   className="avatar"
@@ -153,13 +154,13 @@ export default function TourPackagePage(props) {
                         ""
                       )}
 
-                      <Grid xs={12} sx={{ padding: "0 0 72px 0" }}>
+                      <Grid item xs={12} sx={{ padding: "0 0 72px 0" }}>
                         <TourPackageDetails tourPackage={tourPackage} />
                       </Grid>
                     </div>
                   </Grid>
 
-                  <Grid xs={0} md={4}>
+                  <Grid item xs={0} md={4}>
                     <Grid className="stickyDate">
                       <TourCardReserva tourPackage={tourPackage} mp={mp} />
                     </Grid>{" "}
@@ -169,7 +170,7 @@ export default function TourPackagePage(props) {
               {/* Body */}
               {/* Footer */}
 
-              <Grid className="classFooter mt-12 " xs={12}>
+              <Grid item className="classFooter mt-12 " xs={12}>
                 <Box>
                   <Grid>
                     <Grid>

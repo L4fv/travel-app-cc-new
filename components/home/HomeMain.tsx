@@ -19,7 +19,7 @@ export const HomeMain = () => {
         <h2 className="text-2xl md:text-4xl text-primary  uppercase font-bold mb-8">
           Disfruta de tus vacaciones 
         </h2>
-        <p className=" md:text-lg ">{description[config.brand]}</p>
+        <span className=" md:text-lg ">{description[config.brand]}</span>
         <HomeMainGrid />
       </div>
     </div>

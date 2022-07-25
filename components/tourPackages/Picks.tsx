@@ -52,7 +52,7 @@ export const HeadoutPicks = ({
             >
               {
                 <div className="cashback">
-                  <p>{`${days} Días`}</p>
+                  <span>{`${days} Días`}</span>
                 </div>
               }
             </div>
@@ -60,13 +60,13 @@ export const HeadoutPicks = ({
               <div className="exp-info-wrap">
                 {city ? (
                   <React.Fragment>
-                    <p id="exp-city">{city}</p>
-                    <p id="exp-description"></p>
+                    <span id="exp-city">{city}</span>
+                    <span id="exp-description"></span>
                   </React.Fragment>
                 ) : (
                   <React.Fragment>
-                    <p id="exp-about">{about}</p>
-                    <p id="exp-description"></p>
+                    <span id="exp-about">{about}</span>
+                    <span id="exp-description"></span>
                   </React.Fragment>
                 )}
               </div>
@@ -75,21 +75,21 @@ export const HeadoutPicks = ({
                   <div className="div">
                     {
                       <div className="discount">
-                        <p>
+                        <span>
                           <span>
                             <i className="fas fa-gift" />
                           </span>
                           {`${min} personas`}
-                        </p>
+                        </span>
                       </div>
                     }
                     <div className="ratings-section">
                       {stars ? (
                         <div className="stars">
-                          <p id="stars-p">
+                          <span id="stars-p">
                             {(Math.round(stars * 100) / 100).toFixed(1)}
                             <span id="star"> &#9733;</span>
-                          </p>
+                          </span>
                         </div>
                       ) : (
                         <div
@@ -102,17 +102,17 @@ export const HeadoutPicks = ({
                             paddingTop: "3px",
                           }}
                         >
-                          <p id="stars-p">
+                          <span id="stars-p">
                             <span> &#9733;</span>
-                          </p>
+                          </span>
                         </div>
                       )}
-                      {<p id="ratings">Recién llegados</p>}
+                      {<span id="ratings">Recién llegados</span>}
                     </div>
                   </div>
                   <div className="price">
-                    <p>Desde</p>
-                    {<p id="price">{`S/.${price}`}</p>}
+                    <span>Desde</span>
+                    {<span id="price">{`S/.${price}`}</span>}
                   </div>
                 </div>
               </div>

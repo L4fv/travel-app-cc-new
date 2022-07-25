@@ -154,7 +154,7 @@ export const TourPackageContact = ({
       >
         <span>Reserva WHATSAPP</span>
       </Button>
-      <p className="text-lg font-semibold">TOTAL S/{isPriceItem.toFixed(2)}</p>
+      <span className="text-lg font-semibold">TOTAL S/{isPriceItem.toFixed(2)}</span>
       <Dialog
         open={open}
         onClose={handleClose}

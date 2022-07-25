@@ -40,3 +40,16 @@ prod
 NEXT_PUBLIC_PUBLICK_KEY_TEST_MERCADOPAGO=APP_USR-ab56aa38-f7e9-4d10-9093-d89ea3a8efcd
 test
 NEXT_PUBLIC_PUBLICK_KEY_TEST_MERCADOPAGO=TEST-408b3c56-a1f5-4dd0-9039-e222d131830b
+
+## hotelpark
+dokku config:set htk-front HOST=0.0.0.0 NEXT_PUBLIC_API_URL=https://api.hotelparktarapoto.com NEXT_PUBLIC_BRAND=htk NODE_ENV=production NPM_CONFIG_PRODUCTION=false PORT=3000 NEXT_PUBLIC_API_URL_EXT=https://api.hotelparktarapoto.com NEXT_PUBLIC_PUBLICK_KEY_TEST_MERCADOPAGO=APP_USR-ab56aa38-f7e9-4d10-9093-d89ea3a8efcd NEXT_PUBLIC_GOOGLE_ANALYTICS=G-RPGG3HLKBE
+
+dokku config:set htk-front PORT=5000
+
+
+NEXT_PUBLIC_API_URL=https://api.hotelparktarapoto.com
+NEXT_PUBLIC_BRAND=htk
+NODE_ENV=production
+NPM_CONFIG_PRODUCTION=false
+PORT=3000
+NEXT_PUBLIC_API_URL_EXT=https://api.hotelparktarapoto.com

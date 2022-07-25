@@ -36,7 +36,7 @@ export const TourPackageSlider = ({ tourPackage }) => {
   return (
     <Box>
       <Grid>
-        <Grid xs={12} sx={{ display: { sm: "none", xs: "block" } }}>
+        <Grid item xs={12} sx={{ display: { sm: "none", xs: "block" } }}>
           <AutoPlaySwipeableViews
             axis={theme.direction === "rtl" ? "x-reverse" : "x"}
             index={activeStep}
@@ -44,13 +44,9 @@ export const TourPackageSlider = ({ tourPackage }) => {
             enableMouseEvents
           >
             {photos.map((step, index) => (
-              <Grid container xs={12}>
+              <Grid container item xs={12} key={index}>
                 {Math.abs(activeStep - index) <= 2 ? (
-                  <Box
-                    component="img"
-                    className="imageSlider"
-                    src={step.src}
-                  />
+                  <Box component="img" className="imageSlider" src={step.src} />
                 ) : (
                   <></>
                 )}
@@ -67,6 +63,7 @@ export const TourPackageSlider = ({ tourPackage }) => {
             }}
           >
             <Grid
+              item
               xs={6}
               sx={{
                 borderRadius: "10px 0px 0px 10px",
@@ -85,6 +82,7 @@ export const TourPackageSlider = ({ tourPackage }) => {
               />
             </Grid>
             <Grid
+              item
               container
               xs={6}
               sx={{
@@ -93,6 +91,7 @@ export const TourPackageSlider = ({ tourPackage }) => {
               }}
             >
               <Grid
+                item
                 xs={6}
                 sx={{
                   height: "50%!important",
@@ -109,6 +108,7 @@ export const TourPackageSlider = ({ tourPackage }) => {
                 />{" "}
               </Grid>
               <Grid
+                item
                 xs={6}
                 sx={{
                   height: "50%!important",
@@ -126,6 +126,7 @@ export const TourPackageSlider = ({ tourPackage }) => {
                 />{" "}
               </Grid>
               <Grid
+                item
                 xs={6}
                 sx={{
                   height: "50%!important",
@@ -142,6 +143,7 @@ export const TourPackageSlider = ({ tourPackage }) => {
                 />{" "}
               </Grid>
               <Grid
+                item
                 xs={6}
                 sx={{
                   height: "50%!important",

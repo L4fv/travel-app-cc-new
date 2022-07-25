@@ -2,7 +2,7 @@ import { config } from "../../config";
 
 const HTExperienceContent = () => {
   return (
-    <p className="text-secondary text-3xl md:text-6xl mb-6 text-center leading-relaxed md:leading-tight">
+    <div className="text-secondary text-3xl md:text-6xl mb-6 text-center leading-relaxed md:leading-tight">
       SI NO VAS,
       <br />
       NUNCA
@@ -12,17 +12,17 @@ const HTExperienceContent = () => {
       <span className="text-tertiary font-bold text-4xl md:text-7xl">
         ¡VIAJA!
       </span>
-    </p>
+    </div>
   );
 };
 
 const LMExperienceContent = () => {
   return (
-    <p className="text-secondary text-3xl md:text-6xl mb-6 text-center leading-relaxed md:leading-tight">
+    <div className="text-secondary text-3xl md:text-6xl mb-6 text-center leading-relaxed md:leading-tight">
       <span className="font-bold">ELIGE UNA RUTA,</span>
       <br />
       NO UNA RUTINA
-    </p>
+    </div>
   );
 };
 

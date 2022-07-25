@@ -25,12 +25,13 @@ export const TourPackageDetails = ({ tourPackage }) => {
   };
 
   return (
-    <Grid container xs={12} >
+    <Grid container item xs={12} >
       <Grid className="" sx={{ padding: "16px 0" }}>
         {tourPackage.details.map(
-          (x) =>
+          (x, index) =>
             x.description && (
               <Chip
+              key={index}
                 label={x.title.toUpperCase()}
                 variant="outlined"
                 className="mx-2"
@@ -44,9 +45,9 @@ export const TourPackageDetails = ({ tourPackage }) => {
 
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         {tourPackage.details.map(
-          (x) =>
+          (x, index) =>
             x.description && (
-              <Grid className="content-information" id={textToString(x.title)}>
+              <Grid className="content-information" id={textToString(x.title)} key={index}>
                 <Grid className="" sx={{ padding: "8px 0" }}>
                   <span className="text-2xl font-bold">
                     {x.title.toUpperCase()}
@@ -54,7 +55,7 @@ export const TourPackageDetails = ({ tourPackage }) => {
                 </Grid>
                 <Grid>
                   <Grid container spacing={1}>
-                    <Grid container sx={{ padding: "8px" }} xs={12} md={12}>
+                    <Grid container sx={{ padding: "8px" }} item xs={12} md={12}>
                       <Grid
                         className="break-words prose overflow-hidden"
                         dangerouslySetInnerHTML={{

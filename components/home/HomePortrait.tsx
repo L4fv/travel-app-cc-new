@@ -7,10 +7,10 @@ const HTHeroContent = () => {
       <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase font-bold mb-12">
         Viajar es la mejor terapia
       </h1>
-      <p className="text-lg md:text-xl lg:text-2xl">
+      <span className="text-lg md:text-xl lg:text-2xl">
         Te van a criticar por todo, tu solo compra ese pasaje a la selva. <br />
         <span className="font-bold">Viajar lo cura todo</span>
-      </p>
+      </span>
     </div>
   );
 };
