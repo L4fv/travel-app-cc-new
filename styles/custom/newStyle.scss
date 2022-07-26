@@ -595,18 +595,14 @@ Gallery {
 }
 
 .ratings-section {
-  display: flex;
-  align-items: center;
+  //display: flex;
+  //align-items: center;
   padding-bottom: 10px;
-  p {
-    color: #9a9a9a;
-    font-size: 11px;
-    margin: 0px;
-  }
+ 
 }
 .stars {
-  width: 55px;
-  height: 18px;
+  width: 80px;
+  //height: 18px;
   border-radius: 10px;
   background: linear-gradient(340deg, #ffbb58, #f5c684);
   padding-top: 1px;
@@ -614,6 +610,7 @@ Gallery {
 #stars-p {
   color: white;
   font-weight: 700;
+  padding: 16px;
 }
 #star {
   margin-left: 5px;

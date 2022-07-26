@@ -34,8 +34,8 @@ export const TourPackageContact = ({
   mp,
 }) => {
   let [newPriceItem, setNewPriceItem] = React.useState(isPriceItem);
-  
-  console.log("rangeFrom ",rangeFrom, "rangeTo ", rangeTo)
+
+  console.log("rangeFrom ", rangeFrom, "rangeTo ", rangeTo);
   let message = `Buen día. Quisiera reservar el paquete *${tourPackage.name}* para ${quantity} personas `;
   const [open, setOpen] = useState(false);
 
@@ -69,12 +69,11 @@ export const TourPackageContact = ({
   });
   /* event.preventDefault(); */
   useEffect(() => {
-    if(formik.values.isPercent){
+    if (formik.values.isPercent) {
       setNewPriceItem((isPriceItem * 50) / 100);
-    }else{
-      setNewPriceItem(isPriceItem );
+    } else {
+      setNewPriceItem(isPriceItem);
     }
-    
   }, [formik.values.isPercent, isPriceItem]);
 
   const handleOpenModal = () => {
@@ -101,7 +100,7 @@ export const TourPackageContact = ({
         documentInvoice: v.checked ? v.documentInvoice : v.documentReservation,
         fullNameInvoice: v.checked ? v.fullNameInvoice : v.fullName,
         addressInvoice: v.checked ? v.addressInvoice : "",
-        price: newPriceItem,        
+        price: newPriceItem,
         title: tourPackage.name,
         mail: v.mail,
         phoneNumber: v.phoneNumber,
@@ -130,31 +129,45 @@ export const TourPackageContact = ({
 
   const encoded = encodeURIComponent(message);
   return (
-    <div className="text-center ">
-      <Button
-        variant="contained"
-        //disabled={!rangeFrom || !quantity}
-        onClick={handleOpenModal}
-        className="inline-flex items-center  text-md px-8 py-3 font-bold text-white rounded-full shadow-lg hover:shadow-xl"
-        style={{
-          backgroundColor: config.colors.primary.DEFAULT,
-          padding: "0.8rem 3rem",
-          borderColor: config.colors.primary.DEFAULT,
-        }}
-        startIcon={<Icon path={mdiCreditCardOutline} size={1.5} />}
-      >
-        Reserva Online
-      </Button>
-      <Button
-        variant="contained"
-        href={`https://wa.me/${config.contactPhone}?text=${encoded}`}
-        className="inline-flex items-center  text-md px-8 py-3 font-bold text-white rounded-full shadow-lg hover:shadow-xl"
-        style={{ backgroundColor: "#4fce5d", margin: 8 }}
-        startIcon={<Icon path={mdiWhatsapp} size={1.5} />}
-      >
-        <span>Reserva WHATSAPP</span>
-      </Button>
-      <span className="text-lg font-semibold">TOTAL S/{isPriceItem.toFixed(2)}</span>
+    <Grid
+      container
+      direction="column"
+      spacing={1}
+      alignItems="center"
+      justifyContent="center"
+    >
+      <Grid item xs={12}>
+        <Button
+          variant="contained"
+          //disabled={!rangeFrom || !quantity}
+          onClick={handleOpenModal}
+          className="inline-flex items-center  text-md px-8 py-3 font-bold text-white rounded-full shadow-lg hover:shadow-xl"
+          style={{
+            backgroundColor: config.colors.primary.DEFAULT,
+            padding: "0.8rem 3rem",
+            borderColor: config.colors.primary.DEFAULT,
+          }}
+          startIcon={<Icon path={mdiCreditCardOutline} size={1.5} />}
+        >
+          Reserva Online
+        </Button>
+      </Grid>
+      <Grid item xs={12}>
+        <Button
+          variant="contained"
+          href={`https://wa.me/${config.contactPhone}?text=${encoded}`}
+          className="inline-flex items-center  text-md px-8 py-3 font-bold text-white rounded-full shadow-lg hover:shadow-xl"
+          style={{ backgroundColor: "#4fce5d", margin: 8 }}
+          startIcon={<Icon path={mdiWhatsapp} size={1.5} />}
+        >
+          <span>Reserva WHATSAPP</span>
+        </Button>
+      </Grid>
+      <Grid item xs={12}>
+        <div className="text-lg font-semibold">
+          TOTAL S/{isPriceItem.toFixed(2)}
+        </div>
+      </Grid>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -270,7 +283,7 @@ export const TourPackageContact = ({
                     <Checkbox
                       id="isPercent"
                       checked={formik.values.isPercent}
-                      onChange={formik.handleChange}                      
+                      onChange={formik.handleChange}
                       inputProps={{ "aria-label": "controlled" }}
                     />
                   }
@@ -326,7 +339,6 @@ export const TourPackageContact = ({
               ) : (
                 <div></div>
               )}
-
             </Grid>
           </DialogContent>
           <DialogActions>
@@ -351,6 +363,6 @@ export const TourPackageContact = ({
           </DialogActions>
         </form>
       </Dialog>
-    </div>
+    </Grid>
   );
 };

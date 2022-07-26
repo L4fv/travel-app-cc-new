@@ -34,7 +34,7 @@ export const TourPackageDetails = ({ tourPackage }) => {
               key={index}
                 label={x.title.toUpperCase()}
                 variant="outlined"
-                className="mx-2"
+                className="mx-2 my-2"
                 clickable 
                 component="a"
                 href={`#${textToString(x.title)}`}
