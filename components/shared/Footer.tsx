@@ -33,7 +33,7 @@ export const Footer = () => {
       <div className="py-1 bg-black text-gray-400 text-xs text-center">
         Powered by{" "}
         <a href="https://innout.pe" target="_blank" className="underline">
-          innout.pe
+          innout.pe - 1.0
         </a>
       </div>
     </>
