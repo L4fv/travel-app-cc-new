@@ -13,8 +13,9 @@ git push dokku-lm-front-v2 main:prod
 
 git remote add dokku-hkt-front-v4 dokku@mansionhoteltours.com:htk-front
 git push dokku-hkt-front-v4 main:prod
-## deploy all
+## deploy all pods
 git push dokku-cc-front-v2 main:prod && git push dokku-ht-front-v2 main:prod && git push dokku-sht-front-v2 main:prod && git push dokku-lm-front-v2 main:prod && git push dokku-hkt-front-v4 main:prod
+
 
 # travel_app-front
 git push cc-front2 main:prod
